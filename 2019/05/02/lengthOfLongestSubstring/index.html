@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="C++,algorithm,String,">
 
 
 
@@ -79,14 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="resources">
-<meta property="og:url" content="http://yoursite.com/resources/index.html">
+<meta name="description" content="题解：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
+<meta name="keywords" content="C++,algorithm,String">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lengthOfLongestSubstring">
+<meta property="og:url" content="http://yoursite.com/2019/05/02/lengthOfLongestSubstring/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="题解：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-02T02:28:58.573Z">
+<meta property="og:updated_time" content="2019-05-02T03:21:07.800Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="resources">
+<meta name="twitter:title" content="lengthOfLongestSubstring">
+<meta name="twitter:description" content="题解：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/resources/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/02/lengthOfLongestSubstring/">
 
 
 
 
 
-  <title>resources | Hexo</title>
+  <title>lengthOfLongestSubstring | Hexo</title>
   
 
 
@@ -299,33 +303,191 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/02/lengthOfLongestSubstring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">resources</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
+          <h1 class="post-title" itemprop="name headline">lengthOfLongestSubstring</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-02T11:18:24+08:00">
+                2019-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-      </div>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  题解：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>题目简述：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。<br>–&gt;<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">传送门</a>  </p>
+<p>示例 1：   </p>
+<pre><code>输入: &quot;abcabcbb&quot;    
+输出: 3     
+解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
+</code></pre><pre><code>示例 2：  
+</code></pre><p>输入: “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。  </p>
+<pre><code>示例 3：  
+</code></pre><p>输入: “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。  </p>
+<pre><code>**个人超时解法：**    
+</code></pre><p>class Solution {<br>public:<br>    int max=0;<br>    int notBelong(string s,char c){<br>        int f=1;<br>        for(int i=0;i&lt;s.size();i++){<br>            if(c==s[i]){<br>                f=0;break;<br>            }<br>        }<br>        if(f==1)<br>            return 1;<br>        else<br>            return 0;<br>    }<br>    int lengthOfLongestSubstring(string s) {<br>        if(s.size()==0)  //当s的长度为0或1时的出错情况任意忽视<br>            return 0;<br>        else if(s.size()==1)<br>            return 1;<br>        else<br>        {<br>            for(int i=0;i&lt;s.size()-1;i++){<br>            string str=””;<br>            str+=s[i];<br>            for(int j=i+1;j&lt;s.size();j++){<br>                if(notBelong(str,s[j])){<br>                    str+=s[j];<br>                }else{<br>                    if(str.size()&gt;max)<br>                        max=str.size();<br>                    break;<br>                }<br>            }<br>            if(str.size()&gt;max)<br>                    max=str.size();<br>        }<br>        return max;<br>        }<br>    }<br>};    </p>
+<pre><code>**思路(摘自力扣题解)：**    
+滑动窗口算法，窗口指由开始和结束索引i,j定义的一个集合。将子串存入一个容器，如果s[j]不包含于子串中，向右滑动索引j，即j++;如果s[j]包含于子串中，则i++，窗口缩小。其中，在j++之后，取ans和（j-i）的最大值，即在线得到子串长度的最大值。    
+</code></pre><p>class Solution {<br>public:<br>    int lengthOfLongestSubstring(string s) {<br>        int n=s.size();<br>        set<char> ss;<br>        int ans=0,i=0,j=0;<br>        while(i&lt;n &amp;&amp; j&lt;n){<br>            if(find(ss.begin(),ss.end(),s[j])==ss.end()){<br>                ss.insert(s[j++]);<br>                ans= ans&gt;(j-i)? ans: j-i;<br>            }else{<br>                ss.erase(s[i++]);<br>            }<br>        }<br>        return ans;<br>    }<br>};    </char></p>
+<pre><code>map法优化：    
+我们可以定义字符到索引的映射，而不是使用集合来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。    
+如果s[j]在[i,j)范围内有与j&apos;重复的字符，不是逐渐增加i，而是直接跳过[i,j&apos;]的范围内的所有元素，将i变为j&apos;+1。（注意取i和j&apos;+1的较大值，eg：&quot;abba&quot;）    
+</code></pre><p>class Solution {<br>public:<br>    int lengthOfLongestSubstring(string s) {<br>        int n=s.size();<br>        map&lt;char,int&gt; m;<br>        int ans =0;<br>        for(int j=0,i=0;j&lt;n;j++){<br>            if(m.find(s[j])!=m.end()){<br>                i= m[s[j]]&gt;i? m[s[j]]: i;<br>            }<br>            ans = ans &gt; (j-i+1)? ans : (j-i+1);<br>            m[s[j]]=j+1;<br>        }<br>        return ans;<br>    }<br>};<br><code>`</code>    </p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/String/" rel="tag"># String</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/02/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -334,6 +496,12 @@
 
 
           
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
 
         </div>
         
