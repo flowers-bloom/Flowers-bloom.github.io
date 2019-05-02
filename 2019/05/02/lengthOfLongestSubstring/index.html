@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="踱步者">
 <meta property="og:description" content="给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-02T08:24:58.701Z">
+<meta property="og:updated_time" content="2019-05-02T08:30:12.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lengthOfLongestSubstring">
 <meta name="twitter:description" content="给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
@@ -320,7 +320,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="neuq-Xjh">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/sliderAvatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -408,35 +408,97 @@
       
 
       
-        <p>题目简述：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。<br>–&gt;<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">传送门</a>  </p>
-<p>示例 1：   </p>
+        <p>题目简述：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。<br>–&gt;<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">传送门</a><br>示例 1：   </p>
 <pre><code>输入: &quot;abcabcbb&quot;    
 输出: 3     
 解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
-</code></pre><pre><code>
+</code></pre><p>示例 2：  </p>
+<pre><code>输入: &quot;bbbbb&quot;  
+输出: 1  
+解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。  
+</code></pre><p>示例 3：  </p>
+<pre><code>输入: &quot;pwwkew&quot;  
+输出: 3  
+解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。  
+</code></pre><p><strong>个人超时解法：</strong>    </p>
+<pre><code>class Solution {    
+public:    
+    int max=0;    
+    int notBelong(string s,char c){    
+        int f=1;    
+        for(int i=0;i&lt;s.size();i++){    
+            if(c==s[i]){    
+                f=0;break;    
+            }    
+        }    
+        if(f==1)    
+            return 1;    
+        else    
+            return 0;    
+    }    
+    int lengthOfLongestSubstring(string s) {    
+        if(s.size()==0)  //当s的长度为0或1时的出错情况任意忽视    
+            return 0;    
+        else if(s.size()==1)    
+            return 1;    
+        else    
+        {    
+            for(int i=0;i&lt;s.size()-1;i++){    
+            string str=&quot;&quot;;    
+            str+=s[i];    
+            for(int j=i+1;j&lt;s.size();j++){    
+                if(notBelong(str,s[j])){    
+                    str+=s[j];    
+                }else{    
+                    if(str.size()&gt;max)    
+                        max=str.size();    
+                    break;    
+                }    
+            }    
+            if(str.size()&gt;max)    
+                    max=str.size();        
+        }    
+        return max;    
+        }    
+    }    
+};    
+</code></pre><p><strong>思路(摘自力扣题解)：</strong><br>滑动窗口算法，窗口指由开始和结束索引i,j定义的一个集合。将子串存入一个容器，如果s[j]不包含于子串中，向右滑动索引j，即j++;如果s[j]包含于子串中，则i++，窗口缩小。其中，在j++之后，取ans和（j-i）的最大值，即在线得到子串长度的最大值。    </p>
+<pre><code>class Solution {    
+public:    
+    int lengthOfLongestSubstring(string s) {    
+        int n=s.size();    
+        set&lt;char&gt; ss;    
+        int ans=0,i=0,j=0;    
+        while(i&lt;n &amp;&amp; j&lt;n){    
+            if(find(ss.begin(),ss.end(),s[j])==ss.end()){    
+                ss.insert(s[j++]);    
+                ans= ans&gt;(j-i)? ans: j-i;    
+            }else{    
+                ss.erase(s[i++]);    
+            }    
+        }    
+        return ans;    
+    }    
+};    
 
-示例 2：  
-</code></pre><p>输入: “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。  </p>
-<pre><code>
-
-示例 3：  
-</code></pre><p>输入: “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。  </p>
-<pre><code>
-
-**个人超时解法：**    
-</code></pre><p>class Solution {<br>public:<br>    int max=0;<br>    int notBelong(string s,char c){<br>        int f=1;<br>        for(int i=0;i&lt;s.size();i++){<br>            if(c==s[i]){<br>                f=0;break;<br>            }<br>        }<br>        if(f==1)<br>            return 1;<br>        else<br>            return 0;<br>    }<br>    int lengthOfLongestSubstring(string s) {<br>        if(s.size()==0)  //当s的长度为0或1时的出错情况任意忽视<br>            return 0;<br>        else if(s.size()==1)<br>            return 1;<br>        else<br>        {<br>            for(int i=0;i&lt;s.size()-1;i++){<br>            string str=””;<br>            str+=s[i];<br>            for(int j=i+1;j&lt;s.size();j++){<br>                if(notBelong(str,s[j])){<br>                    str+=s[j];<br>                }else{<br>                    if(str.size()&gt;max)<br>                        max=str.size();<br>                    break;<br>                }<br>            }<br>            if(str.size()&gt;max)<br>                    max=str.size();<br>        }<br>        return max;<br>        }<br>    }<br>};    </p>
-<pre><code>
-
-**思路(摘自力扣题解)：**    
-滑动窗口算法，窗口指由开始和结束索引i,j定义的一个集合。将子串存入一个容器，如果s[j]不包含于子串中，向右滑动索引j，即j++;如果s[j]包含于子串中，则i++，窗口缩小。其中，在j++之后，取ans和（j-i）的最大值，即在线得到子串长度的最大值。    
-</code></pre><p>class Solution {<br>public:<br>    int lengthOfLongestSubstring(string s) {<br>        int n=s.size();<br>        set<char> ss;<br>        int ans=0,i=0,j=0;<br>        while(i&lt;n &amp;&amp; j&lt;n){<br>            if(find(ss.begin(),ss.end(),s[j])==ss.end()){<br>                ss.insert(s[j++]);<br>                ans= ans&gt;(j-i)? ans: j-i;<br>            }else{<br>                ss.erase(s[i++]);<br>            }<br>        }<br>        return ans;<br>    }<br>};    </char></p>
-<pre><code>
-
-map法优化：    
-我们可以定义字符到索引的映射，而不是使用集合来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。    
-如果s[j]在[i,j)范围内有与j&apos;重复的字符，不是逐渐增加i，而是直接跳过[i,j&apos;]的范围内的所有元素，将i变为j&apos;+1。（注意取i和j&apos;+1的较大值，eg：&quot;abba&quot;）    
-</code></pre><p>class Solution {<br>public:<br>    int lengthOfLongestSubstring(string s) {<br>        int n=s.size();<br>        map&lt;char,int&gt; m;<br>        int ans =0;<br>        for(int j=0,i=0;j&lt;n;j++){<br>            if(m.find(s[j])!=m.end()){<br>                i= m[s[j]]&gt;i? m[s[j]]: i;<br>            }<br>            ans = ans &gt; (j-i+1)? ans : (j-i+1);<br>            m[s[j]]=j+1;<br>        }<br>        return ans;<br>    }<br>};<br><code>`</code>    </p>
-
+</code></pre><p>map法优化：<br>我们可以定义字符到索引的映射，而不是使用集合来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。<br>如果s[j]在[i,j)范围内有与j’重复的字符，不是逐渐增加i，而是直接跳过[i,j’]的范围内的所有元素，将i变为j’+1。（注意取i和j’+1的较大值，eg：”abba”）    </p>
+<pre><code>class Solution {    
+public:    
+    int lengthOfLongestSubstring(string s) {    
+        int n=s.size();    
+        map&lt;char,int&gt; m;    
+        int ans =0;    
+        for(int j=0,i=0;j&lt;n;j++){    
+            if(m.find(s[j])!=m.end()){    
+                i= m[s[j]]&gt;i? m[s[j]]: i;    
+            }    
+            ans = ans &gt; (j-i+1)? ans : (j-i+1);    
+            m[s[j]]=j+1;    
+        }    
+        return ans;    
+    }    
+};    
+</code></pre>
       
     </div>
     
@@ -520,6 +582,8 @@ map法优化：
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/sliderAvatar.jpg" alt="neuq-Xjh">
             
               <p class="site-author-name" itemprop="name">neuq-Xjh</p>
               <p class="site-description motion-element" itemprop="description">程序猿的世界</p>
@@ -611,7 +675,7 @@ map法优化：
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共647字</span>
+  <span class="post-count">博客全站共656字</span>
 </div>
 
         
