@@ -6,10 +6,10 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 
@@ -20,8 +20,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -40,7 +40,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -48,9 +48,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C++,algorithm,String,回文串,动态规划,">
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,19 @@
 
 
 
-<meta name="description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
-<meta name="keywords" content="C++,algorithm,String,回文串,动态规划">
+<meta name="description" content="title: messageBoarddate: 2019-05-03 21:58:03categories:      小项目tags:     PHP      留言板description:留言板项目实现代码以及成果展示…       ####留言板功能实现PS：HTML，CSS，以及留言板功能类型借鉴了大牛的博客资源，留言板具体功能为自己实现。   #####一、留言板功能（1）在主界面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="longestPalindrome">
-<meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/index.html">
+<meta property="og:title" content="踱步者">
+<meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/03/messageBoard/index.html">
 <meta property="og:site_name" content="踱步者">
-<meta property="og:description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
+<meta property="og:description" content="title: messageBoarddate: 2019-05-03 21:58:03categories:      小项目tags:     PHP      留言板description:留言板项目实现代码以及成果展示…       ####留言板功能实现PS：HTML，CSS，以及留言板功能类型借鉴了大牛的博客资源，留言板具体功能为自己实现。   #####一、留言板功能（1）在主界面">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-03T08:40:05.743Z">
+<meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG">
+<meta property="og:updated_time" content="2019-05-03T14:15:23.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="longestPalindrome">
-<meta name="twitter:description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
+<meta name="twitter:title" content="踱步者">
+<meta name="twitter:description" content="title: messageBoarddate: 2019-05-03 21:58:03categories:      小项目tags:     PHP      留言板description:留言板项目实现代码以及成果展示…       ####留言板功能实现PS：HTML，CSS，以及留言板功能类型借鉴了大牛的博客资源，留言板具体功能为自己实现。   #####一、留言板功能（1）在主界面">
+<meta name="twitter:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/">
+  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/05/03/messageBoard/"/>
 
 
 
 
 
-  <title>longestPalindrome | 踱步者</title>
+  <title> | 踱步者</title>
   
 
 
@@ -154,7 +155,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">踱步者</span>
         <span class="logo-line-after"><i></i></span>
@@ -262,7 +263,9 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -299,11 +302,11 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/">
+    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/05/03/messageBoard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="neuq-Xjh">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/uploads/avatar.jpg">
     </span>
 
@@ -316,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">longestPalindrome</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -328,7 +331,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T16:34:58+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T21:58:03+08:00">
                 2019-05-03
               </time>
             
@@ -338,28 +341,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/题解/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -382,7 +363,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  730 字
+                  885 字
                 </span>
               
 
@@ -398,16 +379,12 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </div>
           
 
-          
-              <div class="post-description">
-                  <题解>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
-              </题解></div>
           
 
         </div>
@@ -423,144 +400,56 @@
       
 
       
-        <p>–&gt;<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">传送门</a><br>示例 1：  </p>
-<blockquote>
-<p>输入: “babad”<br>输出: “bab”<br>注意: “aba” 也是一个有效答案。  </p>
-</blockquote>
-<p>示例 2：  </p>
-<blockquote>
-<p>输入: “cbbd”<br>输出: “bb”  </p>
-</blockquote>
-<p><strong>超时算法(滑动窗口算法，易于理解）：</strong><br>思路：从某一窗口长度开始，从0滑动到n-1的位置，判断子串是否为回文，再递增窗口长度。（窗口长度从1开始最一般，下面算法为从2开始）  </p>
-<pre><code>int check(string s)  //判断是否为回文  
-{  
-    int n = s.size();  
-    int k = n/2;  
-    if(k==0)  
-    {  
-        return 1;  
-    }  
-    else  
-    {  
-        int i=0,f=1;  
-        for(i; i&lt;k; i++)  
-        {  
-            if(s[i]!=s[n-i-1])  
-            {  
-                f=0;  
-                break;  
-            }  
-        }  
-        if(f==1)  
-        {  
-            return 1;  
-        }  
-        else  
-        {  
-            return 0;  
-        }  
-    }  
-}  
+        <hr>
+<p>title: messageBoard<br>date: 2019-05-03 21:58:03<br>categories:    </p>
+<ul>
+<li>小项目<br>tags:    </li>
+<li>PHP     </li>
+<li>留言板<br>description:<br>留言板项目实现代码以及成果展示…    </li>
+</ul>
+<hr>
+<p>####留言板功能实现<br>PS：HTML，CSS，以及留言板功能类型借鉴了大牛的博客资源，留言板具体功能为自己实现。  </p>
+<p>#####一、留言板功能<br>（1）在主界面显示已添加的留言<br>（2）添加留言<br>（3）管理员登录<br>（4）修改留言<br>（5）删除留言  </p>
+<p>#####二、具体代码  </p>
+<ol>
+<li>主界面：index.php<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG" alt="MainPage"><br><code>`</code>  <html>  
 
-string longestPalindrome(string s)  
-{  
-    int len = s.size();  
-    if(len&lt;=1)  
-    {  
-        return s;  
-    }  
-    string str = &quot;&quot;;  
-    str+=s[0];  
-    str+=s[1];  
-    int f=0;  
-    for(int i=2; i&lt;len + 1; i++)  
-    {  
-        for(int j=0; j&lt;len-i+1 ; j++)  
-        {  
-            int k=0;  
-            string ss=&quot;&quot;;  
-            while(k&lt;i)  //可用substr函数代替  
-            {  
-                ss+=s[j+k];  
-                k++;  
+</html></li>
+</ol>
+<head><meta name="generator" content="Hexo 3.8.0"><br>    <title>欢迎来到小灰灰的留言本吼吼吼</title><br>    <style type="text/css"><br>        TD {<br>            font-size: 12px;<br>            line-height: 150%;<br>        }<br>    </style><br></head>  
 
-            }  
-            if(check(ss))  
-            {  
-                f=1;  
-                str = ss;  
-                break;  
-            }  
-        }  
-    }  
-    if(f==1)  
-    {  
-        return str;  
-    }  
-    str=&quot;&quot;;  
-    str+=s[0];  
-    return str;  
-}  
-</code></pre><p>正确O(n^2)时间复杂度算法：<br><strong>动态规划算法：</strong><br>思路：核心思想在于避免验证回文时的不必要的重复计算。从左往右验证，找出最长回文子串的开始与结束位置。<br>递推公式为 P(i,j)=(s[i] == s[j]) &amp;&amp; (P[i-1][j+1])<br>PS：需考虑字母数为偶数回文的特殊情况，和确定判断条件。  </p>
-<pre><code>class Solution {  
-public:  
-    string longestPalindrome(string s) {  
-        int len = s.size();  
-        if(len &lt;= 1)  
-            return s;  
-        int left=0,right=0;  
-        int book[1000][1000]={0}; //1符合，0不符合  
-        for(int i=0;i&lt;len;i++){  
-            book[i][i]=1;   //单个字母为回文  
-            for(int j=i-1;j&gt;=0;j--){  
-                book[i][j] = (s[i] == s[j]) &amp;&amp; (book[i-1][j+1] || i-j==1);  //注意i-j==1条件不能少  
-                //cout&lt;&lt;j&lt;&lt;&apos; &apos;&lt;&lt;i&lt;&lt;&apos; &apos;&lt;&lt;book[i][j]&lt;&lt;endl;  
-                if(book[i][j] &amp;&amp; (i-j)&gt;(right-left)){  
-                    left = j;  
-                    right = i;  
-                }  
-            }  
-        }  
-        string longest=&quot;&quot;;  
-        longest=s.substr(left,right-left+1);  
-        return longest;  
-    }  
-};  
-</code></pre><p><strong>中心扩展算法：</strong><br>思路：由于回文关于中心对称，所以回文可以从中心展开，其中，共有2*n-1个中心（考虑字母数为偶数的回文）<br>难点：expandAroundCenter()函数的返回值计算与start和end位置的确定。  </p>
-<pre><code>class Solution {  
-public:  
-    string longestPalindrome(string s) {  
-        int len = s.size();  
-        if(len&lt;=1)  
-            return s;  
-        int start=0,end=0;  
-        for(int i=0;i&lt;len;i++){  
-            int len1 = expandAroundCenter(s,i,i);  
-            int len2 = expandAroundCenter(s,i,i+1);  
-            //cout&lt;&lt;i&lt;&lt;&apos; &apos;&lt;&lt;len1&lt;&lt;&apos; &apos;&lt;&lt;len2&lt;&lt;endl;  
-            int len = len1 &gt; len2?len1:len2;  
-            if(len &gt; end-start){  
-                if(len==len1){       //进一步归纳，len==len2情况的计算符合所有情况  
-                    start =  i-len/2;  
-                    end = i + len/2;  
-                }else{  
-                    start=i- (len-1)/2;  
-                    end=i + len/2;  
-                }  
-            }  
-        }  
-        string longest=&quot;&quot;;  
-        longest=s.substr(start,end-start+1);  
-        return longest;  
-    }  
-    int expandAroundCenter(string s,int left,int right){  
-        while(left&gt;=0 &amp;&amp; right&lt;s.size() &amp;&amp;s[left]==s[right]){  
-            left--;right++;  
-        }  
-        return right-left-1;  //注意长度不是right-left+1  
-    }  
-};  
-</code></pre>
+<body><br>    <table border="1" cellspacing="0" cellspadding="0" style="border-collapse:collapse" align="center" width="480" bordercolor="black" height="382"><br>        <tr><br>            <td height="100" bgcolor="#6c6c6c" style="font-size:30px;line-height:30px"><br>                <font color="#ffffff" face="黑体">欢迎来到小灰灰的留言本吼吼吼</font><br>            </td><br>        </tr><br>        <tr><br>            <td height="25"><br>                <a href="send.php">[我要写留言]</a><br>                <a href="login.php">[管理留言]</a><br>            </td><br>        </tr><br>        <tr><br>            <td height="200"><br>                &lt;?php<br>                $conn = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>                if (!$conn) {<br>                    die(‘connect error’ . mysqli_error($conn));<br>                }<br>                $sql = “SELECT * FROM messageboard ORDER BY dateline DESC”;<br>                mysqli_select_db($conn, ‘test’);<br>                $retval = mysqli_query($conn, $sql);<br>                if (!$retval) {<br>                    die(‘use database error!’);<br>                } else {<br>                    $dataNum = mysqli_num_rows($retval);<br>                    $i = 0;<br>                    while ($row = mysqli_fetch_assoc($retval)) {<br>                        echo ‘-&gt;[‘ . $row[‘author’] . ‘] on ‘ . $row[‘dateline’] . ‘ saied：<br>‘<br>                            . $row[‘message’];<br>                        if ($dataNum &gt; 1 &amp;&amp; (++$i) != $dataNum)<br>                            echo ‘<hr>‘;<br>                    }<br>                }<br>                mysqli_close($conn);<br>                ?&gt;<br>            </td><br>        </tr><br>        <tr><br>            <td height="80" bgcolor="#6c6c6c" align="center"><br>                <font color="#FFFFFF"><br>                    版权所有：<a href="https://gitee.com/hui_net/LearnRecords" target="_blank" rel="noopener">小灰灰的码云</a><br><br>                    E-mail:<a href="mailto:neuq-xjh@foxmail.com" target="_blank" rel="noopener">neuq-xjh@foxmail.com</a><br>                </font><br>            </td><br>        </tr><br>    </table><br><br></body>  
+
+<p>  </p>
+<pre><code>2. 留言界面：send.php  
+![LeaveMessage](https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG)  
+</code></pre><!-- 1.用户填写留言部分 send.php -->  
+<!-- 可以首先编写send页面，只有用户提交了留言才能进行后面的留言显示，留言管理等等 -->  
+<html><br><br><head><meta name="generator" content="Hexo 3.8.0"><br>    <title>欢迎来到小灰灰的留言本吼吼吼</title><br></head><br><br><body><br>    <!-- border-collapse:collapse合并表格的边框 --><br>    <table border="1" cellspacing="0" cellspadding="0" style="border-collapse:collapse" align="center" width="600" bordercolor="black"><br>        <tr><br>            <td height="100" bgcolor="#6c6c6c"><br>                <font style="font-size:30px" color="#ffffff" face="黑体">欢迎来到小灰灰的留言本吼吼吼</font><br>            </td><br>        </tr><br>        <tr><br>            <td height="30"><br>                <a href="send.php">[我要写留言]</a><br>                <a href="login.php">[管理留言]</a><br>            </td><br>        </tr><br>        <tr><br>            <td height="200"><br>                <form method="POST" action="send.php"><br>                    <table border="1" width="95%" id="table1" cellspacing="0" cellpadding="0" bordercolor="#808080" style="border-collapse:collapse" height="265"><br>                        <tr><br>                            <td colspan="2" height="30"><br>                                <p align="center">欢迎填写你的留言</p><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="40%"><br>                                <p align="left">你的名字</p><br>                            </td><br>                            <td width="67%"><br>                                <input type="text" name="name" size="25"><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="40%"><br>                                <p align="left">留言内容</p><br>                            </td><br>                            <td width="67%"><br>                                <textarea rows="10" name="content" cols="58"></textarea><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="99%" colspan="4"><br>                                <p align="center"><br>                                    <input type="submit" value="提交" name="B1"><br>                                </p><br>                            </td><br>                        </tr><br>                    </table><br>                </form><br>            </td><br>        </tr><br>        <tr><br>            <td height="80" bgcolor="#6c6c6c" align="center"><br>                <font color="#FFFFFF"><br>                    版权所有：<a href="https://gitee.com/hui_net/LearnRecords" target="_blank" rel="noopener">小灰灰的码云</a><br><br>                    E-mail:<a href="mailto:neuq-xjh@foxmail.com" target="_blank" rel="noopener">neuq-xjh@foxmail.com</a><br>                </font><br>            </td><br>        </tr><br>    </table><br><br></body><br><br></html><br>&lt;?php<br>$name = $_POST[“name”];<br>if ($name != null) {<br>    $content = $_POST[“content”];<br>    $addtime = date(“Y-m-d h:i:s”);<br>    $link = mysqli_connect(“localhost”, “username”, “userpassword”);<br>    if ($link)<br>        echo “connect success!<br>“;<br>    else {<br>        echo “connect error!<br>“;<br>    }<br>    mysqli_select_db($link, “test”);<br>    $sql = “INSERT INTO messageboard(author,dateline,message,response) VALUES(‘$name’,’$addtime’,’$content’,’’)”;<br>    mysqli_query($link, $sql);<br>    mysqli_close($link);<br>    echo “<script><br>    alert(‘留言成功!单击确定查看留言.’);<br>    location.href=’index.php’;<br>    </script>“;<br>}<br><br>?&gt;<br><code>3. 登录界面：login.php  
+![loginPage](https://gitee.com/hui_net/PhotoCategory/raw/master/login.PNG)</code><br><!-- 3.管理员登录页面 login.php --><br><!-- 供管理员登录 --><br><!-- 体会session实现用户登录的方法 --><br><br><html><br><br><head><meta name="generator" content="Hexo 3.8.0"><br>    <title>欢迎来到小灰灰的留言本吼吼吼</title><br>    <br><br></head><body><br><br>    <table border="1" cellspacing="0" cellspadding="0" style="border-collapse:collapse" align="center" width="400" bordercolor="black" height="358"><br>        <tr><br>            <td height="100" bgcolor="#6c6c6c" style="font-size:30px;line-height:30px"><br>                <font color="#ffffff" face="黑体">欢迎来到小灰灰的留言本吼吼吼</font><br>            </td><br>        </tr><br>        <tr><br>            <td height="25"><br>                <a href="send.php">[我要写留言]</a><br>                <a href="login.php">[管理留言]</a><br>            </td><br>        </tr><br>        <tr><br>            <td height="178"><br>                <form method="POST" action="login.php"><br>                    <table border="1" width="95%" id="table1" cellspcing="0" cellpadding="0" bordercolor="#808080" style="border-collapse" height="154"><br>                        <tr><br>                            <td colspan="2" height="29"><br>                                <p align="center">欢迎管理员登录</p><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="32%"><br>                                <p align="center">用户名</p><br>                            </td><br>                            <td width="67%"><br>                                <input type="text" name="name" size="20"><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="32%"><br>                                <p align="center">密 码</p><br>                            </td><br>                            <td><br>                                <input type="password" name="password" size="20"><br>                            </td><br>                        </tr><br>                        <tr><br>                            <td width="99%" colspan="2"><br>                                <p align="center"><input type="submit" value="登录" name="B1"></p><br>                            </td><br>                        </tr><br>                    </table><br>                </form><br>            </td><br>        </tr><br>        <tr><br>            <td height="80" bgcolor="#6c6c6c" align="center"><br>                <font color="#FFFFFF"><br>                    版权所有：<a href="https://gitee.com/hui_net/LearnRecords" target="_blank" rel="noopener">小灰灰的码云</a><br><br>                    E-mail:<a href="mailto:neuq-xjh@Foxmail.com" target="_blank" rel="noopener">neuq-xjh@Foxmail.com</a><br>                </font><br>            </td><br>        </tr><br>    </table><br><br></body><br><br></html>  
+
+<p>&lt;?php<br>$guestName = $_POST[‘name’];<br>$guestPass = $_POST[‘password’];<br>if($guestName!=null &amp;&amp; $guestPass!=null){<br>    $link = mysqli_connect(‘localhost’,’username’,’userpassword’);<br>    if(!$link){<br>        die(‘connect error’.mysqli_error($link));<br>    }<br>    mysqli_select_db($link,’test’);<br>    $sql = “SELECT * FROM admin WHERE username=’$guestName’”;<br>    $retval = mysqli_query($link,$sql);<br>    if(mysqli_num_rows($retval) &gt; 0){<br>        $info = mysqli_fetch_array($retval);<br>        if($info[‘userpass’]==$guestPass){<br>            echo “<script><br>            alert(‘log success!’);<br>            location.href=’manage.php’;<br>            </script>“;<br>        }else{<br>            echo “<script><br>            alert(‘log fail!’);<br>            </script>“;<br>        }<br>    }else{<br>        echo “<script><br>            alert(‘guest not exist!’);<br>            </script>“;<br>    }<br>}<br>?&gt;  </p>
+<pre><code>4. 管理界面：manage.php  
+![ManagePage](https://gitee.com/hui_net/PhotoCategory/raw/master/ManagePage.PNG)  
+</code></pre><p>&lt;!DOCTYPE HTML&gt;  </p>
+<html>  
+
+<head><meta name="generator" content="Hexo 3.8.0"><br>    <meta http-equiv="CONTENT-TYPE" ; content="text/html" charset="UTF-8"><br>    <title>留言列表</title><br>    <style type="text/css"> </style><br></head>  
+
+<p><body><br>    <div><br>        <table><br>            <tr><br>                <th>ID</th><br>                <th>Name</th><br>                <th>Time</th><br>                <th class="content">Content</th><br>                <th>操作</th><br>            </tr><br>            &lt;?php<br>            $conn = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>            if (!$conn) {<br>                die(‘connect error’ . mysqli_error($conn));<br>            }<br>            mysqli_select_db($conn, ‘test’);<br>            $sql = ‘SELECT * FROM messageboard’;<br>            $retval = mysqli_query($conn, $sql);<br>            if ($retval) {<br>                while ($v = mysqli_fetch_assoc($retval)) { ?&gt;<br>                    <tr><br>                        <td>&lt;?php echo $v[‘id’]; ?&gt;</td><br>                        <td>&lt;?php echo $v[‘author’]; ?&gt;</td><br>                        <td>&lt;?php echo $v[‘dateline’]; ?&gt;</td><br>                        <td>&lt;?php echo $v[‘message’]; ?&gt;</td><br>                        <td><br>                            <a href="changeContent.php?id=<?= $v['id'] ?>">修改</a><br>                            <a href="delete.php?id=<?= $v['id'] ?>">删除</a><br>                        </td><br>                    </tr><br>                &lt;?php }<br>        } else {<br>            echo ‘mysqli_query() error!’;<br>        } ?&gt;<br>            <table><br>    </table></table></div><br></body><br><a href="index.php">&lt;——返回主界面——&gt;</a><br></p></html>  <p></p>
+<pre><code>5. 修改界面：  
+changeContent.php  
+![updatePage](https://gitee.com/hui_net/PhotoCategory/raw/master/update.PNG)  
+</code></pre><p>&lt;?php<br>$id = $_GET[‘id’];<br>$link = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>mysqli_select_db($link,’test’);<br>$sql = “SELECT * FROM messageboard WHERE id=” . $id;<br>$retval = mysqli_query($link, $sql);<br>if ($retval) {<br>    while ($row = mysqli_fetch_assoc($retval)) { ?&gt;<br>        <form method="POST" action="update.php"><br>            <input type="hidden" name="id" value="<?= $row['id'] ?>"><br>            你的名字：<input type="text" name="name" value="<?= $row['author'] ?>"><br><br>            留言内容：<textarea name="content" rows="8" cols="30">&lt;?= $row[‘message’] ?&gt;</textarea><br><br>            <input type="submit" value="提交修改"><br>        </form><br>    &lt;?php }<br>}<br>?&gt;  </p>
+<pre><code>update.php  
+</code></pre><p>&lt;?php<br>$name = $_POST[‘name’];<br>$content = $_POST[‘content’];<br>$time = date(“Y-m-d h:i:s”);  </p>
+<p>$link = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>if (!$link) {<br>    die(‘connect error’ . mysqli_error($link));<br>}<br>mysqli_select_db($link, ‘test’);<br>$sql = ‘UPDATE messageboard SET author=”‘ . $name . ‘“,message=”‘ . $content . ‘“,dateline=”‘ . $time . ‘“ WHERE id=”‘ . $_POST[‘id’] . ‘“‘;<br>$retval = mysqli_query($link, $sql);<br>if ($retval) {<br>    echo ‘修改成功，3秒后自动跳转……’; ?&gt;<br>    <meta http-equiv="refresh" content="3;url=manage.php"><br>&lt;?php<br>} else {<br>    echo ‘修改失败，3秒后自动跳转……’; ?&gt;<br>    <meta http-equiv="refresh" content="3;url=manage.php"><br>&lt;?php<br>}<br>?&gt;  </p>
+<pre><code>6. 删除界面：delete.php  
+</code></pre><html>  
+
+<p>&lt;?php<br>$link = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>if (!$link) {<br>    die(‘connect error’ . mysqli_error($link));<br>}<br>mysqli_select_db($link, ‘test’);<br>$id = $_GET[‘id’];<br>$sql = ‘DELETE FROM messageboard WHERE id=’.$id;<br>$retval = mysqli_query($link, $sql);<br>if ($retval) {<br>    echo ‘删除成功，3秒后自动跳转……’; ?&gt;<br>    <meta http-equiv="refresh" content="3;url=manage.php"><br>&lt;?php<br>} else {<br>    echo ‘删除失败，3秒后自动跳转……’;<br>}<br>?&gt;  </p>
+<p></p></html><br><code>`</code>  <p></p>
+
       
     </div>
     
@@ -592,7 +481,7 @@ public:
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/" title="longestPalindrome">http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/</a>
+    <a href="http://Flowers-bloom.github.io/2019/05/03/messageBoard/" title="">http://Flowers-bloom.github.io/2019/05/03/messageBoard/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -605,20 +494,6 @@ public:
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
-          
-            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
-          
-            <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
-          
-            <a href="/tags/回文串/" rel="tag"><i class="fa fa-tag"></i> 回文串</a>
-          
-            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
-          
-        </div>
-      
 
       
       
@@ -628,8 +503,8 @@ public:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/02/lengthOfLongestSubstring/" rel="next" title="lengthOfLongestSubstring">
-                <i class="fa fa-chevron-left"></i> lengthOfLongestSubstring
+              <a href="/2019/05/03/longestPalindrome/" rel="next" title="longestPalindrome">
+                <i class="fa fa-chevron-left"></i> longestPalindrome
               </a>
             
           </div>
@@ -638,7 +513,7 @@ public:
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/03/messageBoard/" rel="prev" title>
+              <a href="/2019/05/03/loginBySession/" rel="prev" title="">
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -699,7 +574,9 @@ public:
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="neuq-Xjh">
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="neuq-Xjh" />
             
               <p class="site-author-name" itemprop="name">neuq-Xjh</p>
               <p class="site-description motion-element" itemprop="description">程序猿的世界</p>
@@ -754,7 +631,7 @@ public:
           
           
 		  <!-- 音乐播放外链 -->
-          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28638958&auto=1&height=66"></iframe>
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=28638958&auto=1&height=66"></iframe>
           
 
         </div>
