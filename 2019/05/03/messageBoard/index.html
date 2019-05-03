@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/login.PNG">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/ManagePage.PNG">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/update.PNG">
-<meta property="og:updated_time" content="2019-05-03T14:38:51.110Z">
+<meta property="og:updated_time" content="2019-05-03T14:53:03.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="messageBoard">
 <meta name="twitter:description" content="留言板项目实现代码以及成果展示...">
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  2.4k 字
+                  2.5k 字
                 </span>
               
 
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  13 分钟
+                  14 分钟
                 </span>
               
             </div>
@@ -796,13 +796,29 @@ if ($retval) {
 }  
 ?&gt;  
 </code></pre><ol start="6">
-<li>删除界面：delete.php<br><code>`</code>  <html>  
-
-</html></li>
+<li>删除界面：delete.php  </li>
 </ol>
-<p>&lt;?php<br>$link = mysqli_connect(‘localhost’, ‘username’, ‘userpassword’);<br>if (!$link) {<br>    die(‘connect error’ . mysqli_error($link));<br>}<br>mysqli_select_db($link, ‘test’);<br>$id = $_GET[‘id’];<br>$sql = ‘DELETE FROM messageboard WHERE id=’.$id;<br>$retval = mysqli_query($link, $sql);<br>if ($retval) {<br>    echo ‘删除成功，3秒后自动跳转……’; ?&gt;<br>    <meta http-equiv="refresh" content="3;url=manage.php"><br>&lt;?php<br>} else {<br>    echo ‘删除失败，3秒后自动跳转……’;<br>}<br>?&gt;  </p>
-<p><br><code>`</code>  </p>
+<pre><code>&lt;html&gt;  
 
+&lt;?php  
+$link = mysqli_connect(&apos;localhost&apos;, &apos;username&apos;, &apos;userpassword&apos;);  
+if (!$link) {  
+    die(&apos;connect error&apos; . mysqli_error($link));  
+}  
+mysqli_select_db($link, &apos;test&apos;);  
+$id = $_GET[&apos;id&apos;];  
+$sql = &apos;DELETE FROM messageboard WHERE id=&apos;.$id;  
+$retval = mysqli_query($link, $sql);  
+if ($retval) {  
+    echo &apos;删除成功，3秒后自动跳转......&apos;; ?&gt;  
+    &lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;url=manage.php&quot;&gt;  
+&lt;?php  
+} else {  
+    echo &apos;删除失败，3秒后自动跳转......&apos;;  
+}  
+?&gt;  
+&lt;/html&gt;  
+</code></pre>
       
     </div>
     
