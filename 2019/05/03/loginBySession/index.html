@@ -89,7 +89,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/loginSuccess.PNG">
-<meta property="og:updated_time" content="2019-05-03T14:32:39.723Z">
+<meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/logStatus.PNG">
+<meta property="og:updated_time" content="2019-05-03T14:37:42.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="loginBySession">
 <meta name="twitter:description" content="会话登录项目实现代码及成果展示">
@@ -385,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  555 字
+                  615 字
                 </span>
               
 
@@ -401,7 +402,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  2 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -428,49 +429,98 @@
       
         <p>####登录功能（session）  </p>
 <ol>
-<li>Login.html<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG" alt="LoginPage">  <pre><code>&lt;!DOCTYPE html&gt;  
-&lt;html lang=&quot;en&quot;&gt;  
-&lt;head&gt;  
-&lt;meta charset=&quot;UTF-8&quot;&gt;  
-&lt;title&gt;Login&lt;/title&gt;  
-&lt;/head&gt;  
-&lt;body&gt;  
-&lt;hr size=&quot;1&quot;&gt;  
-&lt;form action=&quot;log.php&quot; method=&quot;post&quot; &gt;  
-用户：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;  
-密码：&lt;input type=&quot;text&quot; name=&quot;password&quot; /&gt;&lt;br&gt;  
-&lt;input type=&quot;submit&quot; name=&apos;login&apos; value=&quot;登录&quot;&gt;  
-&lt;/form&gt;  
-</code></pre></li>
-<li>Login.php<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/loginSuccess.PNG" alt="Login"><br><code>`</code><br>&lt;?php<br>header(‘content-type:text/html;charset=utf-8’);<br>//获取表单的用户名和密码<br>if ($_SERVER[‘REQUEST_METHOD’] == ‘POST’) {<br> if (empty($_POST[‘username’])){  <pre><code>echo &quot;&lt;script&gt;alert(&apos;用户名不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-</code></pre> }else {  <pre><code>$username=trim($_POST[&apos;username&apos;]);  
-</code></pre> }<br> if (empty($_POST[‘password’])){  <pre><code>echo &quot;&lt;script&gt;alert(&apos;密码不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-</code></pre> }else{  <pre><code>$password=$_POST[&apos;password&apos;];  
-</code></pre> }<br>}<br>//连接数据库，查询并返回用户信息<br>$link = mysqli_connect(‘localhost’,’username’,’userpassword’);<br>if(!$link){<br> echo ‘connect error!’;<br>}<br>mysqli_select_db($link,’test’);<br>$sql = “SELECT userpass FROM admin WHERE username=”.”‘$username’”;<br>$retval = mysqli_query($link,$sql);<br>if($retval){<br> $retpass = $retval-&gt;fetch_row();<br>}else{<br> echo ‘sql error!’;<br>}<br>if($retpass){<br> if($password != $retpass[0]){  <pre><code>echo &quot;&lt;script&gt;alert(&apos;密码错误！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-</code></pre> }else{  <pre><code>$expire=3600;  
-ini_set(&apos;session.gc_maxlifetime&apos;,$expire); //初始化PHP session的有效期为一小时  
-//更改php.ini配置文件的值，在脚本生命周期中有效，脚本结束则失效  
-if(empty($_COOKIE[&apos;PHPSESSION&apos;])){  
-    session_set_cookie_params($expire); //该函数必须在session_start()函数前使用  
-    session_start();  
-}else{  
-    session_start();  
-    setcookie(&apos;PHPSESSION&apos;,session_id(),time() + $expire);  
-}  
-if(isset($_SESSION[&apos;username&apos;])){  
-    exit(&quot;您已经登入了，请不要重新登入！用户名：{$_SESSION[&apos;username&apos;]}---&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;);  
-}else{  
-    $_SESSION[&apos;username&apos;]=$username;  
-}  
-echo &quot;&lt;script&gt;alert(&apos;登录成功！&apos;);&lt;/script&gt;&lt;br&gt;&quot;;  
-echo &quot;您好！{$_SESSION[&apos;username&apos;]},欢迎回来！&quot;;  
-echo &quot;&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;;  
-</code></pre> }<br>}else{<br> echo “<script>alert(‘没有此用户！’);location.href=’login.html’;</script>“;<br>}  </li>
+<li>Login.html<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG" alt="LoginPage">  </li>
 </ol>
-<pre><code>3. Logout.php  
-![LoginStatus](https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/logStatus.PNG)  
-</code></pre><p>&lt;?php<br>header(‘content-type:text/html;charset=utf-8’);<br>session_start();<br>if(isset($_SESSION[‘username’])){<br>    session_unset($_SESSION[‘username’]); //释放所有会话变量<br>    session_destroy();  //销毁一个会话的全部数据<br>    setcookie(session_name(),’’); //销毁保存在客户端 Cookie 中的 Session ID<br>    echo “<script><br>    alert(‘注销成功！’);<br>    location.href=’login.html’;<br>    </script>“;<br>}else{<br>    echo “<script><br>    alert(‘注销失败！’);<br>    </script>“;<br>}<br><code>`</code>  </p>
-
+<pre><code>&lt;!DOCTYPE html&gt;  
+ &lt;html lang=&quot;en&quot;&gt;  
+ &lt;head&gt;  
+ &lt;meta charset=&quot;UTF-8&quot;&gt;  
+ &lt;title&gt;Login&lt;/title&gt;  
+ &lt;/head&gt;  
+ &lt;body&gt;  
+ &lt;hr size=&quot;1&quot;&gt;  
+ &lt;form action=&quot;log.php&quot; method=&quot;post&quot; &gt;  
+ 用户：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;  
+ 密码：&lt;input type=&quot;text&quot; name=&quot;password&quot; /&gt;&lt;br&gt;  
+ &lt;input type=&quot;submit&quot; name=&apos;login&apos; value=&quot;登录&quot;&gt;  
+ &lt;/form&gt;  
+</code></pre><ol start="2">
+<li>Login.php<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/loginSuccess.PNG" alt="Login">  </li>
+</ol>
+<pre><code>&lt;?php  
+header(&apos;content-type:text/html;charset=utf-8&apos;);  
+//获取表单的用户名和密码  
+if ($_SERVER[&apos;REQUEST_METHOD&apos;] == &apos;POST&apos;) {  
+    if (empty($_POST[&apos;username&apos;])){  
+        echo &quot;&lt;script&gt;alert(&apos;用户名不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
+    }else {  
+        $username=trim($_POST[&apos;username&apos;]);  
+    }  
+    if (empty($_POST[&apos;password&apos;])){  
+        echo &quot;&lt;script&gt;alert(&apos;密码不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
+    }else{  
+        $password=$_POST[&apos;password&apos;];  
+    }  
+}  
+//连接数据库，查询并返回用户信息  
+$link = mysqli_connect(&apos;localhost&apos;,&apos;username&apos;,&apos;userpassword&apos;);  
+if(!$link){  
+    echo &apos;connect error!&apos;;  
+}  
+mysqli_select_db($link,&apos;test&apos;);  
+$sql = &quot;SELECT userpass FROM admin WHERE username=&quot;.&quot;&apos;$username&apos;&quot;;  
+$retval = mysqli_query($link,$sql);  
+if($retval){  
+    $retpass = $retval-&gt;fetch_row();  
+}else{  
+    echo &apos;sql error!&apos;;  
+}  
+if($retpass){  
+    if($password != $retpass[0]){  
+        echo &quot;&lt;script&gt;alert(&apos;密码错误！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
+    }else{  
+        $expire=3600;  
+        ini_set(&apos;session.gc_maxlifetime&apos;,$expire); //初始化PHP session的有效期为一小时  
+        //更改php.ini配置文件的值，在脚本生命周期中有效，脚本结束则失效  
+        if(empty($_COOKIE[&apos;PHPSESSION&apos;])){  
+            session_set_cookie_params($expire); //该函数必须在session_start()函数前使用  
+            session_start();  
+        }else{  
+            session_start();  
+            setcookie(&apos;PHPSESSION&apos;,session_id(),time() + $expire);  
+        }  
+        if(isset($_SESSION[&apos;username&apos;])){  
+            exit(&quot;您已经登入了，请不要重新登入！用户名：{$_SESSION[&apos;username&apos;]}---&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;);  
+        }else{  
+            $_SESSION[&apos;username&apos;]=$username;  
+        }  
+        echo &quot;&lt;script&gt;alert(&apos;登录成功！&apos;);&lt;/script&gt;&lt;br&gt;&quot;;  
+        echo &quot;您好！{$_SESSION[&apos;username&apos;]},欢迎回来！&quot;;  
+        echo &quot;&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;;  
+    }  
+}else{  
+    echo &quot;&lt;script&gt;alert(&apos;没有此用户！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
+}  
+</code></pre><ol start="3">
+<li>Logout.php<br><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/logStatus.PNG" alt="LoginStatus">  </li>
+</ol>
+<pre><code>&lt;?php  
+header(&apos;content-type:text/html;charset=utf-8&apos;);  
+session_start();  
+if(isset($_SESSION[&apos;username&apos;])){  
+    session_unset($_SESSION[&apos;username&apos;]); //释放所有会话变量  
+    session_destroy();  //销毁一个会话的全部数据  
+    setcookie(session_name(),&apos;&apos;); //销毁保存在客户端 Cookie 中的 Session ID  
+    echo &quot;&lt;script&gt;  
+    alert(&apos;注销成功！&apos;);  
+    location.href=&apos;login.html&apos;;  
+    &lt;/script&gt;&quot;;  
+}else{  
+    echo &quot;&lt;script&gt;  
+    alert(&apos;注销失败！&apos;);  
+    &lt;/script&gt;&quot;;  
+}  
+</code></pre>
       
     </div>
     
