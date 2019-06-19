@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[报名系统-完整版]]></title>
     <url>%2F2019%2F06%2F16%2F%E6%8A%A5%E5%90%8D%E7%B3%BB%E7%BB%9F-%E5%AE%8C%E6%95%B4%E7%89%88%2F</url>
-    <content type="text"><![CDATA[–&gt;项目地址一、项目展示1、报名页面2、管理员登录 3、管理员页面 4、二、自我评价]]></content>
+    <content type="text"><![CDATA[–&gt;项目地址一、项目展示1、报名页面 2、管理员登录 3、管理员页面（1）首页（2）新增（3）编辑（4）删除 二、自我评价优点：使用了laravel自带脚手架实现管理员登录，使得实现过程简单，并且功能完整，界面简洁。一些细节也照顾到了，比如报名表单的验证，异常的输出。不足：管理员首页的报名信息未按指定字段排列，并且没有实现分页和查询报名信息功能，一定上不方便用户浏览。]]></content>
       <categories>
         <category>web开发</category>
         <category>小项目</category>
