@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[树的遍历（递归和迭代）]]></title>
+    <url>%2F2019%2F08%2F16%2F%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%EF%BC%88%E9%80%92%E5%BD%92%E5%92%8C%E8%BF%AD%E4%BB%A3%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[–&gt;传送门由于两种方法代码不繁琐，理解起来也简单，所以就不啰嗦了，直接上代码。1、递归法123456789101112131415class Solution &#123; List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123; if (root != null) &#123; list.add(root.val); if (root.left != null) &#123; preorderTraversal(root.left); &#125; if (root.right != null) &#123; preorderTraversal(root.right); &#125; &#125; return list; &#125;&#125; 2、迭代法（借助栈）12345678910111213141516171819202122232425class Solution &#123; public List&lt;Integer&gt; preorderTraversal(TreeNode root) &#123; List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); // 借助栈数据结构用于树结点的回溯 Stack&lt;TreeNode&gt; stack = new Stack&lt;TreeNode&gt;(); if (root != null) &#123; stack.push(root); while (!stack.isEmpty()) &#123; root = stack.pop(); list.add(root.val); if (root.right != null) &#123; stack.push(root.right); &#125; if (root.left != null) &#123; stack.push(root.left); &#125; &#125; &#125; return list; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>java</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[反转链表]]></title>
     <url>%2F2019%2F07%2F19%2F%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8%2F</url>
     <content type="text"><![CDATA[–&gt;传送门题解：1、遍历法需要遍历、头、尾三个指针，从尾部开始反转12345678910111213141516171819/** * @param ListNode $head * @return ListNode */function reverseList($head) &#123; if ($head == null) return null; $prev = $p = $head; $tail = $head-&gt;next; while ($tail) &#123; $p = $tail; $tail = $p-&gt;next; $p-&gt;next = $prev; $prev = $p; &#125; $head-&gt;next = null; return $p;&#125; 2、数组法先遍历存储指针，再从头部开始反转123456789101112131415161718192021222324/** * @param ListNode $head * @return ListNode */function reverseList($head) &#123; if ($head == null) return null; $_head = null; $p = $head; $arr = []; while ($p-&gt;next) &#123; $arr[] = $p; $p = $p-&gt;next; &#125; $_head = $p; $i = count($arr); while($i != 0) &#123; $p-&gt;next = $arr[--$i]; $p = $arr[$i]; &#125; $arr[0]-&gt;next = null; return $_head;&#125;]]></content>
