@@ -113,9 +113,9 @@
       </categories>
       <tags>
         <tag>C++</tag>
+        <tag>algorithm</tag>
         <tag>String</tag>
         <tag>回文串</tag>
-        <tag>algorithm</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
@@ -128,8 +128,8 @@
       </categories>
       <tags>
         <tag>C++</tag>
-        <tag>String</tag>
         <tag>algorithm</tag>
+        <tag>String</tag>
       </tags>
   </entry>
 </search>
