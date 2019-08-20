@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[将数组拆分成斐波那契序列]]></title>
+    <url>%2F2019%2F08%2F20%2F%E5%B0%86%E6%95%B0%E7%BB%84%E6%8B%86%E5%88%86%E6%88%90%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E5%BA%8F%E5%88%97%2F</url>
+    <content type="text"><![CDATA[传送门题目描述：给定一个数字字符串 S，比如 S = “123456579”，我们可以将它分成斐波那契式的序列 [123, 456, 579]。 形式上，斐波那契式序列是一个非负整数列表 F，且满足： 0 &lt;= F[i] &lt;= 2^31 - 1，（也就是说，每个整数都符合 32 位有符号整数类型）；F.length &gt;= 3；对于所有的0 &lt;= i &lt; F.length - 2，都有 F[i] + F[i+1] = F[i+2] 成立。 另外，请注意，将字符串拆分成小块时，每个块的数字一定不要以零开头，除非这个块是数字 0 本身。 返回从 S 拆分出来的所有斐波那契式的序列块，如果不能拆分则返回 []。示例： 输入：”123456579”输出：[123,456,579] 输入: “11235813”输出: [1,1,2,3,5,8,13] 输入: “112358130”输出: []解释: 这项任务无法完成。 输入：”0123”输出：[]解释：每个块的数字不能以零开头，因此 “01”，”2”，”3” 不是有效答案。 输入: “1101111”输出: [110, 1, 111]解释: 输出 [11,0,11,11] 也同样被接受。 思路：（1）如何取出子串使用substring（）函数（2）如何完全枚举使用回溯算法，枚举所有情况（3）如何判断符合斐波那契序列将字符串转化为整形，判断是否等于前两个元素之和1234567891011121314151617181920212223242526272829303132333435363738394041424344class Solution &#123; public List&lt;Integer&gt; splitIntoFibonacci(String S) &#123; List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); backTracking(S, 0, list); return list; &#125; // 回溯算法 private boolean backTracking(String s, int start, List&lt;Integer&gt; list) &#123; // 结束条件 if (start == s.length() &amp;&amp; list.size() &gt; 2) return true; for (int i = start; i&lt;s.length(); i++) &#123; String tmp = s.substring(start, i+1); // 排除情况（1、超出整形范围 2、以0开头的子串） if (Long.parseLong(tmp) &gt; Integer.MAX_VALUE) break; if (!&quot;0&quot;.equals(tmp) &amp;&amp; tmp.startsWith(&quot;0&quot;)) break; if (isFibonacci(tmp, list)) &#123; list.add(Integer.valueOf(tmp)); // 查找下一个 if (backTracking(s, i+1, list)) return true; // 回溯 list.remove(list.size()-1); &#125; &#125; return false; &#125; // 判断是否符合斐波那契序列 private boolean isFibonacci(String s, List&lt;Integer&gt; list) &#123; int len = list.size(); if (len &lt; 2) return true; if (list.get(len-1) + list.get(len-2) == Integer.valueOf(s)) return true; return false; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>String</tag>
+        <tag>java</tag>
+        <tag>回溯算法</tag>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[最大利润（贪心算法）]]></title>
     <url>%2F2019%2F08%2F19%2F%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6%EF%BC%88%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95%EF%BC%89%2F</url>
     <content type="text"><![CDATA[传送门题目描述：假设 力扣（LeetCode）即将开始其 IPO。为了以更高的价格将股票卖给风险投资公司，力扣 希望在 IPO 之前开展一些项目以增加其资本。 由于资源有限，它只能在 IPO 之前完成最多 k 个不同的项目。帮助 力扣 设计完成最多 k 个不同项目后得到最大总资本的方式。 给定若干个项目。对于每个项目 i，它都有一个纯利润 Pi，并且需要最小的资本 Ci 来启动相应的项目。最初，你有 W 资本。当你完成一个项目时，你将获得纯利润，且利润将被添加到你的总资本中。 总而言之，从给定项目中选择最多 k 个不同项目的列表，以最大化最终资本，并输出最终可获得的最多资本。 示例： 输入: k=2, W=0, Profits=[1,2,3], Capital=[0,1,1].输出: 4解释:由于你的初始资本为 0，你尽可以从 0 号项目开始。在完成后，你将获得 1 的利润，你的总资本将变为 1。此时你可以选择开始 1 号或 2 号项目。由于你最多可以选择两个项目，所以你需要完成 2 号项目以获得最大的资本。因此，输出最后最大化的资本，为 0 + 1 + 3 = 4。 思路：将启动资金和利润关联，然后按照利润降序排序。那么，只要判断当前资金是否足够启动资金并做出相应处理即可。有些时间没有敲这样的算法题，脑子生锈了，在此记录下… 1234567891011121314151617181920212223242526272829303132333435363738class Solution &#123; class node implements Comparable&lt;node&gt; &#123; public int p; public int c; node (int p, int c) &#123; this.p = p; this.c = c;&#125; public int compareTo(node n) &#123; return n.p - this.p; // 降序 &#125; &#125; public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) &#123; List&lt;node&gt; list = new ArrayList&lt;node&gt;(); for (int i=0; i&lt;Capital.length; i++) &#123; list.add(new node(Profits[i], Capital[i])); &#125; Collections.sort(list); while (k != 0 &amp;&amp; !list.isEmpty()) &#123; int f = 0; for (node n : list) &#123; if (W &gt;= n.c) &#123; f=1; W += n.p; list.remove(n); k--; break; &#125; &#125; if (f==0) return W; &#125; return W; &#125;&#125;]]></content>
@@ -9,6 +23,7 @@
       </categories>
       <tags>
         <tag>java</tag>
+        <tag>algorithm</tag>
         <tag>贪心算法</tag>
       </tags>
   </entry>
@@ -20,9 +35,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
         <tag>java</tag>
         <tag>树</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -33,9 +48,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>数据结构</tag>
         <tag>php</tag>
         <tag>链表</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -113,8 +128,8 @@
       </categories>
       <tags>
         <tag>C++</tag>
-        <tag>algorithm</tag>
         <tag>String</tag>
+        <tag>algorithm</tag>
         <tag>回文串</tag>
         <tag>动态规划</tag>
       </tags>
@@ -128,8 +143,8 @@
       </categories>
       <tags>
         <tag>C++</tag>
-        <tag>algorithm</tag>
         <tag>String</tag>
+        <tag>algorithm</tag>
       </tags>
   </entry>
 </search>

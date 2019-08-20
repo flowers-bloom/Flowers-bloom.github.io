@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="C++,String,找规律,">
+  <meta name="keywords" content="String,java,回溯算法,algorithm,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。">
-<meta name="keywords" content="C++,String,找规律">
+<meta name="description" content="给定一个字符串，将其拆分成斐波那契序列">
+<meta name="keywords" content="String,java,回溯算法,algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Z字形变换">
-<meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/24/Z字形变换/index.html">
+<meta property="og:title" content="将数组拆分成斐波那契序列">
+<meta property="og:url" content="http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/index.html">
 <meta property="og:site_name" content="PJ-BE">
-<meta property="og:description" content="将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。">
+<meta property="og:description" content="给定一个字符串，将其拆分成斐波那契序列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-19T16:05:32.166Z">
+<meta property="og:updated_time" content="2019-08-20T12:04:36.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Z字形变换">
-<meta name="twitter:description" content="将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。">
+<meta name="twitter:title" content="将数组拆分成斐波那契序列">
+<meta name="twitter:description" content="给定一个字符串，将其拆分成斐波那契序列">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/05/24/Z字形变换/">
+  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/">
 
 
 
 
 
-  <title>Z字形变换 | PJ-BE</title>
+  <title>将数组拆分成斐波那契序列 | PJ-BE</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/05/24/Z字形变换/">
+    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="NEUQ-XJH">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Z字形变换</h1>
+          <h1 class="post-title" itemprop="name headline">将数组拆分成斐波那契序列</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T23:23:34+08:00">
-                2019-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T19:42:34+08:00">
+                2019-08-20
               </time>
             
 
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  410 字
+                  551 字
                 </span>
               
 
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -406,8 +406,8 @@
 
           
               <div class="post-description">
-                  <题解>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
-              </题解></div>
+                  给定一个字符串，将其拆分成斐波那契序列
+              </div>
           
 
         </div>
@@ -423,15 +423,29 @@
       
 
       
-        <p><mark><a href="https://leetcode-cn.com/problems/zigzag-conversion/" target="_blank" rel="noopener">传送门</a></mark><br>示例 1：</p>
+        <p><mark><a href="https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/" target="_blank" rel="noopener">传送门</a></mark><br>题目描述：<br>给定一个数字字符串 S，比如 S = “123456579”，我们可以将它分成斐波那契式的序列 [123, 456, 579]。</p>
+<p>形式上，斐波那契式序列是一个非负整数列表 F，且满足：</p>
 <blockquote>
-<p>输入: s = “LEETCODEISHIRING”, numRows = 3<br>输出: “LCIRETOESIIGEDHN”<br>解释：<br>L   C   I   R<br>E T O E S I I G<br>E   D   H   N</p>
+<p>0 &lt;= F[i] &lt;= 2^31 - 1，（也就是说，每个整数都符合 32 位有符号整数类型）；<br>F.length &gt;= 3；<br>对于所有的0 &lt;= i &lt; F.length - 2，都有 F[i] + F[i+1] = F[i+2] 成立。</p>
 </blockquote>
-<p>示例 2：</p>
+<p>另外，请注意，将字符串拆分成小块时，每个块的数字一定不要以零开头，除非这个块是数字 0 本身。</p>
+<p>返回从 S 拆分出来的所有斐波那契式的序列块，如果不能拆分则返回 []。<br>示例：</p>
 <blockquote>
-<p>输入: s = “LEETCODEISHIRING”, numRows = 4<br>输出: “LDREOEIIECIHNTSG”<br>解释:<br>L     D     R<br>E   O E   I I<br>E C   I H   N<br>T     S     G  </p>
+<p>输入：”123456579”<br>输出：[123,456,579]</p>
 </blockquote>
-<p>(原创)思路：根据Z字形排列规律，先找出排在第1行的字符，按找出顺序加到返回的字符串中，再行数累加，重复操作。所以，关键就在于如何找出排在每行的字符。<br>将倒立Z的左竖列和斜对角线上的字符(不包括下一个竖列的第一个字符)作为一个周期，竖行上的字符显然满足 <code>(j+1)%t==i</code> 条件，而对角线上的字符需要分类讨论，处理周期问题，常用的运算符为%。所以判断条件为 <code>numRows-((j+1)%t-numRows)==i</code> ， 整理得 <code>(2*numRows-(j+1)%t)==i</code>，又因为<code>(j+1)%t==0</code>的情况不是预期，所以要分类讨论下。此外，由于竖行和对角线的判断在最后一行时同时满足，故需要加个格外条件。最后，遗漏了当 <code>numRows==1</code> 时，程序会发生错误，需将该情况另外处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string convert(string s, int numRows) &#123;</span><br><span class="line">        string str = &quot;&quot;;</span><br><span class="line">        int len = s.size();</span><br><span class="line">        if(numRows==1)</span><br><span class="line">            return s;</span><br><span class="line">        int k=0,t = 2*numRows-2,ans=0;</span><br><span class="line">        for(int i=1; i&lt;=numRows; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j=0; j&lt;len; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if((j+1)%t==i &amp;&amp; i!=numRows)</span><br><span class="line">                &#123;</span><br><span class="line">                    str+=s[j];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if((j+1)%t!=0 &amp;&amp; (2*numRows-(j+1)%t)==i)</span><br><span class="line">                &#123;</span><br><span class="line">                    str+=s[j];</span><br><span class="line">                &#125;else if((j+1)%t==0 &amp;&amp; (2*numRows-t)==i)</span><br><span class="line">                &#123;</span><br><span class="line">                    str+=s[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>输入: “11235813”<br>输出: [1,1,2,3,5,8,13]</p>
+</blockquote>
+<blockquote>
+<p>输入: “112358130”<br>输出: []<br>解释: 这项任务无法完成。</p>
+</blockquote>
+<blockquote>
+<p>输入：”0123”<br>输出：[]<br>解释：每个块的数字不能以零开头，因此 “01”，”2”，”3” 不是有效答案。</p>
+</blockquote>
+<blockquote>
+<p>输入: “1101111”<br>输出: [110, 1, 111]<br>解释: 输出 [11,0,11,11] 也同样被接受。</p>
+</blockquote>
+<p>思路：<br>（1）如何取出子串<br>使用substring（）函数<br>（2）如何完全枚举<br>使用回溯算法，枚举所有情况<br>（3）如何判断符合斐波那契序列<br>将字符串转化为整形，判断是否等于前两个元素之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    public List&lt;Integer&gt; splitIntoFibonacci(String S) &#123;</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        backTracking(S, 0, list);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">    // 回溯算法</span><br><span class="line">    private boolean backTracking(String s, int start, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        // 结束条件</span><br><span class="line">        if (start == s.length() &amp;&amp; list.size() &gt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        </span><br><span class="line">        for (int i = start; i&lt;s.length(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            String tmp = s.substring(start, i+1);</span><br><span class="line"></span><br><span class="line">            // 排除情况（1、超出整形范围 2、以0开头的子串）</span><br><span class="line">            if (Long.parseLong(tmp) &gt; Integer.MAX_VALUE) break;</span><br><span class="line">            if (!&quot;0&quot;.equals(tmp) &amp;&amp; tmp.startsWith(&quot;0&quot;)) break;</span><br><span class="line"></span><br><span class="line">            if (isFibonacci(tmp, list)) </span><br><span class="line">            &#123;</span><br><span class="line">                list.add(Integer.valueOf(tmp));</span><br><span class="line">                // 查找下一个</span><br><span class="line">                if (backTracking(s, i+1, list)) return true;</span><br><span class="line">                // 回溯</span><br><span class="line">                list.remove(list.size()-1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    // 判断是否符合斐波那契序列</span><br><span class="line">    private boolean isFibonacci(String s, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        int len = list.size();</span><br><span class="line">        if (len &lt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        if (list.get(len-1) + list.get(len-2) == Integer.valueOf(s))</span><br><span class="line">            return true;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -464,7 +478,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://Flowers-bloom.github.io/2019/05/24/Z字形变换/" title="Z字形变换">http://Flowers-bloom.github.io/2019/05/24/Z字形变换/</a>
+    <a href="http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/" title="将数组拆分成斐波那契序列">http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -479,11 +493,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
-          
             <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
           
-            <a href="/tags/找规律/" rel="tag"><i class="fa fa-tag"></i> 找规律</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/回溯算法/" rel="tag"><i class="fa fa-tag"></i> 回溯算法</a>
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
         </div>
       
@@ -496,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/03/messageBoard/" rel="next" title="messageBoard">
-                <i class="fa fa-chevron-left"></i> messageBoard
+              <a href="/2019/08/19/最大利润（贪心算法）/" rel="next" title="最大利润（贪心算法）">
+                <i class="fa fa-chevron-left"></i> 最大利润（贪心算法）
               </a>
             
           </div>
@@ -505,10 +521,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/01/报名系统/" rel="prev" title="报名系统">
-                报名系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
