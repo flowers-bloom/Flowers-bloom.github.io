@@ -82,7 +82,7 @@
 <meta name="description" content="php、java后端攻城狮">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PJ-BE">
-<meta property="og:url" content="http://Flowers-bloom.github.io/tags/PHP/index.html">
+<meta property="og:url" content="http://Flowers-bloom.github.io/tags/php/index.html">
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="php、java后端攻城狮">
 <meta property="og:locale" content="zh-Hans">
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://Flowers-bloom.github.io/tags/PHP/">
+  <link rel="canonical" href="http://Flowers-bloom.github.io/tags/php/">
 
 
 
 
 
-  <title>标签: PHP | PJ-BE</title>
+  <title>标签: php | PJ-BE</title>
   
 
 
@@ -290,7 +290,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>PHP<small>标签</small>
+        <h1>php<small>标签</small>
         </h1>
       </div>
 
@@ -302,43 +302,17 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/05/03/messageBoard/" itemprop="url">
+            <a class="post-title-link" href="/2019/07/19/反转链表/" itemprop="url">
               
-                <span itemprop="name">messageBoard</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-03T22:20:43+08:00" content="2019-05-03">
-          05-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/05/03/loginBySession/" itemprop="url">
-              
-                <span itemprop="name">loginBySession</span>
+                <span itemprop="name">反转链表</span>
               
             </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-03T22:20:25+08:00" content="2019-05-03">
-          05-03
+        <time class="post-time" itemprop="dateCreated" datetime="2019-07-19T11:11:51+08:00" content="2019-07-19">
+          07-19
         </time>
       </div>
 
@@ -400,7 +374,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -956,6 +930,44 @@
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {
         proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
+oceedsearch();
       };
     });
 
