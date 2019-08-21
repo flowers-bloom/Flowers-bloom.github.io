@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[加油站]]></title>
+    <url>%2F2019%2F08%2F21%2F%E5%8A%A0%E6%B2%B9%E7%AB%99%2F</url>
+    <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/gas-station/题目描述：在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。 如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。 说明:如果题目有解，该答案即为唯一答案。输入数组均为非空数组，且长度相同。输入数组中的元素均为非负数。 示例： 输入: gas = [1,2,3,4,5] cost = [3,4,5,1,2]输出: 3解释:从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。因此，3 可为起始索引。 输入: gas = [2,3,4] cost = [3,4,3]输出: -1解释:你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。因此，无论怎样，你都不可能绕环路行驶一周。 1、官方题解思路：理解到“gas数组总和与cost数组总和之差小于0，则无法环路一周；否则可以环路一周”是前提。接着，由于环路方向唯一，正确的起点唯一，那么计算到每个加油站的剩余油量，如果小于0，那么自然到不了该加油站。所以，遍历一遍数组，累加下剩余油量，当剩余油量小于0时，重置为0并进入下一循环。如果最后剩余油量不小于0，最后的一次重置点即正确的起点。12345678910111213141516171819class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int n = gas.length; int sum = 0, ans = 0, start = 0; for (int i=0; i&lt;n; i++) &#123; sum += (gas[i] - cost[i]); if (ans &lt; 0) &#123; ans = (gas[i] - cost[i]); start = i; &#125;else &#123; ans += (gas[i] - cost[i]); &#125; &#125; return sum &gt;= 0 ? start : -1; &#125;&#125; 2、个人解法解题前提想到了，但是找起点的方法效率不高。1234567891011121314151617181920212223242526272829303132333435class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int len = gas.length; int[] arr = new int[len]; int ans = 0; for (int i=0; i&lt;len; i++) &#123; arr[i] = gas[i] - cost[i]; ans += arr[i]; &#125; if (ans &lt; 0) return -1; for (int i=0; i&lt;len; i++) &#123; if (arr[i] &lt; 0) continue; int sum = arr[i]; for (int j=i+1; ; j++) &#123; if ((j%len) == i &amp;&amp; sum &gt;=0) &#123; return i; &#125; sum += arr[j%len]; if (sum &lt; 0) &#123; break; &#125; &#125; &#125; return -1; &#125;&#125;]]></content>
+      <tags>
+        <tag>java</tag>
+        <tag>贪心算法</tag>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[跳跃游戏]]></title>
     <url>%2F2019%2F08%2F21%2F%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F%2F</url>
     <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/jump-game/submissions/题目描述：给定一个非负整数数组，你最初位于数组的第一个位置。 数组中的每个元素代表你在该位置可以跳跃的最大长度。 判断你是否能够到达最后一个位置。示例： 输入: [2,3,1,1,4]输出: true解释: 从位置 0 到 1 跳 1 步, 然后跳 3 步到达最后一个位置。 输入: [3,2,1,0,4] 输出: false 解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。 1、暴力递归模拟解法（超时） 自顶向下：在下标为0位置下，有n1个可跳点；n1个的其中一个可跳点中，又有n2个可跳点…如此延伸下去，以下标0位置为树根，其他可跳点为树结点，就构成了一个倒立树状的自顶向下树。 1234567891011121314151617// 自顶向下的递归模拟public boolean canJumpEnd(int index, int[] nums)&#123; if (index == nums.length-1) return true; // 避免数组越界 int longest = Math.min(index+nums[index], nums.length-1); // 模拟所有可跳的路径 for (int i=index+1; i&lt;=longest; i++) &#123; if (canJumpEnd(i, nums)) return true; &#125; return false;&#125;public boolean canJump(int[] nums) &#123; return canJumpEnd(0, nums);&#125; 2、自顶向下的动态规划解法（超时）思路：使用记忆表记录位置好坏，优化递归次数（如果可以跳到最后的位置，即好位置；如果不能，就是坏位置）1234567891011121314151617181920212223242526272829303132333435class Solution &#123; enum Index &#123; good, bad, unknown &#125; Index[] memo = null; public boolean canJumpEnd(int pos, int[] nums) &#123; if (memo[pos] != Index.unknown) &#123; return memo[pos] == Index.good ? true : false; &#125; int longest = Math.min(pos+nums[pos], nums.length-1); for (int i=pos+1; i&lt;=longest; i++) &#123; if (canJumpEnd(i, nums)) &#123; memo[i] = Index.good; return true; &#125; &#125; memo[pos] = Index.bad; return false; &#125; public boolean canJump(int[] nums) &#123; memo = new Index[nums.length]; for (int i=0; i&lt;nums.length; i++) memo[i] = Index.unknown; memo[nums.length-1] = Index.good; return canJumpEnd(0, nums); &#125; &#125; 3、自底向上动态规划解法（不超时，但耗时长） 自底向上：与自顶向下恰好相反，它是从最底端的树结点向上搜索的方法 思路：由于已知数组最后一个位置为好位置，所以从数组最后一个位置向上搜索可到达最后一个位置的位置。1234567891011121314151617181920212223242526class Solution &#123; enum Index &#123; good &#125; public boolean canJump(int[] nums) &#123; int len = nums.length; Index[] memo = new Index[len]; memo[len-1] = Index.good; for (int i=len-2; i&gt;=0; i--) &#123; int longest = Math.min(i+nums[i], len-1); for (int j=i; j&lt;=longest; j++) &#123; if (memo[j] == Index.good) &#123; memo[i] = Index.good; break; &#125; &#125; &#125; return memo[0] == Index.good; &#125; &#125; 4、自底向上动态规划 + 贪心（完美的解法）思路：在自底向上动态规划解法的基础上，使用一个变量记录数组中可到达数组最右位置的最左端位置的下标，避免了二次循环的遍历，节省运行时间。12345678910public boolean canJump(int[] nums) &#123; // 记录最左端位置，避免二次循环 int lastPos = nums.length - 1; for (int i=nums.length-1; i&gt;=0; i--) &#123; if (i + nums[i] &gt;= lastPos) lastPos = i; &#125; return lastPos == 0; &#125; 5、最后，提供个人的粗糙解法思路：在可跳范围内寻找下一步可跳的最大值（贪心），如果最大值对应位置为0，那么回溯前面的值（回溯）。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152class Solution &#123; public boolean canJump(int[] nums) &#123; int len = nums.length; if (len == 1) return true; int i=0; while (true) &#123; // 数组越界 if (i + nums[i] &gt;= len-1) return true; int max = 0; // 查找最大值 for (int j=i; j&lt;=(i+nums[i]); j++) &#123; if (max &lt; nums[j]) max = nums[j]; &#125; System.out.println(max); // 逆序定位 for (int j=(i+nums[i]); j&gt;=i; j--) &#123; if (max == nums[j]) &#123; i = j; break; &#125; &#125; if (i + nums[i] &gt;= len-1) return true; else if (i + nums[i] &lt; len -1 &amp;&amp; nums[i + nums[i]]==0) // 回溯 &#123; for (int j=(i+nums[i]); j&gt;=i; j--) &#123; if (j + nums[j] &gt;= len-1) &#123; System.out.println(j + nums[j]); return true; &#125; &#125; return false; &#125;else if (i + nums[i] &lt; len -1 &amp;&amp; nums[i]==0) // 示例2情况 &#123; return false; &#125; // 跳一步 i = i + nums[i]; &#125; &#125;&#125; PS：除个人解法外，其余解法来源于力扣官方题解。]]></content>
@@ -8,9 +18,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>algorithm</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
+        <tag>algorithm</tag>
         <tag>回溯算法</tag>
         <tag>动态规划</tag>
       </tags>
@@ -24,8 +34,8 @@
       </categories>
       <tags>
         <tag>String</tag>
-        <tag>algorithm</tag>
         <tag>java</tag>
+        <tag>algorithm</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
@@ -37,9 +47,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>algorithm</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
+        <tag>algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -51,8 +61,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>树</tag>
         <tag>数据结构</tag>
+        <tag>树</tag>
       </tags>
   </entry>
   <entry>
@@ -63,9 +73,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
         <tag>php</tag>
         <tag>链表</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
