@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[正则表达式匹配]]></title>
+    <url>%2F2019%2F08%2F23%2F%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D%2F</url>
+    <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/regular-expression-matching/ 题目描述：给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 &#39;.&#39; 和 &#39;*&#39; 的正则表达式匹配。 &apos;.&apos; 匹配任意单个字符 &apos;*&apos; 匹配零个或多个前面的那一个元素 所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。 说明: s 可能为空，且只包含从 a-z 的小写字母。 p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。 示例： 输入:s = “aa”p = “a”输出: false解释: “a” 无法匹配 “aa” 整个字符串。 输入:s = “aa”p = “a“输出: true解释: 因为 `’‘` 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。 输入:s = “ab”p = &quot;.*&quot;输出: true解释: &quot;.*&quot; 表示可匹配零个或多个（&#39;*&#39;）任意字符（&#39;.&#39;）。 输入:s = “aab”p = &quot;c*a*b&quot;输出: true解释: 因为 &#39;*&#39; 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。 输入:s = “mississippi”p = &quot;mis*is*p*.&quot;输出: false 题解：1、自顶向下动态规划推荐详细解析 https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/12345678910111213141516171819202122232425262728293031323334353637class Solution &#123; enum Result&#123; t,f &#125; Result memo[][] = null; public boolean isMatch(String s, String p) &#123; memo = new Result[s.length()+1][p.length()+1]; return dp(s, p, 0, 0); &#125; public boolean dp(String s, String p, int i, int j) &#123; if (memo[i][j] != null) return memo[i][j] == Result.t; boolean ans = false; if (j == p.length()) // 当s，p长度都为0或者相等时 &#123; ans = (i == s.length()); &#125;else // j &lt; p.length() &#123; boolean first_match = (i &lt; s.length() &amp;&amp; ( s.charAt(i) == p.charAt(j) || p.charAt(j) == &apos;.&apos; ) ); if ( p.length() &gt; j+1 &amp;&amp; p.charAt(j+1) == &apos;*&apos; ) &#123; ans = ( dp(s, p, i, j+2) || first_match &amp;&amp; dp(s, p, i+1, j) ); &#125;else &#123; ans = first_match &amp;&amp; dp(s, p, i+1, j+1); &#125; &#125; memo[i][j] = ans? Result.t : Result.f; return ans; &#125;&#125; 2、自底向上动态规划处理方法与自顶向下相似，不过需注意数组越界问题。此外，需注意&amp;&amp;优先级大于||，当&amp;&amp;的左边为false时，程序不会执行&amp;&amp;的右边，所以下面程序才不会出现越界。12345678910111213141516171819202122232425class Solution &#123; public boolean isMatch(String s, String p) &#123; int m = s.length(), n = p.length(); boolean[][] dp = new boolean[m+2][n+2]; dp[m][n] = true; for (int i=m; i&gt;=0; i--) &#123; for (int j=n-1; j&gt;=0; j--) &#123; boolean first_match = i &lt; m &amp;&amp; s.charAt(i) == p.charAt(j) || p.charAt(j) == &apos;.&apos;; if (j &lt; n-1 &amp;&amp; p.charAt(j+1) == &apos;*&apos;) &#123; dp[i][j] = dp[i][j+2] || first_match &amp;&amp; dp[i+1][j] ; &#125;else &#123; dp[i][j] = first_match &amp;&amp; dp[i+1][j+1]; &#125; &#125; &#125; return dp[0][0]; &#125;&#125; PS：题解来源于力扣官方题解]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>algorithm</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[通配符匹配]]></title>
+    <url>%2F2019%2F08%2F23%2F%E9%80%9A%E9%85%8D%E7%AC%A6%E5%8C%B9%E9%85%8D%2F</url>
+    <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/wildcard-matching/ 题目描述：给定一个字符串 (s) 和一个字符模式 (p) ，实现一个支持 &#39;?&#39; 和 &#39;*&#39; 的通配符匹配。 ‘?’ 可以匹配任何单个字符。‘*’ 可以匹配任意字符串（包括空字符串）。 两个字符串完全匹配才算匹配成功。 说明: s 可能为空，且只包含从 a-z 的小写字母。p 可能为空，且只包含从 a-z 的小写字母，以及字符 ? 和 *。 示例： 输入:s = “aa”p = “a”输出: false解释: “a” 无法匹配 “aa” 整个字符串。 输入:s = “aa”p = &quot;*&quot;输出: true解释: &#39;*&#39; 可以匹配任意字符串。 输入:s = “cb”p = “?a”输出: false解释: ‘?’ 可以匹配 ‘c’, 但第二个 ‘a’ 无法匹配 ‘b’。 输入: s = “adceb” p = “ab”输出: true解释: 第一个 &#39;*&#39; 可以匹配空字符串, 第二个 &#39;*&#39; 可以匹配字符串 “dce”. 输入:s = “acdcb”p = “a*c?b”输入: false 思路：（动态规划四要素）（1）状态f[i][j]表示字符串s的前i个字符是否可以和字符串p的前j个字符匹配（2）转移方程 如果字符串s的第i个字符和字符串p第j个字符相等 或者 字符串p第j个字符为 ‘?’， 那么f[i][j]取决于f[i-1][j-1]的值 如果字符串p的第j个字符为 &#39;*&#39;， 1）如果 &#39;*&#39; 匹配空串，那么f[i][j]取决于f[i][j-1]的值 2）如果 &#39;*&#39; 匹配字符串s第i个字符，那么f[i][j]取决于f[i-1][j]（eg：s（abc） p（a*） f[3][2] = f[2][2]） （3）初始化f[0][0] = truef[0][i] = f[0][i-1] &amp;&amp; p.charAt(i-1) == &#39;*&#39;表示字符串s的前0个字符能否和字符串p的前i个字符匹配（4）结果f[s.length()][p.length()]12345678910111213141516171819202122232425262728293031323334class Solution &#123; public boolean isMatch(String s, String p) &#123; int n1 = s.length(), n2 = p.length(); boolean f[][] = new boolean[n1+1][n2+1]; // 状态：f[i][j]表示字符串s的前i个字符是否可以和字符串p的前j个字符匹配 // 初始化 f[0][0] = true; for (int i=1; i&lt;=n2; i++) &#123; f[0][i] = f[0][i-1] &amp;&amp; p.charAt(i-1) == &apos;*&apos;; &#125; // 转移方程 for (int i=1; i&lt;=n1; i++) &#123; for (int j=1; j&lt;=n2; j++) &#123; if (s.charAt(i-1) == p.charAt(j-1) || p.charAt(j-1) == &apos;?&apos;) &#123; f[i][j] = f[i-1][j-1]; &#125; if (p.charAt(j-1) == &apos;*&apos;) &#123; // s的第i个字符与p的第j个字符匹配 || p的第j个字符匹配空串 f[i][j] = f[i-1][j] || f[i][j-1]; &#125; &#125; &#125; // 结果 return f[n1][n2]; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>algorithm</tag>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[加油站]]></title>
     <url>%2F2019%2F08%2F21%2F%E5%8A%A0%E6%B2%B9%E7%AB%99%2F</url>
     <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/gas-station/题目描述：在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。 如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。 说明:如果题目有解，该答案即为唯一答案。输入数组均为非空数组，且长度相同。输入数组中的元素均为非负数。 示例： 输入: gas = [1,2,3,4,5] cost = [3,4,5,1,2]输出: 3解释:从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。因此，3 可为起始索引。 输入: gas = [2,3,4] cost = [3,4,3]输出: -1解释:你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。因此，无论怎样，你都不可能绕环路行驶一周。 1、官方题解思路：理解到“gas数组总和与cost数组总和之差小于0，则无法环路一周；否则可以环路一周”是前提。接着，由于环路方向唯一，正确的起点唯一，那么计算到每个加油站的剩余油量，如果小于0，那么自然到不了该加油站。所以，遍历一遍数组，累加下剩余油量，当剩余油量小于0时，重置为0并进入下一循环。如果最后剩余油量不小于0，最后的一次重置点即正确的起点。12345678910111213141516171819class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int n = gas.length; int sum = 0, ans = 0, start = 0; for (int i=0; i&lt;n; i++) &#123; sum += (gas[i] - cost[i]); if (ans &lt; 0) &#123; ans = (gas[i] - cost[i]); start = i; &#125;else &#123; ans += (gas[i] - cost[i]); &#125; &#125; return sum &gt;= 0 ? start : -1; &#125;&#125; 2、个人解法解题前提想到了，但是找起点的方法效率不高。1234567891011121314151617181920212223242526272829303132333435class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int len = gas.length; int[] arr = new int[len]; int ans = 0; for (int i=0; i&lt;len; i++) &#123; arr[i] = gas[i] - cost[i]; ans += arr[i]; &#125; if (ans &lt; 0) return -1; for (int i=0; i&lt;len; i++) &#123; if (arr[i] &lt; 0) continue; int sum = arr[i]; for (int j=i+1; ; j++) &#123; if ((j%len) == i &amp;&amp; sum &gt;=0) &#123; return i; &#125; sum += arr[j%len]; if (sum &lt; 0) &#123; break; &#125; &#125; &#125; return -1; &#125;&#125;]]></content>
@@ -33,9 +59,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>String</tag>
         <tag>java</tag>
         <tag>algorithm</tag>
+        <tag>String</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
@@ -152,9 +178,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>algorithm</tag>
         <tag>C++</tag>
         <tag>String</tag>
-        <tag>algorithm</tag>
         <tag>动态规划</tag>
         <tag>回文串</tag>
       </tags>
@@ -167,9 +193,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>algorithm</tag>
         <tag>C++</tag>
         <tag>String</tag>
-        <tag>algorithm</tag>
       </tags>
   </entry>
 </search>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="laravel,后端,报名系统,">
+  <meta name="keywords" content="java,algorithm,动态规划,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="web开发之学生报名系统(简单测试版)">
-<meta name="keywords" content="laravel,后端,报名系统">
+<meta name="description" content="实现正则表达式匹配算法">
+<meta name="keywords" content="java,algorithm,动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="报名系统">
-<meta property="og:url" content="http://Flowers-bloom.github.io/2019/06/01/报名系统/index.html">
+<meta property="og:title" content="正则表达式匹配">
+<meta property="og:url" content="http://Flowers-bloom.github.io/2019/08/23/正则表达式匹配/index.html">
 <meta property="og:site_name" content="PJ-BE">
-<meta property="og:description" content="web开发之学生报名系统(简单测试版)">
+<meta property="og:description" content="实现正则表达式匹配算法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-19T16:05:55.862Z">
+<meta property="og:updated_time" content="2019-08-23T01:31:13.397Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="报名系统">
-<meta name="twitter:description" content="web开发之学生报名系统(简单测试版)">
+<meta name="twitter:title" content="正则表达式匹配">
+<meta name="twitter:description" content="实现正则表达式匹配算法">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/06/01/报名系统/">
+  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/08/23/正则表达式匹配/">
 
 
 
 
 
-  <title>报名系统 | PJ-BE</title>
+  <title>正则表达式匹配 | PJ-BE</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/06/01/报名系统/">
+    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/08/23/正则表达式匹配/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="NEUQ-XJH">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">报名系统</h1>
+          <h1 class="post-title" itemprop="name headline">正则表达式匹配</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T20:32:35+08:00">
-                2019-06-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T08:31:26+08:00">
+                2019-08-23
               </time>
             
 
@@ -351,19 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web开发/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
                   </a>
                 </span>
 
@@ -393,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  1.1k 字
+                  733 字
                 </span>
               
 
@@ -409,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  5 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -417,7 +406,7 @@
 
           
               <div class="post-description">
-                  web开发之学生报名系统(简单测试版)
+                  实现正则表达式匹配算法
               </div>
           
 
@@ -434,12 +423,33 @@
       
 
       
-        <p>1.编写前端代码(简易版，前端不做对输入正误的检测)<br>在views目录下创建form.blade.php文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!Doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;报名页面&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h3 align=&quot;center&quot;&gt;报名页面&lt;/h3&gt;</span><br><span class="line">        &lt;form action=&#123;&#123; url(&apos;sign/form&apos;) &#125;&#125; method=&quot;post&quot; &gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;学号&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;stuId&quot; class=&quot;form-control&quot; placeholder=&quot;学号&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;姓名&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;name&quot; class=&quot;form-control&quot; placeholder=&quot;名字&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;年龄&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;age&quot; class=&quot;form-control&quot; placeholder=&quot;年龄&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;邮箱&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;email&quot; class=&quot;form-control&quot; placeholder=&quot;邮箱&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;学院&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;college&quot; class=&quot;form-control&quot; placeholder=&quot;学院&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;form-group&quot; align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;label&gt;专业&lt;/label&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; name=&quot;major&quot; class=&quot;form-control&quot; placeholder=&quot;专业&quot; &gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div align=&quot;center&quot;&gt;</span><br><span class="line">                &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot; &gt;提交&lt;/button&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
-<p>2.编写控制器、路由，并测试index页面是否打通<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">signController</span><br><span class="line">public function index()</span><br><span class="line">&#123;</span><br><span class="line">    return view(&apos;form.sign&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">route</span><br><span class="line">Route::get(&apos;sign/index&apos;, &apos;signController@index&apos;);</span><br><span class="line">Route::post(&apos;sign/form&apos;, &apos;signController@form&apos;);</span><br></pre></td></tr></table></figure></p>
-<p>PS：测试前需要关闭App/Http/MiddleWare/VerifyCsrfToken.php的csrf验证<br>3.创建模型、迁移文件<br>在控制台下输入<br>php artisan make:model Sign<br>php artisan make:migration create_signs_table<br>PS：Model类默认的数据表为派生的Model类名+s,所以创建的数据表名为signs<br>4.编写迁移文件，修改.env文件，通过迁移文件在数据库中快速创建数据表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">迁移文件</span><br><span class="line">Schema::create(&apos;signs&apos;, function (Blueprint $table) &#123;</span><br><span class="line">            $table-&gt;bigIncrements(&apos;id&apos;);</span><br><span class="line">            $table-&gt;integer(&apos;stuId&apos;);</span><br><span class="line">            $table-&gt;string(&apos;name&apos;);</span><br><span class="line">            $table-&gt;integer(&apos;age&apos;);</span><br><span class="line">            $table-&gt;string(&apos;email&apos;);</span><br><span class="line">            $table-&gt;string(&apos;college&apos;);</span><br><span class="line">            $table-&gt;string(&apos;major&apos;);</span><br><span class="line">            $table-&gt;timestamps();</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">.env文件</span><br><span class="line">DB_DATABASE= database</span><br><span class="line">DB_USERNAME= username</span><br><span class="line">DB_PASSWORD= password </span><br><span class="line"></span><br><span class="line">创建数据表</span><br><span class="line">artisan migrate</span><br><span class="line">PS:如果提示字符过长，则在App/Providers/AppserviceProvider.php的boot方法定义字符长度</span><br><span class="line">Schema::defaultStringLength(225);</span><br></pre></td></tr></table></figure></p>
-<p>5.编写Api<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">报名APi：处理对输入的正确性检测以及向数据库写入</span><br><span class="line">class ApiSign</span><br><span class="line">&#123;</span><br><span class="line">    /**</span><br><span class="line">     * 判断输入是否正确</span><br><span class="line">     * @param $request</span><br><span class="line">     * @return bool</span><br><span class="line">     */</span><br><span class="line">    public function Judge($request)</span><br><span class="line">    &#123;</span><br><span class="line">        $arr = [</span><br><span class="line">            &apos;stuId&apos;, &apos;name&apos;, &apos;age&apos;, &apos;email&apos;, &apos;college&apos;, &apos;major&apos;</span><br><span class="line">        ];</span><br><span class="line">        foreach ($arr as $key) &#123;</span><br><span class="line">            if($request[$key] == null) &#123;</span><br><span class="line">                throw new ApiException(ApiErrorCode::ERROR_INFO_NOT_COMPLETE);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $stuId = $request[&apos;stuId&apos;];</span><br><span class="line">        if($stuId &lt; 20180000 || $stuId &gt;= 20190000 || !is_numeric($stuId)) &#123;</span><br><span class="line">            throw new ApiException(ApiErrorCode::ERROR_STUID);</span><br><span class="line">        &#125;</span><br><span class="line">        $age = $request[&apos;age&apos;];</span><br><span class="line">        if(!is_numeric($age) || $age &lt; 18 || $age &gt; 100) &#123;</span><br><span class="line">            throw new ApiException(ApiErrorCode::ERROR_AGE_NOT_EXIST);</span><br><span class="line">        &#125;</span><br><span class="line">        // 邮箱地址验证</span><br><span class="line">        if( !preg_match(&apos;/[a-zA-Z0-9]+@[a-zA-Z0-9]+.(com|cn)/&apos;, $request[&apos;email&apos;])) &#123;</span><br><span class="line">            throw new ApiException(ApiErrorCode::ERROR_EMAIL);</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 向数据库中写入数据</span><br><span class="line">     * @param $request</span><br><span class="line">     */</span><br><span class="line">    public function write($request)</span><br><span class="line">    &#123;</span><br><span class="line">        $stuId = intval($request[&apos;stuId&apos;]);</span><br><span class="line">        $ret = DB::table(&apos;signs&apos;)-&gt;where(&apos;stuId&apos;, &apos;=&apos;, $stuId)-&gt;first();</span><br><span class="line">        $age = intval($request[&apos;age&apos;]);</span><br><span class="line">        $time = time(&apos;Y-m-d H:i:s&apos;);</span><br><span class="line">        if($ret == null) &#123;</span><br><span class="line">            $sign = new Sign();</span><br><span class="line">            $sign-&gt;stuId = $stuId;</span><br><span class="line">            $sign-&gt;name = $request[&apos;name&apos;];</span><br><span class="line">            $sign-&gt;age = $age;</span><br><span class="line">            $sign-&gt;email = $request[&apos;email&apos;];</span><br><span class="line">            $sign-&gt;college = $request[&apos;college&apos;];</span><br><span class="line">            $sign-&gt;major = $request[&apos;major&apos;];</span><br><span class="line">            $sign-&gt;save();</span><br><span class="line">            throw new ApiException(ApiErrorCode::SUCCESS);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            throw new ApiException(ApiErrorCode::ERROR_INFO_EXIST);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">异常Api：返回一些异常信息</span><br><span class="line">class ApiException extends \RuntimeException</span><br><span class="line">&#123;</span><br><span class="line">    public function __construct(array $ApiErrorConst,Throwable $previous = null)</span><br><span class="line">    &#123;</span><br><span class="line">        $code = $ApiErrorConst[0];</span><br><span class="line">        $message = $ApiErrorConst[1];</span><br><span class="line">        parent::__construct($message, $code, $previous);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ApiErrorCode</span><br><span class="line">&#123;</span><br><span class="line">    /**</span><br><span class="line">     * 错误码定义</span><br><span class="line">     */</span><br><span class="line">    const SUCCESS = [0, &apos;success&apos;];</span><br><span class="line">    const ERROR_INFO_NOT_COMPLETE = [1, &apos;填写信息不全&apos;];</span><br><span class="line">    const ERROR_STUID = [2, &apos;学号不存在&apos;];</span><br><span class="line">    const ERROR_EMAIL = [3, &apos;邮箱错误&apos;];</span><br><span class="line">    const ERROR_INFO_EXIST = [4, &apos;报名信息已存在&apos;];</span><br><span class="line">    const ERROR_AGE_NOT_EXIST = [5, &apos;年龄不正确&apos;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>6.ORM模型操作数据库的相关配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Sign extends Model</span><br><span class="line">&#123;</span><br><span class="line">    /**</span><br><span class="line">     * 定义操作的数据表</span><br><span class="line">     * @var string</span><br><span class="line">     */</span><br><span class="line">    protected $table = &apos;signs&apos;;</span><br><span class="line">    /**</span><br><span class="line">     * 设置时间戳格式</span><br><span class="line">     * @var string</span><br><span class="line">     */</span><br><span class="line">    protected $dateFormat = &apos;Y-m-d H:i:s&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>7.Test！</p>
+        <p><mark><a href="https://leetcode-cn.com/problems/regular-expression-matching/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/regular-expression-matching/</a></mark></p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 <code>&#39;.&#39;</code> 和 <code>&#39;*&#39;</code> 的正则表达式匹配。</p>
+<pre><code>&apos;.&apos; 匹配任意单个字符
+&apos;*&apos; 匹配零个或多个前面的那一个元素
+</code></pre><p>所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。</p>
+<p>说明:</p>
+<pre><code>s 可能为空，且只包含从 a-z 的小写字母。
+p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
+</code></pre><p>示例：</p>
+<blockquote>
+<p>输入:<br>s = “aa”<br>p = “a”<br>输出: false<br>解释: “a” 无法匹配 “aa” 整个字符串。</p>
+</blockquote>
+<blockquote>
+<p>输入:<br>s = “aa”<br>p = “a<em>“<br>输出: true<br>解释: 因为 `’</em>‘` 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p>
+</blockquote>
+<blockquote>
+<p>输入:<br>s = “ab”<br>p = <code>&quot;.*&quot;</code><br>输出: true<br>解释: <code>&quot;.*&quot;</code> 表示可匹配零个或多个（<code>&#39;*&#39;</code>）任意字符（<code>&#39;.&#39;</code>）。</p>
+</blockquote>
+<blockquote>
+<p>输入:<br>s = “aab”<br>p = <code>&quot;c*a*b&quot;</code><br>输出: true<br>解释: 因为 <code>&#39;*&#39;</code> 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。</p>
+</blockquote>
+<blockquote>
+<p>输入:<br>s = “mississippi”<br>p = <code>&quot;mis*is*p*.&quot;</code><br>输出: false</p>
+</blockquote>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p>1、自顶向下动态规划<br><mark><a href="https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/" target="_blank" rel="noopener">推荐详细解析 https://leetcode-cn.com/problems/regular-expression-matching/solution/ji-yu-guan-fang-ti-jie-gen-xiang-xi-de-jiang-jie-b/</a></mark><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    enum Result&#123;</span><br><span class="line">      t,f</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    Result memo[][] = null;</span><br><span class="line">  </span><br><span class="line">    public boolean isMatch(String s, String p) &#123;</span><br><span class="line">        memo = new Result[s.length()+1][p.length()+1];</span><br><span class="line">        return dp(s, p, 0, 0);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public boolean dp(String s, String p, int i, int j)</span><br><span class="line">    &#123;</span><br><span class="line">        if (memo[i][j] != null)</span><br><span class="line">          return memo[i][j] == Result.t;</span><br><span class="line">      </span><br><span class="line">        boolean ans = false;</span><br><span class="line">        if (j == p.length()) // 当s，p长度都为0或者相等时</span><br><span class="line">        &#123;</span><br><span class="line">            ans = (i == s.length());</span><br><span class="line">        &#125;else  // j &lt; p.length()</span><br><span class="line">        &#123;</span><br><span class="line">            boolean first_match = (i &lt; s.length() &amp;&amp; </span><br><span class="line">                                   ( s.charAt(i) == p.charAt(j) || p.charAt(j) == &apos;.&apos; ) );</span><br><span class="line">            if ( p.length() &gt; j+1 &amp;&amp; p.charAt(j+1) == &apos;*&apos; )</span><br><span class="line">            &#123;</span><br><span class="line">                ans = ( dp(s, p, i, j+2) || first_match &amp;&amp; dp(s, p, i+1, j) );</span><br><span class="line">            &#125;else</span><br><span class="line">            &#123;</span><br><span class="line">                ans = first_match &amp;&amp; dp(s, p, i+1, j+1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        memo[i][j] = ans? Result.t : Result.f;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、自底向上动态规划<br>处理方法与自顶向下相似，不过需注意数组越界问题。此外，<strong>需注意<code>&amp;&amp;</code>优先级大于<code>||</code>，当<code>&amp;&amp;</code>的左边为false时，程序不会执行<code>&amp;&amp;</code>的右边，所以下面程序才不会出现越界。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">  </span><br><span class="line">    public boolean isMatch(String s, String p) &#123;</span><br><span class="line">        int m = s.length(), n = p.length();</span><br><span class="line">        boolean[][] dp = new boolean[m+2][n+2];</span><br><span class="line">        dp[m][n] = true;</span><br><span class="line">        </span><br><span class="line">        for (int i=m; i&gt;=0; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j=n-1; j&gt;=0; j--)</span><br><span class="line">            &#123;</span><br><span class="line">                boolean first_match =  i &lt; m &amp;&amp; s.charAt(i) == p.charAt(j)  || p.charAt(j) == &apos;.&apos;;</span><br><span class="line">                </span><br><span class="line">                if (j &lt; n-1 &amp;&amp; p.charAt(j+1) == &apos;*&apos;)</span><br><span class="line">                &#123;</span><br><span class="line">                    dp[i][j] =  dp[i][j+2] ||  first_match &amp;&amp; dp[i+1][j] ;</span><br><span class="line">                &#125;else</span><br><span class="line">                &#123;   </span><br><span class="line">                    dp[i][j] = first_match &amp;&amp; dp[i+1][j+1];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[0][0];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>PS：题解来源于力扣官方题解</p>
 
       
     </div>
@@ -472,7 +482,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://Flowers-bloom.github.io/2019/06/01/报名系统/" title="报名系统">http://Flowers-bloom.github.io/2019/06/01/报名系统/</a>
+    <a href="http://Flowers-bloom.github.io/2019/08/23/正则表达式匹配/" title="正则表达式匹配">http://Flowers-bloom.github.io/2019/08/23/正则表达式匹配/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -487,11 +497,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/laravel/" rel="tag"><i class="fa fa-tag"></i> laravel</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
-            <a href="/tags/后端/" rel="tag"><i class="fa fa-tag"></i> 后端</a>
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
-            <a href="/tags/报名系统/" rel="tag"><i class="fa fa-tag"></i> 报名系统</a>
+            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
           
         </div>
       
@@ -504,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/24/Z字形变换/" rel="next" title="Z字形变换">
-                <i class="fa fa-chevron-left"></i> Z字形变换
+              <a href="/2019/08/23/通配符匹配/" rel="next" title="通配符匹配">
+                <i class="fa fa-chevron-left"></i> 通配符匹配
               </a>
             
           </div>
@@ -513,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/16/报名系统-完整版/" rel="prev" title="报名系统-完整版">
-                报名系统-完整版 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -570,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -640,6 +655,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解："><span class="nav-number">2.</span> <span class="nav-text">题解：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
