@@ -92,7 +92,7 @@
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/login.PNG">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/ManagePage.PNG">
 <meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/update.PNG">
-<meta property="og:updated_time" content="2019-08-23T01:49:37.160Z">
+<meta property="og:updated_time" content="2019-08-23T02:12:50.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="messageBoard">
 <meta name="twitter:description" content="留言板项目实现代码以及成果展示">
@@ -430,8 +430,8 @@
 
       
         <h3 id="留言板功能实现（php入门小白）"><a href="#留言板功能实现（php入门小白）" class="headerlink" title="留言板功能实现（php入门小白）"></a>留言板功能实现（php入门小白）</h3><p>PS：HTML，CSS，以及留言板功能类型借鉴了大牛的博客资源，留言板具体功能为自己实现。  </p>
-<h4 id="一、留言板功能"><a href="#一、留言板功能" class="headerlink" title="一、留言板功能"></a>一、留言板功能</h4><p>（1）在主界面显示已添加的留言<br>（2）添加留言<br>（3）管理员登录<br>（4）修改留言<br>（5）删除留言  </p>
-<h4 id="二、具体代码"><a href="#二、具体代码" class="headerlink" title="二、具体代码"></a>二、具体代码</h4><h5 id="1、-主界面：-index-php"><a href="#1、-主界面：-index-php" class="headerlink" title="1、 主界面： index.php"></a>1、 主界面： index.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG" alt="MainPage">  </p>
+<h4 id="留言板功能"><a href="#留言板功能" class="headerlink" title="留言板功能"></a>留言板功能</h4><p>（1）在主界面显示已添加的留言<br>（2）添加留言<br>（3）管理员登录<br>（4）修改留言<br>（5）删除留言  </p>
+<h4 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h4><h5 id="主界面：-index-php"><a href="#主界面：-index-php" class="headerlink" title="主界面： index.php"></a>主界面： index.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG" alt="MainPage">  </p>
 <pre><code>&lt;html&gt;  
 
 &lt;head&gt;  
@@ -496,7 +496,7 @@
 &lt;/body&gt;  
 
 &lt;/html&gt;  
-</code></pre><h5 id="2、-留言界面：-send-php"><a href="#2、-留言界面：-send-php" class="headerlink" title="2、 留言界面： send.php"></a>2、 留言界面： send.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG" alt="LeaveMessage"> </p>
+</code></pre><h5 id="留言界面：-send-php"><a href="#留言界面：-send-php" class="headerlink" title="留言界面： send.php"></a>留言界面： send.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LeaveMessage.PNG" alt="LeaveMessage"> </p>
 <pre><code>&lt;!-- 1.用户填写留言部分 send.php --&gt;  
 &lt;!-- 可以首先编写send页面，只有用户提交了留言才能进行后面的留言显示，留言管理等等 --&gt;  
 
@@ -590,7 +590,7 @@ if ($name != null) {
     &lt;/script&gt;&quot;;  
 }  
 ?&gt;  
-</code></pre><h5 id="3、-登录界面：-login-php"><a href="#3、-登录界面：-login-php" class="headerlink" title="3、 登录界面： login.php"></a>3、 登录界面： login.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/login.PNG" alt="loginPage">  </p>
+</code></pre><h5 id="登录界面：-login-php"><a href="#登录界面：-login-php" class="headerlink" title="登录界面： login.php"></a>登录界面： login.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/login.PNG" alt="loginPage">  </p>
 <pre><code>&lt;!-- 3.管理员登录页面 login.php --&gt;  
 &lt;!-- 供管理员登录 --&gt;  
 &lt;!-- 体会session实现用户登录的方法 --&gt;  
@@ -693,7 +693,7 @@ if($guestName!=null &amp;&amp; $guestPass!=null){
     }  
 }  
 ?&gt;  
-</code></pre><h5 id="4、-管理界面：-manage-php"><a href="#4、-管理界面：-manage-php" class="headerlink" title="4、 管理界面： manage.php"></a>4、 管理界面： manage.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/ManagePage.PNG" alt="ManagePage">  </p>
+</code></pre><h5 id="管理界面：-manage-php"><a href="#管理界面：-manage-php" class="headerlink" title="管理界面： manage.php"></a>管理界面： manage.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/ManagePage.PNG" alt="ManagePage">  </p>
 <pre><code>&lt;!DOCTYPE HTML&gt;  
 &lt;HTML&gt;  
 
@@ -742,7 +742,7 @@ if($guestName!=null &amp;&amp; $guestPass!=null){
 &lt;/body&gt;  
 &lt;a href=&quot;index.php&quot;&gt;&lt;------返回主界面------&gt;&lt;/a&gt;  
 &lt;/HTML&gt;  
-</code></pre><h5 id="5、-修改界面：-changeContent-php"><a href="#5、-修改界面：-changeContent-php" class="headerlink" title="5、 修改界面： changeContent.php"></a>5、 修改界面： changeContent.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/update.PNG" alt="updatePage"></p>
+</code></pre><h5 id="修改界面：-changeContent-php"><a href="#修改界面：-changeContent-php" class="headerlink" title="修改界面： changeContent.php"></a>修改界面： changeContent.php</h5><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/update.PNG" alt="updatePage"></p>
 <pre><code>&lt;?php  
 $id = $_GET[&apos;id&apos;];  
 $link = mysqli_connect(&apos;localhost&apos;, &apos;username&apos;, &apos;userpassword&apos;);  
@@ -784,7 +784,7 @@ if ($retval) {
 &lt;?php  
 }  
 ?&gt;  
-</code></pre><h5 id="6、-删除界面：-delete-php"><a href="#6、-删除界面：-delete-php" class="headerlink" title="6、 删除界面： delete.php"></a>6、 删除界面： delete.php</h5><pre><code>&lt;html&gt;  
+</code></pre><h5 id="删除界面：-delete-php"><a href="#删除界面：-delete-php" class="headerlink" title="删除界面： delete.php"></a>删除界面： delete.php</h5><pre><code>&lt;html&gt;  
 
 &lt;?php  
 $link = mysqli_connect(&apos;localhost&apos;, &apos;username&apos;, &apos;userpassword&apos;);  
@@ -1021,7 +1021,7 @@ if ($retval) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#留言板功能实现（php入门小白）"><span class="nav-number">1.</span> <span class="nav-text">留言板功能实现（php入门小白）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、留言板功能"><span class="nav-number">1.1.</span> <span class="nav-text">一、留言板功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、具体代码"><span class="nav-number">1.2.</span> <span class="nav-text">二、具体代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、-主界面：-index-php"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、 主界面： index.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、-留言界面：-send-php"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、 留言界面： send.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、-登录界面：-login-php"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、 登录界面： login.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、-管理界面：-manage-php"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、 管理界面： manage.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、-修改界面：-changeContent-php"><span class="nav-number">1.2.5.</span> <span class="nav-text">5、 修改界面： changeContent.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、-删除界面：-delete-php"><span class="nav-number">1.2.6.</span> <span class="nav-text">6、 删除界面： delete.php</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#留言板功能实现（php入门小白）"><span class="nav-number">1.</span> <span class="nav-text">留言板功能实现（php入门小白）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#留言板功能"><span class="nav-number">1.1.</span> <span class="nav-text">留言板功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体代码"><span class="nav-number">1.2.</span> <span class="nav-text">具体代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#主界面：-index-php"><span class="nav-number">1.2.1.</span> <span class="nav-text">主界面： index.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#留言界面：-send-php"><span class="nav-number">1.2.2.</span> <span class="nav-text">留言界面： send.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登录界面：-login-php"><span class="nav-number">1.2.3.</span> <span class="nav-text">登录界面： login.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管理界面：-manage-php"><span class="nav-number">1.2.4.</span> <span class="nav-text">管理界面： manage.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改界面：-changeContent-php"><span class="nav-number">1.2.5.</span> <span class="nav-text">修改界面： changeContent.php</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除界面：-delete-php"><span class="nav-number">1.2.6.</span> <span class="nav-text">删除界面： delete.php</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
