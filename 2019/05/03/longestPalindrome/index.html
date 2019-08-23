@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="algorithm,C++,String,动态规划,回文串,">
+  <meta name="keywords" content="C++,String,algorithm,回文串,动态规划,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
-<meta name="keywords" content="algorithm,C++,String,动态规划,回文串">
+<meta name="keywords" content="C++,String,algorithm,回文串,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="longestPalindrome">
 <meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/03/longestPalindrome/index.html">
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-19T16:05:48.279Z">
+<meta property="og:updated_time" content="2019-08-23T01:53:22.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="longestPalindrome">
 <meta name="twitter:description" content="给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  729 字
+                  764 字
                 </span>
               
 
@@ -423,15 +423,15 @@
       
 
       
-        <p><mark><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">传送门</a></mark><br>示例 1：  </p>
-<blockquote>
+        <p><mark><a href="https://leetcode-cn.com/problems/longest-palindromic-substring/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/longest-palindromic-substring/</a></mark>    </p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><blockquote>
 <p>输入: “babad”<br>输出: “bab”<br>注意: “aba” 也是一个有效答案。  </p>
 </blockquote>
-<p>示例 2：  </p>
 <blockquote>
 <p>输入: “cbbd”<br>输出: “bb”  </p>
 </blockquote>
-<p><strong>超时算法(滑动窗口算法，易于理解）：</strong><br>思路：从某一窗口长度开始，从0滑动到n-1的位置，判断子串是否为回文，再递增窗口长度。（窗口长度从1开始最一般，下面算法为从2开始）  </p>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><h5 id="1、个人超时算法-滑动窗口算法，易于理解）"><a href="#1、个人超时算法-滑动窗口算法，易于理解）" class="headerlink" title="1、个人超时算法(滑动窗口算法，易于理解）"></a>1、个人超时算法(滑动窗口算法，易于理解）</h5><p>思路：从某一窗口长度开始，从0滑动到n-1的位置，判断子串是否为回文，再递增窗口长度。（窗口长度从1开始最一般，下面算法为从2开始）  </p>
 <pre><code>int check(string s)  //判断是否为回文  
 {  
     int n = s.size();  
@@ -501,7 +501,7 @@ string longestPalindrome(string s)
     str+=s[0];  
     return str;  
 }  
-</code></pre><p>正确O(n^2)时间复杂度算法：<br><strong>动态规划算法：</strong><br>思路：核心思想在于避免验证回文时的不必要的重复计算。从左往右验证，找出最长回文子串的开始与结束位置。<br>递推公式为 P(i,j)=(s[i] == s[j]) &amp;&amp; (P[i-1][j+1])<br>PS：需考虑字母数为偶数回文的特殊情况，和确定判断条件。  </p>
+</code></pre><h5 id="2、动态规划算法"><a href="#2、动态规划算法" class="headerlink" title="2、动态规划算法"></a>2、动态规划算法</h5><p>思路：核心思想在于避免验证回文时的不必要的重复计算。从左往右验证，找出最长回文子串的开始与结束位置。<br>递推公式为 P(i,j)=(s[i] == s[j]) &amp;&amp; (P[i-1][j+1])<br>PS：需考虑字母数为偶数回文的特殊情况，和确定判断条件。  </p>
 <pre><code>class Solution {  
 public:  
     string longestPalindrome(string s) {  
@@ -526,7 +526,7 @@ public:
         return longest;  
     }  
 };  
-</code></pre><p><strong>中心扩展算法：</strong><br>思路：由于回文关于中心对称，所以回文可以从中心展开，其中，共有2*n-1个中心（考虑字母数为偶数的回文）<br>难点：expandAroundCenter()函数的返回值计算与start和end位置的确定。  </p>
+</code></pre><h5 id="3、中心扩展算法"><a href="#3、中心扩展算法" class="headerlink" title="3、中心扩展算法"></a>3、中心扩展算法</h5><p>思路：由于回文关于中心对称，所以回文可以从中心展开，其中，共有2*n-1个中心（考虑字母数为偶数的回文）<br>难点：expandAroundCenter()函数的返回值计算与start和end位置的确定。  </p>
 <pre><code>class Solution {  
 public:  
     string longestPalindrome(string s) {  
@@ -607,15 +607,15 @@ public:
       
         <div class="post-tags">
           
-            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
-          
             <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           
             <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
           
-            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
             <a href="/tags/回文串/" rel="tag"><i class="fa fa-tag"></i> 回文串</a>
+          
+            <a href="/tags/动态规划/" rel="tag"><i class="fa fa-tag"></i> 动态规划</a>
           
         </div>
       
@@ -694,8 +694,17 @@ public:
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -764,6 +773,22 @@ public:
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例："><span class="nav-number">2.</span> <span class="nav-text">示例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解："><span class="nav-number">3.</span> <span class="nav-text">题解：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、个人超时算法-滑动窗口算法，易于理解）"><span class="nav-number">3.1.</span> <span class="nav-text">1、个人超时算法(滑动窗口算法，易于理解）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、动态规划算法"><span class="nav-number">3.2.</span> <span class="nav-text">2、动态规划算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、中心扩展算法"><span class="nav-number">3.3.</span> <span class="nav-text">3、中心扩展算法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

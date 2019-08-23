@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="algorithm,C++,String,">
+  <meta name="keywords" content="C++,String,algorithm,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
-<meta name="keywords" content="algorithm,C++,String">
+<meta name="keywords" content="C++,String,algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="lengthOfLongestSubstring">
 <meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/02/lengthOfLongestSubstring/index.html">
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-19T16:05:43.793Z">
+<meta property="og:updated_time" content="2019-08-23T02:02:31.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lengthOfLongestSubstring">
 <meta name="twitter:description" content="给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  655 字
+                  647 字
                 </span>
               
 
@@ -423,27 +423,26 @@
       
 
       
-        <p>题目简述：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。<br><mark><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">传送门</a></mark><br>示例 1：   </p>
-<pre><code>输入: &quot;abcabcbb&quot;    
-输出: 3     
-解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。
-</code></pre><p>示例 2：  </p>
-<pre><code>输入: &quot;bbbbb&quot;  
-输出: 1  
-解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。  
-</code></pre><p>示例 3：  </p>
-<pre><code>输入: &quot;pwwkew&quot;  
-输出: 3  
-解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。  
-</code></pre><p><strong>个人超时解法：</strong>    </p>
-<pre><code>class Solution {    
+        <p><mark><a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/</a></mark></p>
+<h4 id="题目简述："><a href="#题目简述：" class="headerlink" title="题目简述："></a>题目简述：</h4><p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。  </p>
+<h4 id="示例-："><a href="#示例-：" class="headerlink" title="示例 ："></a>示例 ：</h4><blockquote>
+<p>输入: “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。 </p>
+</blockquote>
+<blockquote>
+<p> 输入: “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。   </p>
+</blockquote>
+<blockquote>
+<p>输入: “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。   </p>
+</blockquote>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><h5 id="1、个人超时解法"><a href="#1、个人超时解法" class="headerlink" title="1、个人超时解法"></a>1、个人超时解法</h5><pre><code>class Solution {    
 public:    
     int max=0;    
     int notBelong(string s,char c){    
         int f=1;    
         for(int i=0;i&lt;s.size();i++){    
             if(c==s[i]){    
-                f=0;break;    
+                f=0;
+                break;    
             }    
         }    
         if(f==1)    
@@ -477,7 +476,7 @@ public:
         }    
     }    
 };    
-</code></pre><p><strong>思路(摘自力扣题解)：</strong><br>滑动窗口算法，窗口指由开始和结束索引i,j定义的一个集合。将子串存入一个容器，如果s[j]不包含于子串中，向右滑动索引j，即j++;如果s[j]包含于子串中，则i++，窗口缩小。其中，在j++之后，取ans和（j-i）的最大值，即在线得到子串长度的最大值。    </p>
+</code></pre><h5 id="2、滑动窗口算法"><a href="#2、滑动窗口算法" class="headerlink" title="2、滑动窗口算法"></a>2、滑动窗口算法</h5><p>思路：<br>窗口指由开始和结束索引i,j定义的一个集合。<br>将子串存入一个容器，如果s[j]不包含于子串中，向右滑动索引j，即j++;<br>如果s[j]包含于子串中，则i++，窗口缩小。其中，在j++之后，取ans和（j-i）的最大值，即在线得到子串长度的最大值。    </p>
 <pre><code>class Solution {    
 public:    
     int lengthOfLongestSubstring(string s) {    
@@ -496,7 +495,7 @@ public:
     }    
 };    
 
-</code></pre><p>map法优化：<br>我们可以定义字符到索引的映射，而不是使用集合来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。<br>如果s[j]在[i,j)范围内有与j’重复的字符，不是逐渐增加i，而是直接跳过[i,j’]的范围内的所有元素，将i变为j’+1。（注意取i和j’+1的较大值，eg：”abba”）    </p>
+</code></pre><h5 id="3、map法优化："><a href="#3、map法优化：" class="headerlink" title="3、map法优化："></a>3、map法优化：</h5><p>我们可以定义字符到索引的映射，而不是使用集合来判断一个字符是否存在。 当我们找到重复的字符时，我们可以立即跳过该窗口。<br>如果s[j]在<code>[i,j)</code>范围内有与<code>j&#39;</code>重复的字符，不是逐渐增加i，而是直接跳过<code>[i,j&#39;]</code>的范围内的所有元素，将<code>i</code>变为<code>j&#39;+1</code>。（注意取<code>i</code>和<code>j&#39;+1</code>的较大值，eg：”abba”）    </p>
 <pre><code>class Solution {    
 public:    
     int lengthOfLongestSubstring(string s) {    
@@ -560,11 +559,11 @@ public:
       
         <div class="post-tags">
           
-            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
-          
             <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           
             <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
         </div>
       
@@ -639,8 +638,17 @@ public:
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -709,6 +717,22 @@ public:
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目简述："><span class="nav-number">1.</span> <span class="nav-text">题目简述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例-："><span class="nav-number">2.</span> <span class="nav-text">示例 ：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解："><span class="nav-number">3.</span> <span class="nav-text">题解：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、个人超时解法"><span class="nav-number">3.1.</span> <span class="nav-text">1、个人超时解法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、滑动窗口算法"><span class="nav-number">3.2.</span> <span class="nav-text">2、滑动窗口算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、map法优化："><span class="nav-number">3.3.</span> <span class="nav-text">3、map法优化：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

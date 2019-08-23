@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,贪心算法,algorithm,">
+  <meta name="keywords" content="algorithm,java,贪心算法,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="选择正确的起点，确保汽油充足环路一周（典型的贪心算法）">
-<meta name="keywords" content="java,贪心算法,algorithm">
+<meta name="keywords" content="algorithm,java,贪心算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加油站">
 <meta property="og:url" content="http://Flowers-bloom.github.io/2019/08/21/加油站/index.html">
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="选择正确的起点，确保汽油充足环路一周（典型的贪心算法）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T13:41:34.536Z">
+<meta property="og:updated_time" content="2019-08-23T01:38:39.824Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="加油站">
 <meta name="twitter:description" content="选择正确的起点，确保汽油充足环路一周（典型的贪心算法）">
@@ -401,19 +401,19 @@
       
 
       
-        <p><mark><a href="https://leetcode-cn.com/problems/gas-station/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/gas-station/</a></mark><br>题目描述：<br>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。</p>
+        <p><mark><a href="https://leetcode-cn.com/problems/gas-station/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/gas-station/</a></mark></p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。</p>
 <p>你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。</p>
 <p>如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。</p>
 <p>说明:<br>如果题目有解，该答案即为唯一答案。<br>输入数组均为非空数组，且长度相同。<br>输入数组中的元素均为非负数。</p>
-<p>示例：</p>
-<blockquote>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><blockquote>
 <p>输入: gas = [1,2,3,4,5] cost = [3,4,5,1,2]<br>输出: 3<br>解释:<br>从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油<br>开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油<br>开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油<br>开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油<br>开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油<br>开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。<br>因此，3 可为起始索引。</p>
 </blockquote>
 <blockquote>
 <p>输入: gas = [2,3,4] cost = [3,4,3]<br>输出: -1<br>解释:<br>你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。<br>我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油<br>开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油<br>开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油<br>你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。<br>因此，无论怎样，你都不可能绕环路行驶一周。</p>
 </blockquote>
-<p>1、官方题解思路：<br>理解到<strong>“gas数组总和与cost数组总和之差小于0，则无法环路一周；否则可以环路一周”</strong>是前提。<br>接着，由于环路方向唯一，正确的起点唯一，那么<strong>计算到每个加油站的剩余油量，如果小于0，那么自然到不了该加油站。</strong><br>所以，遍历一遍数组，累加下剩余油量，当剩余油量小于0时，重置为0并进入下一循环。如果最后剩余油量不小于0，最后的一次重置点即正确的起点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int canCompleteCircuit(int[] gas, int[] cost) &#123;</span><br><span class="line">        int n = gas.length; </span><br><span class="line">        int sum = 0, ans = 0, start = 0;</span><br><span class="line">        for (int i=0; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += (gas[i] - cost[i]);</span><br><span class="line">            if (ans &lt; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                ans = (gas[i] - cost[i]);</span><br><span class="line">                start = i;</span><br><span class="line">            &#125;else</span><br><span class="line">            &#123;</span><br><span class="line">                ans += (gas[i] - cost[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum &gt;= 0 ? start : -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、个人解法<br>解题前提想到了，但是找起点的方法效率不高。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int canCompleteCircuit(int[] gas, int[] cost) &#123;</span><br><span class="line">        int len = gas.length;</span><br><span class="line">        int[] arr = new int[len];</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i=0; i&lt;len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            arr[i] = gas[i] - cost[i];</span><br><span class="line">            ans += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (ans &lt; 0)</span><br><span class="line">            return -1;</span><br><span class="line">        </span><br><span class="line">        for (int i=0; i&lt;len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (arr[i] &lt; 0)</span><br><span class="line">                continue;</span><br><span class="line">            int sum = arr[i];</span><br><span class="line">            for (int j=i+1; ; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if ((j%len) == i &amp;&amp; sum &gt;=0)</span><br><span class="line">                &#123;</span><br><span class="line">                    return i;</span><br><span class="line">                &#125;</span><br><span class="line">                sum += arr[j%len];</span><br><span class="line">                if (sum &lt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="1、官方题解思路："><a href="#1、官方题解思路：" class="headerlink" title="1、官方题解思路："></a>1、官方题解思路：</h4><p>理解到<strong>“gas数组总和与cost数组总和之差小于0，则无法环路一周；否则可以环路一周”</strong>是前提。<br>接着，由于环路方向唯一，正确的起点唯一，那么<strong>计算到每个加油站的剩余油量，如果小于0，那么自然到不了该加油站。</strong><br>所以，遍历一遍数组，累加下剩余油量，当剩余油量小于0时，重置为0并进入下一循环。如果最后剩余油量不小于0，最后的一次重置点即正确的起点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int canCompleteCircuit(int[] gas, int[] cost) &#123;</span><br><span class="line">        int n = gas.length; </span><br><span class="line">        int sum = 0, ans = 0, start = 0;</span><br><span class="line">        for (int i=0; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            sum += (gas[i] - cost[i]);</span><br><span class="line">            if (ans &lt; 0)</span><br><span class="line">            &#123;</span><br><span class="line">                ans = (gas[i] - cost[i]);</span><br><span class="line">                start = i;</span><br><span class="line">            &#125;else</span><br><span class="line">            &#123;</span><br><span class="line">                ans += (gas[i] - cost[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum &gt;= 0 ? start : -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、个人解法"><a href="#2、个人解法" class="headerlink" title="2、个人解法"></a>2、个人解法</h4><p>解题前提想到了，但是找起点的方法效率不高。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int canCompleteCircuit(int[] gas, int[] cost) &#123;</span><br><span class="line">        int len = gas.length;</span><br><span class="line">        int[] arr = new int[len];</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i=0; i&lt;len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            arr[i] = gas[i] - cost[i];</span><br><span class="line">            ans += arr[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        if (ans &lt; 0)</span><br><span class="line">            return -1;</span><br><span class="line">        </span><br><span class="line">        for (int i=0; i&lt;len; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (arr[i] &lt; 0)</span><br><span class="line">                continue;</span><br><span class="line">            int sum = arr[i];</span><br><span class="line">            for (int j=i+1; ; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if ((j%len) == i &amp;&amp; sum &gt;=0)</span><br><span class="line">                &#123;</span><br><span class="line">                    return i;</span><br><span class="line">                &#125;</span><br><span class="line">                sum += arr[j%len];</span><br><span class="line">                if (sum &lt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -461,11 +461,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
             <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
             <a href="/tags/贪心算法/" rel="tag"><i class="fa fa-tag"></i> 贪心算法</a>
-          
-            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
         </div>
       
@@ -544,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -614,6 +623,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例："><span class="nav-number">2.</span> <span class="nav-text">示例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、官方题解思路："><span class="nav-number">3.</span> <span class="nav-text">1、官方题解思路：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、个人解法"><span class="nav-number">4.</span> <span class="nav-text">2、个人解法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,algorithm,String,回溯算法,">
+  <meta name="keywords" content="String,algorithm,java,回溯算法,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="给定一个字符串，将其拆分成斐波那契序列">
-<meta name="keywords" content="java,algorithm,String,回溯算法">
+<meta name="keywords" content="String,algorithm,java,回溯算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="将数组拆分成斐波那契序列">
 <meta property="og:url" content="http://Flowers-bloom.github.io/2019/08/20/将数组拆分成斐波那契序列/index.html">
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="给定一个字符串，将其拆分成斐波那契序列">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T08:06:58.245Z">
+<meta property="og:updated_time" content="2019-08-23T01:38:12.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将数组拆分成斐波那契序列">
 <meta name="twitter:description" content="给定一个字符串，将其拆分成斐波那契序列">
@@ -423,14 +423,15 @@
       
 
       
-        <p><mark><a href="https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/</a></mark><br>题目描述：<br>给定一个数字字符串 S，比如 S = “123456579”，我们可以将它分成斐波那契式的序列 [123, 456, 579]。</p>
+        <p><mark><a href="https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/split-array-into-fibonacci-sequence/</a></mark></p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给定一个数字字符串 S，比如 S = “123456579”，我们可以将它分成斐波那契式的序列 [123, 456, 579]。</p>
 <p>形式上，斐波那契式序列是一个非负整数列表 F，且满足：</p>
 <blockquote>
 <p>0 &lt;= F[i] &lt;= 2^31 - 1，（也就是说，每个整数都符合 32 位有符号整数类型）；<br>F.length &gt;= 3；<br>对于所有的0 &lt;= i &lt; F.length - 2，都有 F[i] + F[i+1] = F[i+2] 成立。</p>
 </blockquote>
 <p>另外，请注意，将字符串拆分成小块时，每个块的数字一定不要以零开头，除非这个块是数字 0 本身。</p>
-<p>返回从 S 拆分出来的所有斐波那契式的序列块，如果不能拆分则返回 []。<br>示例：</p>
-<blockquote>
+<p>返回从 S 拆分出来的所有斐波那契式的序列块，如果不能拆分则返回 []。</p>
+<h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><blockquote>
 <p>输入：”123456579”<br>输出：[123,456,579]</p>
 </blockquote>
 <blockquote>
@@ -445,7 +446,7 @@
 <blockquote>
 <p>输入: “1101111”<br>输出: [110, 1, 111]<br>解释: 输出 [11,0,11,11] 也同样被接受。</p>
 </blockquote>
-<p>思路：<br>（1）如何取出子串<br>使用substring（）函数<br>（2）如何完全枚举<br>使用回溯算法，枚举所有情况<br>（3）如何判断符合斐波那契序列<br>将字符串转化为整形，判断是否等于前两个元素之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    public List&lt;Integer&gt; splitIntoFibonacci(String S) &#123;</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        backTracking(S, 0, list);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">    // 回溯算法</span><br><span class="line">    private boolean backTracking(String s, int start, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        // 结束条件</span><br><span class="line">        if (start == s.length() &amp;&amp; list.size() &gt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        </span><br><span class="line">        for (int i = start; i&lt;s.length(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            String tmp = s.substring(start, i+1);</span><br><span class="line"></span><br><span class="line">            // 排除情况（1、超出整形范围 2、以0开头的子串）</span><br><span class="line">            if (Long.parseLong(tmp) &gt; Integer.MAX_VALUE) break;</span><br><span class="line">            if (!&quot;0&quot;.equals(tmp) &amp;&amp; tmp.startsWith(&quot;0&quot;)) break;</span><br><span class="line"></span><br><span class="line">            if (isFibonacci(tmp, list)) </span><br><span class="line">            &#123;</span><br><span class="line">                list.add(Integer.valueOf(tmp));</span><br><span class="line">                // 查找下一个</span><br><span class="line">                if (backTracking(s, i+1, list)) return true;</span><br><span class="line">                // 回溯</span><br><span class="line">                list.remove(list.size()-1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    // 判断是否符合斐波那契序列</span><br><span class="line">    private boolean isFibonacci(String s, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        int len = list.size();</span><br><span class="line">        if (len &lt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        if (list.get(len-1) + list.get(len-2) == Integer.valueOf(s))</span><br><span class="line">            return true;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>（1）如何取出子串<br>使用substring（）函数<br>（2）如何完全枚举<br>使用回溯算法，枚举所有情况<br>（3）如何判断符合斐波那契序列<br>将字符串转化为整形，判断是否等于前两个元素之和<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    public List&lt;Integer&gt; splitIntoFibonacci(String S) &#123;</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        backTracking(S, 0, list);</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">    // 回溯算法</span><br><span class="line">    private boolean backTracking(String s, int start, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        // 结束条件</span><br><span class="line">        if (start == s.length() &amp;&amp; list.size() &gt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        </span><br><span class="line">        for (int i = start; i&lt;s.length(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            String tmp = s.substring(start, i+1);</span><br><span class="line"></span><br><span class="line">            // 排除情况（1、超出整形范围 2、以0开头的子串）</span><br><span class="line">            if (Long.parseLong(tmp) &gt; Integer.MAX_VALUE) break;</span><br><span class="line">            if (!&quot;0&quot;.equals(tmp) &amp;&amp; tmp.startsWith(&quot;0&quot;)) break;</span><br><span class="line"></span><br><span class="line">            if (isFibonacci(tmp, list)) </span><br><span class="line">            &#123;</span><br><span class="line">                list.add(Integer.valueOf(tmp));</span><br><span class="line">                // 查找下一个</span><br><span class="line">                if (backTracking(s, i+1, list)) return true;</span><br><span class="line">                // 回溯</span><br><span class="line">                list.remove(list.size()-1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    // 判断是否符合斐波那契序列</span><br><span class="line">    private boolean isFibonacci(String s, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        int len = list.size();</span><br><span class="line">        if (len &lt; 2)</span><br><span class="line">            return true;</span><br><span class="line">        if (list.get(len-1) + list.get(len-2) == Integer.valueOf(s))</span><br><span class="line">            return true;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -493,11 +494,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+            <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
           
             <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
-            <a href="/tags/String/" rel="tag"><i class="fa fa-tag"></i> String</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
             <a href="/tags/回溯算法/" rel="tag"><i class="fa fa-tag"></i> 回溯算法</a>
           
@@ -578,8 +579,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -648,6 +658,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述："><span class="nav-number">1.</span> <span class="nav-text">题目描述：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例："><span class="nav-number">2.</span> <span class="nav-text">示例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路："><span class="nav-number">3.</span> <span class="nav-text">思路：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
