@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="PHP,login,Session,">
+  <meta name="keywords" content="java,数据结构,二叉树,">
 
 
 
@@ -79,22 +79,18 @@
 
 
 
-<meta name="description" content="会话登录项目实现代码及成果展示">
-<meta name="keywords" content="PHP,login,Session">
+<meta name="description" content="通过给定的数组构建最大二叉树，并且输出这个树的根节点">
+<meta name="keywords" content="java,数据结构,二叉树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="loginBySession">
-<meta property="og:url" content="http://Flowers-bloom.github.io/2019/05/03/loginBySession/index.html">
+<meta property="og:title" content="最大二叉树">
+<meta property="og:url" content="http://Flowers-bloom.github.io/2019/08/26/最大二叉树/index.html">
 <meta property="og:site_name" content="PJ-BE">
-<meta property="og:description" content="会话登录项目实现代码及成果展示">
+<meta property="og:description" content="通过给定的数组构建最大二叉树，并且输出这个树的根节点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG">
-<meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/loginSuccess.PNG">
-<meta property="og:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/logStatus.PNG">
-<meta property="og:updated_time" content="2019-08-23T02:13:40.149Z">
+<meta property="og:updated_time" content="2019-08-26T03:48:12.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="loginBySession">
-<meta name="twitter:description" content="会话登录项目实现代码及成果展示">
-<meta name="twitter:image" content="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG">
+<meta name="twitter:title" content="最大二叉树">
+<meta name="twitter:description" content="通过给定的数组构建最大二叉树，并且输出这个树的根节点">
 
 
 
@@ -124,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/05/03/loginBySession/">
+  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/08/26/最大二叉树/">
 
 
 
 
 
-  <title>loginBySession | PJ-BE</title>
+  <title>最大二叉树 | PJ-BE</title>
   
 
 
@@ -303,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/05/03/loginBySession/">
+    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/08/26/最大二叉树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="NEUQ-XJH">
@@ -320,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">loginBySession</h1>
+          <h1 class="post-title" itemprop="name headline">最大二叉树</h1>
         
 
         <div class="post-meta">
@@ -332,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T22:20:25+08:00">
-                2019-05-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-26T11:29:46+08:00">
+                2019-08-26
               </time>
             
 
@@ -355,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发</span>
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
                   </a>
                 </span>
 
@@ -386,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  633 字
+                  590 字
                 </span>
               
 
@@ -402,7 +398,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长 ">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -410,7 +406,7 @@
 
           
               <div class="post-description">
-                  会话登录项目实现代码及成果展示
+                  通过给定的数组构建最大二叉树，并且输出这个树的根节点
               </div>
           
 
@@ -427,94 +423,33 @@
       
 
       
-        <h3 id="登录实现"><a href="#登录实现" class="headerlink" title="登录实现"></a>登录实现</h3><p>记录一次session实现有登录过期时间的登录功能</p>
-<h4 id="Login-html"><a href="#Login-html" class="headerlink" title="Login.html"></a>Login.html</h4><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/log.PNG" alt="LoginPage">  </p>
-<pre><code>&lt;!DOCTYPE html&gt;  
- &lt;html lang=&quot;en&quot;&gt;  
- &lt;head&gt;  
- &lt;meta charset=&quot;UTF-8&quot;&gt;  
- &lt;title&gt;Login&lt;/title&gt;  
- &lt;/head&gt;  
- &lt;body&gt;  
- &lt;hr size=&quot;1&quot;&gt;  
- &lt;form action=&quot;log.php&quot; method=&quot;post&quot; &gt;  
- 用户：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;  
- 密码：&lt;input type=&quot;text&quot; name=&quot;password&quot; /&gt;&lt;br&gt;  
- &lt;input type=&quot;submit&quot; name=&apos;login&apos; value=&quot;登录&quot;&gt;  
- &lt;/form&gt;  
-</code></pre><h4 id="Login-php"><a href="#Login-php" class="headerlink" title="Login.php"></a>Login.php</h4><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/loginSuccess.PNG" alt="Login">  </p>
-<pre><code>&lt;?php  
-header(&apos;content-type:text/html;charset=utf-8&apos;);  
-//获取表单的用户名和密码  
-if ($_SERVER[&apos;REQUEST_METHOD&apos;] == &apos;POST&apos;) {  
-    if (empty($_POST[&apos;username&apos;])){  
-        echo &quot;&lt;script&gt;alert(&apos;用户名不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-    }else {  
-        $username=trim($_POST[&apos;username&apos;]);  
-    }  
-    if (empty($_POST[&apos;password&apos;])){  
-        echo &quot;&lt;script&gt;alert(&apos;密码不能为空！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-    }else{  
-        $password=$_POST[&apos;password&apos;];  
-    }  
-}  
-//连接数据库，查询并返回用户信息  
-$link = mysqli_connect(&apos;localhost&apos;,&apos;username&apos;,&apos;userpassword&apos;);  
-if(!$link){  
-    echo &apos;connect error!&apos;;  
-}  
-mysqli_select_db($link,&apos;test&apos;);  
-$sql = &quot;SELECT userpass FROM admin WHERE username=&quot;.&quot;&apos;$username&apos;&quot;;  
-$retval = mysqli_query($link,$sql);  
-if($retval){  
-    $retpass = $retval-&gt;fetch_row();  
-}else{  
-    echo &apos;sql error!&apos;;  
-}  
-if($retpass){  
-    if($password != $retpass[0]){  
-        echo &quot;&lt;script&gt;alert(&apos;密码错误！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-    }else{  
-        $expire=3600;  
-        ini_set(&apos;session.gc_maxlifetime&apos;,$expire); //初始化PHP session的有效期为一小时  
-        //更改php.ini配置文件的值，在脚本生命周期中有效，脚本结束则失效  
-        if(empty($_COOKIE[&apos;PHPSESSION&apos;])){  
-            session_set_cookie_params($expire); //该函数必须在session_start()函数前使用  
-            session_start();  
-        }else{  
-            session_start();  
-            setcookie(&apos;PHPSESSION&apos;,session_id(),time() + $expire);  
-        }  
-        if(isset($_SESSION[&apos;username&apos;])){  
-            exit(&quot;您已经登入了，请不要重新登入！用户名：{$_SESSION[&apos;username&apos;]}---&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;);  
-        }else{  
-            $_SESSION[&apos;username&apos;]=$username;  
-        }  
-        echo &quot;&lt;script&gt;alert(&apos;登录成功！&apos;);&lt;/script&gt;&lt;br&gt;&quot;;  
-        echo &quot;您好！{$_SESSION[&apos;username&apos;]},欢迎回来！&quot;;  
-        echo &quot;&lt;a href=&apos;logout.php&apos;&gt;注销&lt;/a&gt;&quot;;  
-    }  
-}else{  
-    echo &quot;&lt;script&gt;alert(&apos;没有此用户！&apos;);location.href=&apos;login.html&apos;;&lt;/script&gt;&quot;;  
-}  
-</code></pre><h4 id="Logout-php"><a href="#Logout-php" class="headerlink" title="Logout.php"></a>Logout.php</h4><p><img src="https://gitee.com/hui_net/PhotoCategory/raw/master/LoginBySession/logStatus.PNG" alt="LoginStatus">  </p>
-<pre><code>&lt;?php  
-header(&apos;content-type:text/html;charset=utf-8&apos;);  
-session_start();  
-if(isset($_SESSION[&apos;username&apos;])){  
-    session_unset($_SESSION[&apos;username&apos;]); //释放所有会话变量  
-    session_destroy();  //销毁一个会话的全部数据  
-    setcookie(session_name(),&apos;&apos;); //销毁保存在客户端 Cookie 中的 Session ID  
-    echo &quot;&lt;script&gt;  
-    alert(&apos;注销成功！&apos;);  
-    location.href=&apos;login.html&apos;;  
-    &lt;/script&gt;&quot;;  
-}else{  
-    echo &quot;&lt;script&gt;  
-    alert(&apos;注销失败！&apos;);  
-    &lt;/script&gt;&quot;;  
-}  
-</code></pre>
+        <p><mark><a href="https://leetcode-cn.com/problems/maximum-binary-tree/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/maximum-binary-tree/</a></mark></p>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下：</p>
+<pre><code>二叉树的根是数组中的最大元素。
+左子树是通过数组中最大值左边部分构造出的最大二叉树。
+右子树是通过数组中最大值右边部分构造出的最大二叉树。
+</code></pre><p>通过给定的数组构建最大二叉树，并且输出这个树的根节点。</p>
+<p>示例：</p>
+<pre><code>输入：[3,2,1,6,0,5]
+输出：返回下面这棵树的根节点：
+
+  6
+/   \
+3    5
+\    / 
+ 2  0   
+   \
+    1
+</code></pre><h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>思路：<br>题意清晰易懂，且明显可以看出解决问题方法是一个流程的重复，所以想到递归。<br>流程：</p>
+<ul>
+<li>找数组特定范围内的最大值，和最大值对应的数组下标</li>
+<li>将最大值添加的树结点</li>
+<li>以数组最大值下标为分割点，在分割的两部分重复上面两步骤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public TreeNode create(int begin, int end, int[] nums)</span><br><span class="line">    &#123;</span><br><span class="line">        TreeNode node = null;</span><br><span class="line">        </span><br><span class="line">        // 只存下标有利于节省内存</span><br><span class="line">        int index = begin;</span><br><span class="line">        for (int i=begin; i&lt;=end; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (nums[i] &gt; nums[index])</span><br><span class="line">            &#123;</span><br><span class="line">                index = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        //System.out.println(begin + &quot; &quot;+ index+ &quot; &quot; + end + &quot; &quot; + nums[index]);</span><br><span class="line">        node = new TreeNode(nums[index]);</span><br><span class="line">        </span><br><span class="line">        if (index != begin )</span><br><span class="line">        node.left = create( begin, index-1 , nums );</span><br><span class="line">        </span><br><span class="line">        if (index != end )</span><br><span class="line">        node.right =  create( index+1 , end, nums ); </span><br><span class="line">    </span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public TreeNode constructMaximumBinaryTree(int[] nums) &#123;</span><br><span class="line">        if ( nums.length == 0 )</span><br><span class="line">            return null;</span><br><span class="line">        return create(0, nums.length-1, nums);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h4><p><mark><a href="https://leetcode-cn.com/problems/maximum-binary-tree/" target="_blank" rel="noopener">传送门 https://leetcode-cn.com/problems/maximum-binary-tree/</a></mark></p>
+<p>思路：<br>从题目样例中可以看出，数组是由给出的A树经过中序遍历，再加上附加值得到。然后创建最大树的方法与上面题解法完全一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public void inTraverse(TreeNode node, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        if ( node != null )</span><br><span class="line">        &#123;</span><br><span class="line">            if ( node.left != null )</span><br><span class="line">            &#123;</span><br><span class="line">                inTraverse( node.left, list );</span><br><span class="line">            &#125;</span><br><span class="line">            list.add( node.val );</span><br><span class="line">            if ( node.right != null )</span><br><span class="line">            &#123;</span><br><span class="line">                inTraverse( node.right, list );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public TreeNode create( int begin, int end, List&lt;Integer&gt; list)</span><br><span class="line">    &#123;</span><br><span class="line">        TreeNode node = null;</span><br><span class="line">        int index = begin;</span><br><span class="line">        </span><br><span class="line">        for ( int i=begin; i&lt;=end; i++ )</span><br><span class="line">        &#123;</span><br><span class="line">            if (list.get(i) &gt; list.get(index))</span><br><span class="line">                index = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        node = new TreeNode(list.get(index));</span><br><span class="line">        </span><br><span class="line">        if (index != begin)</span><br><span class="line">            node.left = create( begin, index-1, list);</span><br><span class="line">        if (index != end)</span><br><span class="line">            node.right = create( index+1, end, list);</span><br><span class="line">        </span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public TreeNode insertIntoMaxTree(TreeNode root, int val) &#123;</span><br><span class="line">        List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        inTraverse(root, list);</span><br><span class="line">        list.add(val);</span><br><span class="line">        return create(0, list.size()-1, list);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -546,7 +481,7 @@ if(isset($_SESSION[&apos;username&apos;])){
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://Flowers-bloom.github.io/2019/05/03/loginBySession/" title="loginBySession">http://Flowers-bloom.github.io/2019/05/03/loginBySession/</a>
+    <a href="http://Flowers-bloom.github.io/2019/08/26/最大二叉树/" title="最大二叉树">http://Flowers-bloom.github.io/2019/08/26/最大二叉树/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -561,11 +496,11 @@ if(isset($_SESSION[&apos;username&apos;])){
       
         <div class="post-tags">
           
-            <a href="/tags/PHP/" rel="tag"><i class="fa fa-tag"></i> PHP</a>
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
-            <a href="/tags/login/" rel="tag"><i class="fa fa-tag"></i> login</a>
+            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
           
-            <a href="/tags/Session/" rel="tag"><i class="fa fa-tag"></i> Session</a>
+            <a href="/tags/二叉树/" rel="tag"><i class="fa fa-tag"></i> 二叉树</a>
           
         </div>
       
@@ -578,8 +513,8 @@ if(isset($_SESSION[&apos;username&apos;])){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/03/longestPalindrome/" rel="next" title="longestPalindrome">
-                <i class="fa fa-chevron-left"></i> longestPalindrome
+              <a href="/2019/08/23/正则表达式匹配/" rel="next" title="正则表达式匹配">
+                <i class="fa fa-chevron-left"></i> 正则表达式匹配
               </a>
             
           </div>
@@ -587,10 +522,6 @@ if(isset($_SESSION[&apos;username&apos;])){
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/03/messageBoard/" rel="prev" title="messageBoard">
-                messageBoard <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -733,7 +664,7 @@ if(isset($_SESSION[&apos;username&apos;])){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录实现"><span class="nav-number">1.</span> <span class="nav-text">登录实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Login-html"><span class="nav-number">1.1.</span> <span class="nav-text">Login.html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Login-php"><span class="nav-number">1.2.</span> <span class="nav-text">Login.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Logout-php"><span class="nav-number">1.3.</span> <span class="nav-text">Logout.php</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展"><span class="nav-number">3.</span> <span class="nav-text">扩展</span></a></li></ol></div>
             
 
           </div>

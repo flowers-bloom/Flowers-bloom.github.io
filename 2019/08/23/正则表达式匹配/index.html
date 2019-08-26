@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="实现正则表达式匹配算法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-23T02:14:42.223Z">
+<meta property="og:updated_time" content="2019-08-23T02:20:52.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式匹配">
 <meta name="twitter:description" content="实现正则表达式匹配算法">
@@ -382,7 +382,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  731 字
+                  721 字
                 </span>
               
 
@@ -436,13 +436,13 @@ p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
 <p>输入:<br>s = “aa”<br>p = “a”<br>输出: false<br>解释: “a” 无法匹配 “aa” 整个字符串。</p>
 </blockquote>
 <blockquote>
-<p>输入:<br>s = “aa”<br>p = “a<em>“<br>输出: true<br>解释: 因为 `’</em>‘` 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p>
+<p>输入:<br>s = “aa”<br>p = “a<em>“<br>输出: true<br>解释: 因为 ‘</em>‘ 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 ‘a’。因此，字符串 “aa” 可被视为 ‘a’ 重复了一次。</p>
 </blockquote>
 <blockquote>
-<p>输入:<br>s = “ab”<br>p = <code>&quot;.*&quot;</code><br>输出: true<br>解释: <code>&quot;.*&quot;</code> 表示可匹配零个或多个（<code>&#39;*&#39;</code>）任意字符（<code>&#39;.&#39;</code>）。</p>
+<p>输入:<br>s = “ab”<br>p = “.<em>“<br>输出: true<br>解释: “.</em>“ 表示可匹配零个或多个（’*’）任意字符（’.’）。</p>
 </blockquote>
 <blockquote>
-<p>输入:<br>s = “aab”<br>p = <code>&quot;c*a*b&quot;</code><br>输出: true<br>解释: 因为 <code>&#39;*&#39;</code> 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。</p>
+<p>输入:<br>s = “aab”<br>p = <code>&quot;c*a*b&quot;</code><br>输出: true<br>解释: 因为 ‘*’ 表示零个或多个，这里 ‘c’ 为 0 个, ‘a’ 被重复一次。因此可以匹配字符串 “aab”。</p>
 </blockquote>
 <blockquote>
 <p>输入:<br>s = “mississippi”<br>p = <code>&quot;mis*is*p*.&quot;</code><br>输出: false</p>
@@ -524,6 +524,10 @@ p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/08/26/最大二叉树/" rel="prev" title="最大二叉树">
+                最大二叉树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -603,7 +607,7 @@ p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -625,7 +629,7 @@ p 可能为空，且只包含从 a-z 的小写字母，以及字符 . 和 *。
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
