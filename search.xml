@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[两数相加||]]></title>
+    <url>%2F2019%2F08%2F27%2F%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0%2F</url>
+    <content type="text"><![CDATA[题目描述：给定两个非空链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储单个数字。将这两数相加会返回一个新的链表。 你可以假设除了数字 0 之外，这两个数字都不会以零开头。 示例： 输入: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4) 输出: 7 -&gt; 8 -&gt; 0 -&gt; 7 题解思路：由数字存储顺序得，无法直接相加两个单链表的值。为了可以直接相加两链表，所以反转两个链表。（分别求出链表代表的数字，再相加会超出int的范围）然后，用链表的头插法（逆序创建，负负得正）创建一个新的链表，并返回头结点。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152class Solution &#123; // 反转单链表需要先存储链表结点 public ListNode reverse(ListNode n) &#123; ListNode[] node = new ListNode[100]; int i = 0; while (n != null) &#123; node[i++] = n; n = n.next; &#125; i--; int j = i; while (i != 0) &#123; node[i].next = node[i-1]; i--; &#125; node[0].next = null; return node[j]; &#125; public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123; l1 = reverse(l1); l2 = reverse(l2); ListNode head = null, tail = null; // 解决进位问题，结果大于等于10时，剩余值到下一个循环 int n = 0; while (l1 != null || l2 != null || n != 0) &#123; if (l1 != null) n += l1.val; if (l2 != null) n += l2.val; tail = new ListNode(n%10); n /= 10; tail.next = head; head = tail; if (l1 != null) l1 = l1.next; if (l2 != null) l2 = l2.next; &#125; return head; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>单链表</tag>
+        <tag>单链表反转</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[单链表创建]]></title>
+    <url>%2F2019%2F08%2F27%2F%E5%8D%95%E9%93%BE%E8%A1%A8%E5%88%9B%E5%BB%BA%2F</url>
+    <content type="text"><![CDATA[PS：头插法实现较简单，但生成内容为原内容的逆序；尾插法则为正序生成12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273class ListNode&#123; public int val; public ListNode next; ListNode (int val) &#123; this.val = val; &#125;&#125;public class ListTest &#123; /** * 头插法 * @param nums * @return */ public static ListNode headInsert(int[] nums) &#123; ListNode head = null; ListNode tail = null; int len = nums.length, i=0; while (i &lt; len) &#123; tail = new ListNode(nums[i++]); tail.next = head; head = tail; &#125; return head; &#125; /** * 尾插法 * @param nums * @return */ public static ListNode tailInsert(int[] nums) &#123; ListNode head = null; ListNode tail = null; int len = nums.length, i = 0; while (i &lt; len) &#123; if (head == null) &#123; head = tail = new ListNode(nums[i++]); &#125;else &#123; tail.next = new ListNode(nums[i++]); tail = tail.next; &#125; &#125; tail.next = null; return head; &#125; /** * 遍历 * @param node */ public static void Traverse(ListNode node) &#123; while (node != null) &#123; System.out.println(node.val); node = node.next; &#125; &#125; public static void main(String[] args) &#123; int arr[] = &#123;1,2,3,4,5&#125;; ListNode head = null; head = headInsert(arr); //head = tailInsert(arr); Traverse(head); &#125;&#125;]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>单链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[最大二叉树]]></title>
     <url>%2F2019%2F08%2F26%2F%E6%9C%80%E5%A4%A7%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/maximum-binary-tree/ 题目描述给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下： 二叉树的根是数组中的最大元素。 左子树是通过数组中最大值左边部分构造出的最大二叉树。 右子树是通过数组中最大值右边部分构造出的最大二叉树。 通过给定的数组构建最大二叉树，并且输出这个树的根节点。 示例： 输入：[3,2,1,6,0,5] 输出：返回下面这棵树的根节点： 6 / \ 3 5 \ / 2 0 \ 1 题解思路：题意清晰易懂，且明显可以看出解决问题方法是一个流程的重复，所以想到递归。流程： 找数组特定范围内的最大值，和最大值对应的数组下标 将最大值添加的树结点 以数组最大值下标为分割点，在分割的两部分重复上面两步骤 123456789101112131415161718192021222324252627282930313233class Solution &#123; public TreeNode create(int begin, int end, int[] nums) &#123; TreeNode node = null; // 只存下标有利于节省内存 int index = begin; for (int i=begin; i&lt;=end; i++) &#123; if (nums[i] &gt; nums[index]) &#123; index = i; &#125; &#125; //System.out.println(begin + &quot; &quot;+ index+ &quot; &quot; + end + &quot; &quot; + nums[index]); node = new TreeNode(nums[index]); if (index != begin ) node.left = create( begin, index-1 , nums ); if (index != end ) node.right = create( index+1 , end, nums ); return node; &#125; public TreeNode constructMaximumBinaryTree(int[] nums) &#123; if ( nums.length == 0 ) return null; return create(0, nums.length-1, nums); &#125;&#125; 扩展传送门 https://leetcode-cn.com/problems/maximum-binary-tree/ 思路：从题目样例中可以看出，数组是由给出的A树经过中序遍历，再加上附加值得到。然后创建最大树的方法与上面题解法完全一致。 123456789101112131415161718192021222324252627282930313233343536373839404142434445class Solution &#123; public void inTraverse(TreeNode node, List&lt;Integer&gt; list) &#123; if ( node != null ) &#123; if ( node.left != null ) &#123; inTraverse( node.left, list ); &#125; list.add( node.val ); if ( node.right != null ) &#123; inTraverse( node.right, list ); &#125; &#125; &#125; public TreeNode create( int begin, int end, List&lt;Integer&gt; list) &#123; TreeNode node = null; int index = begin; for ( int i=begin; i&lt;=end; i++ ) &#123; if (list.get(i) &gt; list.get(index)) index = i; &#125; node = new TreeNode(list.get(index)); if (index != begin) node.left = create( begin, index-1, list); if (index != end) node.right = create( index+1, end, list); return node; &#125; public TreeNode insertIntoMaxTree(TreeNode root, int val) &#123; List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;(); inTraverse(root, list); list.add(val); return create(0, list.size()-1, list); &#125;&#125;]]></content>
@@ -22,8 +45,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -35,8 +58,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -58,9 +81,9 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
+        <tag>动态规划</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
