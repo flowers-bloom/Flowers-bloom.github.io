@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[字符串全排序]]></title>
+    <url>%2F2019%2F09%2F06%2F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%85%A8%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/letter-tile-possibilities/ 题目描述你有一套活字字模 tiles，其中每个字模上都刻有一个字母 tiles[i]。返回你可以印出的非空字母序列的数目。 示例 输入：”AAB”输出：8解释：可能的序列为 “A”, “B”, “AA”, “AB”, “BA”, “AAB”, “ABA”, “BAA”。 输入：”AAABBC”输出：188 题解123456789101112131415161718192021222324252627class Solution &#123; public int numTilePossibilities(String tiles) &#123; int[] counter = new int[26]; for (int i=0; i&lt;tiles.length(); i++) &#123; counter[tiles.charAt(i) - &apos;A&apos;] ++; &#125; return backTrace(counter); &#125; public int backTrace(int[] counter) &#123; int ans = 0; for (int i=0; i&lt;counter.length; i++) &#123; if (counter[i] == 0) continue; ans ++; counter[i] -- ; ans += backTrace(counter); counter[i]++; // 回溯 &#125; return ans; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>树</tag>
+        <tag>回溯算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[子集]]></title>
+    <url>%2F2019%2F09%2F06%2F%E5%AD%90%E9%9B%86%2F</url>
+    <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/subsets/ 子集 I题目描述给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 示例 输入: nums = [1,2,3]输出:[ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ] 题解代码理解不难，直接贴代码了123456789101112131415public List&lt;List&lt;Integer&gt;&gt; subsets(int[] nums) &#123; List&lt;List&lt;Integer&gt;&gt; res = new ArrayList&lt;&gt;(); res.add(new ArrayList&lt;&gt;()); // 遍历数组每个元素，将其加入集合之前的元素中 for (int i = 0; i &lt; nums.length; i++) &#123; // 遍历集合中的每个元素 int all = res.size(); for (int j = 0; j &lt; all; j++) &#123; List&lt;Integer&gt; tmp = new ArrayList&lt;&gt;(res.get(j)); tmp.add(nums[i]); res.add(tmp); &#125; &#125; return res; &#125; 传送门 https://leetcode-cn.com/problems/subsets-ii/ 子集 II题目描述给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。 说明：解集不能包含重复的子集。 示例 输入: [1,2,2]输出:[ [2], [1], [1,2,2], [2,2], [1,2], []] 题解该题比子集I多出一个操作，那就是去重，实现代码与子集I类似。1234567891011121314151617181920212223242526272829303132class Solution &#123; public List&lt;List&lt;Integer&gt;&gt; subsetsWithDup(int[] nums) &#123; // 排序 Arrays.sort(nums); List&lt;List&lt;Integer&gt;&gt; list = new ArrayList&lt;&gt;(); List&lt;Integer&gt; temp = new ArrayList&lt;&gt;(); list.add(temp); int j = 0, right = 0; for (int i=0; i&lt;nums.length; i++) &#123; int len = list.size(); right = len; for (; j&lt;len; j++) &#123; temp = new ArrayList&lt;&gt;(list.get(j)); temp.add(nums[i]); list.add(temp); &#125; // 去重 if (i != nums.length-1 &amp;&amp; nums[i] == nums[i+1]) &#123; j = right; &#125;else &#123; j=0; &#125; &#125; return list; &#125;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[两数相加||]]></title>
     <url>%2F2019%2F08%2F27%2F%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0%2F</url>
     <content type="text"><![CDATA[题目描述：给定两个非空链表来代表两个非负整数。数字最高位位于链表开始位置。它们的每个节点只存储单个数字。将这两数相加会返回一个新的链表。 你可以假设除了数字 0 之外，这两个数字都不会以零开头。 示例： 输入: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4) 输出: 7 -&gt; 8 -&gt; 0 -&gt; 7 题解思路：由数字存储顺序得，无法直接相加两个单链表的值。为了可以直接相加两链表，所以反转两个链表。（分别求出链表代表的数字，再相加会超出int的范围）然后，用链表的头插法（逆序创建，负负得正）创建一个新的链表，并返回头结点。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152class Solution &#123; // 反转单链表需要先存储链表结点 public ListNode reverse(ListNode n) &#123; ListNode[] node = new ListNode[100]; int i = 0; while (n != null) &#123; node[i++] = n; n = n.next; &#125; i--; int j = i; while (i != 0) &#123; node[i].next = node[i-1]; i--; &#125; node[0].next = null; return node[j]; &#125; public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123; l1 = reverse(l1); l2 = reverse(l2); ListNode head = null, tail = null; // 解决进位问题，结果大于等于10时，剩余值到下一个循环 int n = 0; while (l1 != null || l2 != null || n != 0) &#123; if (l1 != null) n += l1.val; if (l2 != null) n += l2.val; tail = new ListNode(n%10); n /= 10; tail.next = head; head = tail; if (l1 != null) l1 = l1.next; if (l2 != null) l2 = l2.next; &#125; return head; &#125;&#125;]]></content>
@@ -45,8 +70,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>java</tag>
         <tag>动态规划</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -58,8 +83,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>java</tag>
         <tag>动态规划</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -81,9 +106,9 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
+        <tag>动态规划</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
-        <tag>动态规划</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
