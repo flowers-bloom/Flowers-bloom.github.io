@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[七牛云上传图片并返回url]]></title>
+    <url>%2F2019%2F09%2F06%2F%E4%B8%83%E7%89%9B%E4%BA%91%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%B9%B6%E8%BF%94%E5%9B%9Eurl%2F</url>
+    <content type="text"><![CDATA[准备（1）注册七牛，实名认证获得30天的免费域名（也可以配置自己的域名）（2）创建存储空间（笔者使用的是公有空间） 配置本地开发环境（1）下载SDK（2）导入SDK进laravel框架（笔者导入目录的是app，方便引入方法到控制器）（3）指定路由，编写上传图片方法12345678910111213141516171819202122232425262728293031/** * 用户上传文件到七牛，并返回图片Url * @param Request $request * @return false|string * @throws \Exception */ public function upload(Request $request) &#123; // 获取鉴权 $auth = new Auth($this-&gt;accessKey, $this-&gt;secretKey); $token = $auth-&gt;uploadToken($this-&gt;bucket, null, 3600); // 上传文件 $image = $request-&gt;file(&apos;user_image&apos;); if ($image-&gt;isValid()) &#123; $localPath = $image-&gt;getRealPath(); $key = &apos;imgUrl_&apos;.microtime(true).&apos;.jpg&apos;; $uploadManager = new UploadManager(); if (!$uploadManager-&gt;putFile($token, $key, $localPath)) &#123; return Response::jsonResponse(109, &apos;图片上传失败&apos;); &#125; // 定义图片url $retUrl = $this-&gt;domainName.$key; return Response::jsonResponse(0, &apos;图片上传成功&apos;, [ &apos;callbackUrl&apos; =&gt; $retUrl ]); &#125; &#125; 测试使用postman测试接口]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>七牛云</tag>
+        <tag>laravel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[字符串全排序]]></title>
     <url>%2F2019%2F09%2F06%2F%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%85%A8%E6%8E%92%E5%BA%8F%2F</url>
     <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/letter-tile-possibilities/ 题目描述你有一套活字字模 tiles，其中每个字模上都刻有一个字母 tiles[i]。返回你可以印出的非空字母序列的数目。 示例 输入：”AAB”输出：8解释：可能的序列为 “A”, “B”, “AA”, “AB”, “BA”, “AAB”, “ABA”, “BAA”。 输入：”AAABBC”输出：188 题解123456789101112131415161718192021222324252627class Solution &#123; public int numTilePossibilities(String tiles) &#123; int[] counter = new int[26]; for (int i=0; i&lt;tiles.length(); i++) &#123; counter[tiles.charAt(i) - &apos;A&apos;] ++; &#125; return backTrace(counter); &#125; public int backTrace(int[] counter) &#123; int ans = 0; for (int i=0; i&lt;counter.length; i++) &#123; if (counter[i] == 0) continue; ans ++; counter[i] -- ; ans += backTrace(counter); counter[i]++; // 回溯 &#125; return ans; &#125;&#125;]]></content>
@@ -70,8 +82,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -83,8 +95,8 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -106,10 +118,10 @@
       </categories>
       <tags>
         <tag>algorithm</tag>
-        <tag>动态规划</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
         <tag>回溯算法</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -120,8 +132,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>String</tag>
         <tag>algorithm</tag>
+        <tag>String</tag>
         <tag>java</tag>
         <tag>回溯算法</tag>
       </tags>
@@ -148,8 +160,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>数据结构</tag>
         <tag>树</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -240,8 +252,8 @@
       </categories>
       <tags>
         <tag>C++</tag>
-        <tag>String</tag>
         <tag>algorithm</tag>
+        <tag>String</tag>
         <tag>回文串</tag>
         <tag>动态规划</tag>
       </tags>
@@ -255,8 +267,8 @@
       </categories>
       <tags>
         <tag>C++</tag>
-        <tag>String</tag>
         <tag>algorithm</tag>
+        <tag>String</tag>
       </tags>
   </entry>
 </search>
