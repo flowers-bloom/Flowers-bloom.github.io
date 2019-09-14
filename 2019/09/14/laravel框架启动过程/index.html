@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="laravel,laravel源码,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一篇让读者对laravel框架启动过程有清晰了解的文章">
+<meta name="keywords" content="laravel,laravel源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel框架启动过程">
+<meta property="og:url" content="http://Flowers-bloom.github.io/2019/09/14/laravel框架启动过程/index.html">
+<meta property="og:site_name" content="PJ-BE">
+<meta property="og:description" content="一篇让读者对laravel框架启动过程有清晰了解的文章">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-14T08:19:25.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel框架启动过程">
+<meta name="twitter:description" content="一篇让读者对laravel框架启动过程有清晰了解的文章">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"post"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Flowers-bloom.github.io/2019/09/14/laravel框架启动过程/">
+
+
+
+
+
+  <title>laravel框架启动过程 | PJ-BE</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">PJ-BE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">成功不是随随便便的！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources" rel="section">
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Flowers-bloom.github.io/2019/09/14/laravel框架启动过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="NEUQ-XJH">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="PJ-BE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">laravel框架启动过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-14T11:27:28+08:00">
+                2019-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计 ">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长 ">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  一篇让读者对laravel框架启动过程有清晰了解的文章
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><mark>阅读本文前，建议先阅读<a href>laravel生命周期</a></mark></p>
+<h3 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h3><p>了解laravel的读者都知道，public目录是laravel项目的入口，所以，laravel框架的整个启动流程就定义在<code>public/index.php</code>文件中。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'LARAVEL_START'</span>, microtime(<span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册自动加载器</span></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span>.<span class="string">'/../vendor/autoload.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化应用</span></span><br><span class="line">$app = <span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">'/../bootstrap/app.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理请求和响应</span></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure></p>
+<p>上面短短几行代码是如何将laravel框架运行起来的呢？请看下面具体分析</p>
+<h4 id="注册自动加载器"><a href="#注册自动加载器" class="headerlink" title="注册自动加载器"></a>注册自动加载器</h4><p>启动一个框架，自然少不了在文件中加载大量的类，而laravel实现类的加载是十分轻松的！<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录项目启动的时刻</span></span><br><span class="line">define(<span class="string">'LARAVEL_START'</span>, microtime(<span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册类自动加载器</span></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span>.<span class="string">'/../vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>autoload.php是由composer提供的类自动加载器文件，包含它即可以实现自动加载框架类。</p>
+<h4 id="实例化应用"><a href="#实例化应用" class="headerlink" title="实例化应用"></a>实例化应用</h4><p>包含了类文件后，接下来，就是实例化laravel应用。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$app = <span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">'/../bootstrap/app.php'</span>;</span><br><span class="line">``` </span><br><span class="line">通过上述一条语句实现了laravel application的实例化，下面分析下`$app`实例化的具体过程：</span><br><span class="line">``` php</span><br><span class="line"><span class="comment">// bootstrap/app.php文件</span></span><br><span class="line"><span class="comment">// 实例化$app</span></span><br><span class="line">$app = <span class="keyword">new</span> Illuminate\Foundation\Application(</span><br><span class="line">    realpath(<span class="keyword">__DIR__</span>.<span class="string">'/../'</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单例绑定共享的Kernel和异常处理器</span></span><br><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Http\Kernel::class,</span><br><span class="line">    App\Http\Kernel::class</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Console\Kernel::class,</span><br><span class="line">    App\Console\Kernel::class</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Debug\ExceptionHandler::class,</span><br><span class="line">    App\Exceptions\Handler::class</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> $app;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>实例化<code>$app</code></p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create a new Illuminate application instance.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string|null  $basePath</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($basePath = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 设置基础路径</span></span><br><span class="line">    <span class="keyword">if</span> ($basePath) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;setBasePath($basePath);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册基础绑定</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerBaseBindings();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册基础服务</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerBaseServiceProviders();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注册核心容器别名</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerCoreContainerAliases();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>设置基础路径<br>在容器中设置app、/、config、public、storage、database等目录的路径</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set the base path for the application.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $basePath</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> $this</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setBasePath</span><span class="params">($basePath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;basePath = rtrim($basePath, <span class="string">'\/'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;bindPathsInContainer();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Bind all of the application paths in the container.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">bindPathsInContainer</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path'</span>, <span class="keyword">$this</span>-&gt;path());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.base'</span>, <span class="keyword">$this</span>-&gt;basePath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.lang'</span>, <span class="keyword">$this</span>-&gt;langPath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.config'</span>, <span class="keyword">$this</span>-&gt;configPath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.public'</span>, <span class="keyword">$this</span>-&gt;publicPath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.storage'</span>, <span class="keyword">$this</span>-&gt;storagePath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.database'</span>, <span class="keyword">$this</span>-&gt;databasePath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.resources'</span>, <span class="keyword">$this</span>-&gt;resourcePath());</span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'path.bootstrap'</span>, <span class="keyword">$this</span>-&gt;bootstrapPath());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>绑定后的数组 $this-&gt;instances 如下:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path'</span>] = <span class="string">'/var/www/laravel/app'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.base'</span>] = <span class="string">'/var/www/laravel'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.lang'</span>] = <span class="string">'/var/www/laravel/resources/lang'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.config'</span>] = <span class="string">'/var/www/laravel/config'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.public'</span>] = <span class="string">'/var/www/laravel/public'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.storage'</span>] = <span class="string">'/var/www/laravel/storage'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.database'</span>] = <span class="string">'/var/www/laravel/database'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.resources'</span>] = <span class="string">'/var/www/laravel/resources'</span>;  </span><br><span class="line"><span class="keyword">$this</span>-&gt;instances[<span class="string">'path.bootstrap'</span>] = <span class="string">'/var/www/laravel/bootstrap'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册基础绑定</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Register the basic bindings into the container.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerBaseBindings</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>::setInstance(<span class="keyword">$this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(<span class="string">'app'</span>, <span class="keyword">$this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(Container::class, <span class="keyword">$this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 包清单实例</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;instance(PackageManifest::class, <span class="keyword">new</span> PackageManifest(</span><br><span class="line">        <span class="keyword">new</span> Filesystem, <span class="keyword">$this</span>-&gt;basePath(), <span class="keyword">$this</span>-&gt;getCachedPackagesPath()</span><br><span class="line">    ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>追加$this-&gt;instances 如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;instances[&apos;app&apos;] = object(Illuminate\Foundation\Application);  </span><br><span class="line">$this-&gt;instances[&apos;Illuminate\Container\Container&apos;] = object(Illuminate\Foundation\Application);</span><br><span class="line">$this-&gt;instances[&apos;PackageManifest&apos;] = object(PackageManifest);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册基础服务<br>注册事件、日志、路由服务</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Register all of the base service providers.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerBaseServiceProviders</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;register(<span class="keyword">new</span> EventServiceProvider(<span class="keyword">$this</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;register(<span class="keyword">new</span> LogServiceProvider(<span class="keyword">$this</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;register(<span class="keyword">new</span> RoutingServiceProvider(<span class="keyword">$this</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成数组如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">event:</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[<span class="string">'events'</span>] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> (<span class="keyword">new</span> Dispatcher($app))-&gt;setQueueResolver(<span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="title">use</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> $app-&gt;make(QueueFactoryContract::class);</span><br><span class="line">                        &#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line">log:</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[<span class="string">'log'</span>] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">createLogger</span><span class="params">()</span></span></span><br><span class="line"><span class="function">                                </span>&#123;</span><br><span class="line">                                    $log = <span class="keyword">new</span> Writer(</span><br><span class="line">                                        <span class="keyword">new</span> Monolog(<span class="keyword">$this</span>-&gt;channel()), <span class="keyword">$this</span>-&gt;app[<span class="string">'events'</span>]</span><br><span class="line">                                    );</span><br><span class="line"></span><br><span class="line">                                    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;app-&gt;hasMonologConfigurator()) &#123;</span><br><span class="line">                                        call_user_func(<span class="keyword">$this</span>-&gt;app-&gt;getMonologConfigurator(), $log-&gt;getMonolog());</span><br><span class="line">                                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                        <span class="keyword">$this</span>-&gt;&#123;<span class="keyword">$this</span>-&gt;&#123;<span class="string">'configure'</span>.ucfirst(<span class="keyword">$this</span>-&gt;handler()).<span class="string">'Handler'</span>&#125;($log)&#125;($log);</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line">                                    <span class="keyword">return</span> $log;</span><br><span class="line">                                &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line">router:</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[<span class="string">'router'</span>] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> Router($app[<span class="string">'events'</span>], $app);</span><br><span class="line">                    &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[<span class="string">'url'</span>] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        $routes = $app[<span class="string">'router'</span>]-&gt;getRoutes();</span><br><span class="line"></span><br><span class="line">                        $app-&gt;instance(<span class="string">'routes'</span>, $routes);</span><br><span class="line"></span><br><span class="line">                        $url = <span class="keyword">new</span> UrlGenerator(</span><br><span class="line">                            $routes, $app-&gt;rebinding(</span><br><span class="line">                                <span class="string">'request'</span>, <span class="keyword">$this</span>-&gt;requestRebinder()</span><br><span class="line">                            )</span><br><span class="line">                        );</span><br><span class="line"></span><br><span class="line">                        $url-&gt;setSessionResolver(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;app[<span class="string">'session'</span>];</span><br><span class="line">                        &#125;);</span><br><span class="line"></span><br><span class="line">                        $app-&gt;rebinding(<span class="string">'routes'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($app, $routes)</span> </span>&#123;</span><br><span class="line">                            $app[<span class="string">'url'</span>]-&gt;setRoutes($routes);</span><br><span class="line">                        &#125;);</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">return</span> $url;</span><br><span class="line">                    &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[<span class="string">'redirect'</span>] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                    $redirector = <span class="keyword">new</span> Redirector($app[<span class="string">'url'</span>]);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">isset</span>($app[<span class="string">'session.store'</span>])) &#123;</span><br><span class="line">                        $redirector-&gt;setSession($app[<span class="string">'session.store'</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">return</span> $redirector;</span><br><span class="line">                &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[ServerRequestInterface::class] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> (<span class="keyword">new</span> DiactorosFactory)-&gt;createRequest($app-&gt;make(<span class="string">'request'</span>));</span><br><span class="line">                    &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[ResponseInterface::class] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> PsrResponse();</span><br><span class="line">                    &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br><span class="line"><span class="keyword">$this</span>-&gt;bindings[ResponseFactoryContract::class] = [</span><br><span class="line">    <span class="string">'concrete'</span> =&gt; <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">new</span> ResponseFactory($app[ViewFactoryContract::class], $app[<span class="string">'redirect'</span>]);</span><br><span class="line">                    &#125;,</span><br><span class="line">    <span class="string">'shared'</span> =&gt; <span class="string">'true'</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册核心容器别名</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">registerCoreContainerAliases</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $aliases = [</span><br><span class="line">        <span class="string">'app'</span>                  =&gt; [\Illuminate\Foundation\Application::class, \Illuminate\Contracts\Container\Container::class, \Illuminate\Contracts\Foundation\Application::class],</span><br><span class="line">        <span class="string">'auth'</span>                 =&gt; [\Illuminate\Auth\AuthManager::class, \Illuminate\Contracts\Auth\Factory::class],</span><br><span class="line">        <span class="string">'auth.driver'</span>          =&gt; [\Illuminate\Contracts\Auth\Guard::class],</span><br><span class="line">        <span class="string">'blade.compiler'</span>       =&gt; [\Illuminate\View\Compilers\BladeCompiler::class],</span><br><span class="line">        <span class="string">'cache'</span>                =&gt; [\Illuminate\Cache\CacheManager::class, \Illuminate\Contracts\Cache\Factory::class],</span><br><span class="line">        <span class="string">'cache.store'</span>          =&gt; [\Illuminate\Cache\Repository::class, \Illuminate\Contracts\Cache\Repository::class],</span><br><span class="line">        <span class="string">'config'</span>               =&gt; [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],</span><br><span class="line">        <span class="string">'cookie'</span>               =&gt; [\Illuminate\Cookie\CookieJar::class, \Illuminate\Contracts\Cookie\Factory::class, \Illuminate\Contracts\Cookie\QueueingFactory::class],</span><br><span class="line">        <span class="string">'encrypter'</span>            =&gt; [\Illuminate\Encryption\Encrypter::class, \Illuminate\Contracts\Encryption\Encrypter::class],</span><br><span class="line">        <span class="string">'db'</span>                   =&gt; [\Illuminate\Database\DatabaseManager::class],</span><br><span class="line">        <span class="string">'db.connection'</span>        =&gt; [\Illuminate\Database\Connection::class, \Illuminate\Database\ConnectionInterface::class],</span><br><span class="line">        <span class="string">'events'</span>               =&gt; [\Illuminate\Events\Dispatcher::class, \Illuminate\Contracts\Events\Dispatcher::class],</span><br><span class="line">        <span class="string">'files'</span>                =&gt; [\Illuminate\Filesystem\Filesystem::class],</span><br><span class="line">        <span class="string">'filesystem'</span>           =&gt; [\Illuminate\Filesystem\FilesystemManager::class, \Illuminate\Contracts\Filesystem\Factory::class],</span><br><span class="line">        <span class="string">'filesystem.disk'</span>      =&gt; [\Illuminate\Contracts\Filesystem\Filesystem::class],</span><br><span class="line">        <span class="string">'filesystem.cloud'</span>     =&gt; [\Illuminate\Contracts\Filesystem\Cloud::class],</span><br><span class="line">        <span class="string">'hash'</span>                 =&gt; [\Illuminate\Contracts\Hashing\Hasher::class],</span><br><span class="line">        <span class="string">'translator'</span>           =&gt; [\Illuminate\Translation\Translator::class, \Illuminate\Contracts\Translation\Translator::class],</span><br><span class="line">        <span class="string">'log'</span>                  =&gt; [\Illuminate\Log\Writer::class, \Illuminate\Contracts\Logging\Log::class, \Psr\Log\LoggerInterface::class],</span><br><span class="line">        <span class="string">'mailer'</span>               =&gt; [\Illuminate\Mail\Mailer::class, \Illuminate\Contracts\Mail\Mailer::class, \Illuminate\Contracts\Mail\MailQueue::class],</span><br><span class="line">        <span class="string">'auth.password'</span>        =&gt; [\Illuminate\Auth\Passwords\PasswordBrokerManager::class, \Illuminate\Contracts\Auth\PasswordBrokerFactory::class],</span><br><span class="line">        <span class="string">'auth.password.broker'</span> =&gt; [\Illuminate\Auth\Passwords\PasswordBroker::class, \Illuminate\Contracts\Auth\PasswordBroker::class],</span><br><span class="line">        <span class="string">'queue'</span>                =&gt; [\Illuminate\Queue\QueueManager::class, \Illuminate\Contracts\Queue\Factory::class, \Illuminate\Contracts\Queue\Monitor::class],</span><br><span class="line">        <span class="string">'queue.connection'</span>     =&gt; [\Illuminate\Contracts\Queue\Queue::class],</span><br><span class="line">        <span class="string">'queue.failer'</span>         =&gt; [\Illuminate\Queue\Failed\FailedJobProviderInterface::class],</span><br><span class="line">        <span class="string">'redirect'</span>             =&gt; [\Illuminate\Routing\Redirector::class],</span><br><span class="line">        <span class="string">'redis'</span>                =&gt; [\Illuminate\Redis\RedisManager::class, \Illuminate\Contracts\Redis\Factory::class],</span><br><span class="line">        <span class="string">'request'</span>              =&gt; [\Illuminate\Http\Request::class, \Symfony\Component\HttpFoundation\Request::class],</span><br><span class="line">        <span class="string">'router'</span>               =&gt; [\Illuminate\Routing\Router::class, \Illuminate\Contracts\Routing\Registrar::class, \Illuminate\Contracts\Routing\BindingRegistrar::class],</span><br><span class="line">        <span class="string">'session'</span>              =&gt; [\Illuminate\Session\SessionManager::class],</span><br><span class="line">        <span class="string">'session.store'</span>        =&gt; [\Illuminate\Session\Store::class, \Illuminate\Contracts\Session\Session::class],</span><br><span class="line">        <span class="string">'url'</span>                  =&gt; [\Illuminate\Routing\UrlGenerator::class, \Illuminate\Contracts\Routing\UrlGenerator::class],</span><br><span class="line">        <span class="string">'validator'</span>            =&gt; [\Illuminate\Validation\Factory::class, \Illuminate\Contracts\Validation\Factory::class],</span><br><span class="line">        <span class="string">'view'</span>                 =&gt; [\Illuminate\View\Factory::class, \Illuminate\Contracts\View\Factory::class],</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> ($aliases <span class="keyword">as</span> $key =&gt; $aliases) &#123;</span><br><span class="line">        <span class="keyword">foreach</span> ($aliases <span class="keyword">as</span> $alias) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;alias($key, $alias);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">alias</span><span class="params">($abstract, $alias)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;aliases[$alias] = $abstract;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;abstractAliases[$abstract][] = $alias;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生成数组如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;aliases[<span class="string">'Illuminate\Foundation\Application'</span>] = <span class="string">'app'</span>;</span><br><span class="line"><span class="keyword">$this</span>-&gt;aliases[<span class="string">'Illuminate\Contracts\Container\Container'</span>] = <span class="string">'app'</span>;</span><br><span class="line"><span class="keyword">$this</span>-&gt;aliases[<span class="string">'Illuminate\Contracts\Foundation\Application'</span>] = <span class="string">'app'</span>;</span><br><span class="line"><span class="keyword">$this</span>-&gt;abstractAliases[<span class="string">'app'</span>][] = <span class="string">'Illuminate\Foundation\Application'</span>;</span><br><span class="line"><span class="keyword">$this</span>-&gt;abstractAliases[<span class="string">'app'</span>][] = <span class="string">'Illuminate\Contracts\Container\Container'</span>;</span><br><span class="line"><span class="keyword">$this</span>-&gt;abstractAliases[<span class="string">'app'</span>][] = <span class="string">'Illuminate\Contracts\Foundation\Application'</span>;</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>单例绑定共享的Kernel和异常处理器<br>单例绑定Http、Console的Kernel和异常处理器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Http\Kernel::class,</span><br><span class="line">    App\Http\Kernel::class</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Console\Kernel::class,</span><br><span class="line">    App\Console\Kernel::class</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$app-&gt;singleton(</span><br><span class="line">    Illuminate\Contracts\Debug\ExceptionHandler::class,</span><br><span class="line">    App\Exceptions\Handler::class</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>总结：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">设置基础路径（$this-&gt;instances[&apos;path.*&apos;]） =&gt; </span><br><span class="line">注册基础绑定($this-&gt;instances[&apos;app|Container&apos;]) =&gt; </span><br><span class="line">注册基础服务($this-&gt;bindings[]) =&gt; </span><br><span class="line">注册核心容器别名($this-&gt;aliases[],$this-&gt;abstractAliases[])</span><br><span class="line">至此，应用的实例化完成。</span><br></pre></td></tr></table></figure></p>
+<h4 id="处理请求和响应"><a href="#处理请求和响应" class="headerlink" title="处理请求和响应"></a>处理请求和响应</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过前面在$app中注册的Illuminate\Contracts\Http\Kernel::class，现在获取Http实例</span></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Kernel处理器调用handle方法处理当前请求，得到response</span></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送响应信息到浏览器</span></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 请求结束，进行回调</span></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure>
+<p>终于，laravel的启动讲完了。能看到这里说明你是一个有决心看源码的读者！加油，前路依然不平坦…<br>参考：<a href="https://segmentfault.com/a/1190000008848349" target="_blank" rel="noopener">https://segmentfault.com/a/1190000008848349</a></p>
+
+      
+    </div>
+    
+
+
+
+
+  <div>
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束&nbsp;<i class="fa fa-paw"></i>&nbsp;感谢您的阅读-------------</div>
+    
+</div>
+  </div>
+
+
+
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    NEUQ-XJH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://Flowers-bloom.github.io/2019/09/14/laravel框架启动过程/" title="laravel框架启动过程">http://Flowers-bloom.github.io/2019/09/14/laravel框架启动过程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/laravel/" rel="tag"><i class="fa fa-tag"></i> laravel</a>
+          
+            <a href="/tags/laravel源码/" rel="tag"><i class="fa fa-tag"></i> laravel源码</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/10/2019-9-10会议记录/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/14/laravel生命周期/" rel="prev" title="laravel生命周期">
+                laravel生命周期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="vcomments"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="NEUQ-XJH">
+            
+              <p class="site-author-name" itemprop="name">NEUQ-XJH</p>
+              <p class="site-description motion-element" itemprop="description">php、java后端攻城狮</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+		  <!-- 音乐播放外链 -->
+		  <div>
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=422790454&auto=0&height=66"></iframe>
+			<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=28854182&auto=0&height=66"></iframe>
+      
+		  </div>
+		  
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心文件"><span class="nav-number">1.</span> <span class="nav-text">核心文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注册自动加载器"><span class="nav-number">1.1.</span> <span class="nav-text">注册自动加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例化应用"><span class="nav-number">1.2.</span> <span class="nav-text">实例化应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理请求和响应"><span class="nav-number">1.3.</span> <span class="nav-text">处理请求和响应</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">NEUQ-XJH</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+<span id="busuanzi_container_site_pv"> 本站总访问量<span id="busuanzi_value_site_pv"></span>次 </span> <span class="post-meta-divider">|</span> 
+<span id="busuanzi_container_site_uv" style="display:none"> 本站访客数<span id="busuanzi_value_site_uv"></span>人 
+</span> <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"> 
+</script>
+
+<br>
+
+<span id="sitetime"></span>
+<script language="javascript">
+	function siteTime(){
+		window.setTimeout("siteTime()", 1000);
+		var seconds = 1000;
+		var minutes = seconds * 60;
+		var hours = minutes * 60;
+		var days = hours * 24;
+		var years = days * 365;
+		var today = new Date();
+		var todayYear = today.getFullYear();
+		var todayMonth = today.getMonth()+1;
+		var todayDate = today.getDate();
+		var todayHour = today.getHours();
+		var todayMinute = today.getMinutes();
+		var todaySecond = today.getSeconds();
+		var t1 = Date.UTC(2019,5,2); //北京时间2018-11-1 00:00:00
+		var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond);
+		var diff = t2-t1;
+		var diffYears = Math.floor(diff/years);
+		var diffDays = Math.floor((diff/days)-diffYears*365);
+		var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours);
+		var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes);
+		var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds);
+		document.getElementById("sitetime").innerHTML=" 已运行"+/*diffYears+" 年 "+*/diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒";
+	}/*因为建站时间还没有一年，就将之注释掉了。需要的可以取消*/
+	siteTime();
+</script>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine@1.1.4/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#vcomments' ,
+        verify: false,
+        notify: false,
+        app_id: 'k7rFamzUbYo39HwMtLayXkXU-gzGzoHsz',
+        app_key: 'iXCGhjYygpQUCSfREXXBHVmA',
+        placeholder: 'Comment input placeholder'
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+</body>
+</html>
