@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="PJ-BE">
 <meta property="og:description" content="一篇让读者对laravel框架启动过程有清晰了解的文章">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-14T08:19:25.172Z">
+<meta property="og:updated_time" content="2019-09-14T11:15:07.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel框架启动过程">
 <meta name="twitter:description" content="一篇让读者对laravel框架启动过程有清晰了解的文章">
@@ -423,7 +423,7 @@
       
 
       
-        <p><mark>阅读本文前，建议先阅读<a href>laravel生命周期</a></mark></p>
+        <p><mark>阅读本文前，建议先阅读<a href="https://flowers-bloom.github.io/2019/09/14/laravel%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">laravel生命周期</a></mark></p>
 <h3 id="核心文件"><a href="#核心文件" class="headerlink" title="核心文件"></a>核心文件</h3><p>了解laravel的读者都知道，public目录是laravel项目的入口，所以，laravel框架的整个启动流程就定义在<code>public/index.php</code>文件中。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">'LARAVEL_START'</span>, microtime(<span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册自动加载器</span></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span>.<span class="string">'/../vendor/autoload.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化应用</span></span><br><span class="line">$app = <span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">'/../bootstrap/app.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理请求和响应</span></span><br><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line"></span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">$response-&gt;send();</span><br><span class="line"></span><br><span class="line">$kernel-&gt;terminate($request, $response);</span><br></pre></td></tr></table></figure></p>
 <p>上面短短几行代码是如何将laravel框架运行起来的呢？请看下面具体分析</p>
 <h4 id="注册自动加载器"><a href="#注册自动加载器" class="headerlink" title="注册自动加载器"></a>注册自动加载器</h4><p>启动一个框架，自然少不了在文件中加载大量的类，而laravel实现类的加载是十分轻松的！<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录项目启动的时刻</span></span><br><span class="line">define(<span class="string">'LARAVEL_START'</span>, microtime(<span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册类自动加载器</span></span><br><span class="line"><span class="keyword">require</span> <span class="keyword">__DIR__</span>.<span class="string">'/../vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p>
@@ -524,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/10/2019-9-10会议记录/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/09/08/回溯算法（1）/" rel="next" title="回溯算法（1）">
+                <i class="fa fa-chevron-left"></i> 回溯算法（1）
               </a>
             
           </div>
@@ -617,7 +617,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
