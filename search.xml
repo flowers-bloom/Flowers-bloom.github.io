@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MyISAM和InnoDB底层索引结构]]></title>
+    <url>%2F2019%2F09%2F17%2FMyISAM%E5%92%8CInnoDB%E5%BA%95%E5%B1%82%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84%2F</url>
+    <content type="text"><![CDATA[索引和数据的存储下面有两张表信息，role表使用MyISAM引擎存储，而user表用InnoDB引擎存储：下面是两种表在磁盘中的索引文件和数据文件： role表 role.frm：表结构文件 role.MYD：数据文件（MyISAM Data） role.MYI：索引文件（MyISAM Index） user表 user.frm：表结构文件 user.ibd：索引和数据文件（InnoDB Index and Data） 由上可知，MyISAM引擎将索引和数据分开文件存储，而InnoDB将索引和数据集中存储。因此，也称MyISAM的索引为非聚集索引，InnoDB的索引为聚集索引。 主键索引和辅助索引结构对数据库底层实现了解的读者应该都清楚，数据库索引是采用B+ Tree存储，在非叶结点存储索引和指针，在叶节点存储数据和指针。其中，非叶节点存储子树根节点的地址，而叶节点的指针存储数据文件的地址。 MyISAM 主键索引以col1列作为主键索引，对应结构请看下面示例图：查询流程：持有某条记录的主键id，在B+ Tree中遍历节点，找到含有目标主键id的节点并取得数据文件的存储地址，再到指定存储地址取得数据。 辅助索引以col2列作为辅助索引，得到与主键索引相同的结构，请看下面示例图： InnoDB 主键索引由于InnoDB为聚集索引，所以叶节点存储了索引以及对应的数据。 辅助索引以姓名作为辅助索引，节点中存储的不再是id，而是姓名。并且，叶节点中第一行存储辅助索引，第二行存储主键索引。通过第二行主键索引便于查询记录其他数据。 参考：https://blog.csdn.net/u010922732/article/details/82994253#%E4%B8%80%20%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E4%BD%9C%E7%94%A8%E4%BA%8E%E4%BB%80%E4%B9%88%E5%AF%B9%E8%B1%A1]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>数据库索引</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[sql语句执行过程]]></title>
+    <url>%2F2019%2F09%2F16%2Fsql%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[客户端将语句发送到服务端在SQL语句执行过程中，客户端和服务端都会有一个数据库进程，两者一一对应并发生数据传递。其中，服务端的数据库进程真正处理SQL语句的执行。 语句解析当语句传输到服务端之后，服务端进程会对语句进行解析，解析分为若干步。 查询高速缓存在服务端进程解析语句之前，会先将SQL字符语句转化为一个ASCII等效数字码，传递给hash函数获得一个hash值。然后在shared pool中的高速缓存中查找相同的hash值。如果存在相同的hash值，则直接使用在shared pool的高速缓存中已解析的版本，这称为软解析。否则，进行下面的正常解析，这对应称为硬解析。所以，如果使用软解析，在内存中读取数据，将可以大大地提升SQL语句的查询效率。这也是为什么redis数据库比mysql类型数据库查询速度高的关键原因。 语句解析 语句语法检查检查语句是否符合SQL语法，而不检查表名、字段名等值 语句语义检查检查语句表名、字段名、索引等值 获得对象解析锁检查语句的语法和语义都正确后，系统会对查询对象加锁，避免在查询过程中对象被改变，以保证数据的一致性 数据访问权限核对查询对象加锁后，系统还要核实当前连接用户是否有该数据访问的权限 确定最佳执行计划权限也合格之后，服务端根据一定的规则对SQL语句进行优化，确定可能的最低成本的执行计划。但是，这个优化是有限的。所以，在开发过程中，开发人员对SQL语句进行优化，产生的作用远大于数据库的自我优化。绑定变量如果SQL语句中使用了变量绑定，那么需要进行变量绑定，将变量值带入执行计划。如果在高速缓存中存在已解析的版本，则跳过该步。语句执行 SELECT语句 首先服务端进程判断所需数据是否存在db buffer中，如果存在且可用，那么直接使用db buffer中的数据 如果db buffer中不存在可用数据，则从数据库文件中查询数据，并将这些数据存入到数据缓存区（buffer cache） DML语句（insert、delete、update） 检查所需数据是否存在缓存区，如果存在，则直接跳到步骤3 若所需数据不在缓存区，则从数据库文件中读取数据到缓存区 对想要修改的表取得的数据行锁定，并且之后加上独占锁 将数据的redo记录复制到redo log buffer 产生数据修改的undo数据 修改db buffer db writer将修改写入数据文件返回结果当语句执行完之后，服务端的一个进程专门负责将数据返回给客户端，从而完成整个查询过程。]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>SQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[laravel生命周期]]></title>
     <url>%2F2019%2F09%2F14%2Flaravel%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
-    <content type="text"><![CDATA[php生命周期 运行模式 CLI模式在终端输入php命令时使用的就是CLI模式 WEB模式当使用nginx或者其他web服务器作为宿主机处理请求时，使用的就是WEB模式 生命周期 模块初始化：调用php.ini中指明的扩展的初始化函数进行初始化工作，如mysql扩展 请求初始化：初始化脚本中所需要的变量名和变量值内容的符号表，如$_SESSION变量 执行php脚本 请求处理完成：按顺序调用各个模块的request shutdown方法，对每个变量调用unset方法 关闭模块：php调用每个模块的module shutdown方法，这是各个模块最后一次释放内存的机会 WEB模式和CLI模式的区别 CLI模式会在每次脚本执行经历5个完整的生命周期 WEB模式为了应对高并发，可能采用多线程，所以，可能1,5只执行一次，而2~4执行多次，以节省系统模块初始化带来的开销 总结理解这些，你就可以优化你的 Laravel 代码，可以更加深入的了解 Laravel 的singleton（单例）。至少你知道了，每一次请求结束，PHP 的变量都会 unset，Laravel 的 singleton 只是在某一次请求过程中的singleton；你在 Laravel 中的静态变量也不能在多个请求之间共享，因为每一次请求结束都会 unset。理解这些概念，是写高质量代码的第一步，也是最关键的一步。因此记住，PHP是一种脚本语言，所有的变量只会在这一次请求中生效，下次请求之时已被重置，而不像Java静态变量拥有全局作用。 laravel生命周期 生命周期 文件载入composer生成的自动加载设置，包括所有你 composer require的依赖。 1require __DIR__.'/../bootstrap/autoload.php'; 注册绑定服务，实例化Application，并绑定HttpKernel，ConsoleKernel ，ExceptionHandler 1$app = require_once __DIR__.'/../bootstrap/app.php'; 处理请求，生成并发送响应（毫不夸张的说，你99%的代码都运行在这个小小的handle 方法里面） 12345$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);$response = $kernel-&gt;handle( $request = Illuminate\Http\Request::capture());$response-&gt;send(); 请求结束，进行回调（还记得可终止中间件吗？没错，就是在这里回调的） 1$kernel-&gt;terminate($request, $response); 阅读本文后，建议阅读laravel框架启动过程 参考：https://www.cnblogs.com/fubuki/p/9695379.html]]></content>
+    <content type="text"><![CDATA[php生命周期 运行模式 CLI模式在终端输入php命令时使用的就是CLI模式 WEB模式当使用nginx或者其他web服务器作为宿主机处理请求时，使用的就是WEB模式 生命周期 模块初始化：调用php.ini中指明的扩展的初始化函数进行初始化工作，如mysql扩展 请求初始化：初始化脚本中所需要的变量名和变量值内容的符号表，如$_SESSION变量 执行php脚本 请求处理完成：按顺序调用各个模块的request shutdown方法，对每个变量调用unset方法 关闭模块：php调用每个模块的module shutdown方法，这是各个模块最后一次释放内存的机会 WEB模式和CLI模式的区别 CLI模式会在每次脚本执行经历5个完整的生命周期 WEB模式为了应对高并发，可能采用多线程，所以，可能1,5只执行一次，而2~4执行多次，以节省系统模块初始化带来的开销 总结理解这些，你就可以优化你的 Laravel 代码，可以更加深入的了解 Laravel 的singleton（单例）。至少你知道了，每一次请求结束，PHP 的变量都会 unset，Laravel 的 singleton 只是在某一次请求过程中的singleton；你在 Laravel 中的静态变量也不能在多个请求之间共享，因为每一次请求结束都会 unset。理解这些概念，是写高质量代码的第一步，也是最关键的一步。因此记住，PHP是一种脚本语言，所有的变量只会在这一次请求中生效，下次请求之时已被重置，而不像Java静态变量拥有全局作用。 laravel生命周期 生命周期 文件载入composer生成的自动加载设置，包括所有你 composer require的依赖。 1require __DIR__.'/../bootstrap/autoload.php'; 注册绑定服务，实例化Application，并绑定HttpKernel，ConsoleKernel ，ExceptionHandler 1$app = require_once __DIR__.'/../bootstrap/app.php'; 将请求分发到路由，处理请求，生成并发送响应（毫不夸张的说，你99%的代码都运行在这个小小的handle 方法里面）但是，请求是如何分发到路由的呢？具体而言就是，请求的分发是通过管道（Pipeline）实现的，而管道中有墙的阻碍。没错，墙就是中间件。请求需要首先经过全局中间件的审核，成功后才会分发到路由；分发到路由后，还要经过路由中间件的审核，然后请求才会被路由引导向控制器或闭包函数。 12345$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);$response = $kernel-&gt;handle( $request = Illuminate\Http\Request::capture());$response-&gt;send(); 请求结束，进行回调（还记得可终止中间件吗？没错，就是在这里回调的） 1$kernel-&gt;terminate($request, $response); 阅读本文后，建议阅读laravel框架启动过程 参考：https://www.cnblogs.com/fubuki/p/9695379.html]]></content>
       <categories>
         <category>笔记</category>
       </categories>
@@ -109,9 +131,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>algorithm</tag>
         <tag>动态规划</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -122,9 +144,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>algorithm</tag>
         <tag>动态规划</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -132,9 +154,9 @@
     <url>%2F2019%2F08%2F21%2F%E5%8A%A0%E6%B2%B9%E7%AB%99%2F</url>
     <content type="text"><![CDATA[传送门 https://leetcode-cn.com/problems/gas-station/ 题目描述：在一条环路上有 N 个加油站，其中第 i 个加油站有汽油 gas[i] 升。 你有一辆油箱容量无限的的汽车，从第 i 个加油站开往第 i+1 个加油站需要消耗汽油 cost[i] 升。你从其中的一个加油站出发，开始时油箱为空。 如果你可以绕环路行驶一周，则返回出发时加油站的编号，否则返回 -1。 说明:如果题目有解，该答案即为唯一答案。输入数组均为非空数组，且长度相同。输入数组中的元素均为非负数。 示例： 输入: gas = [1,2,3,4,5] cost = [3,4,5,1,2]输出: 3解释:从 3 号加油站(索引为 3 处)出发，可获得 4 升汽油。此时油箱有 = 0 + 4 = 4 升汽油开往 4 号加油站，此时油箱有 4 - 1 + 5 = 8 升汽油开往 0 号加油站，此时油箱有 8 - 2 + 1 = 7 升汽油开往 1 号加油站，此时油箱有 7 - 3 + 2 = 6 升汽油开往 2 号加油站，此时油箱有 6 - 4 + 3 = 5 升汽油开往 3 号加油站，你需要消耗 5 升汽油，正好足够你返回到 3 号加油站。因此，3 可为起始索引。 输入: gas = [2,3,4] cost = [3,4,3]输出: -1解释:你不能从 0 号或 1 号加油站出发，因为没有足够的汽油可以让你行驶到下一个加油站。我们从 2 号加油站出发，可以获得 4 升汽油。 此时油箱有 = 0 + 4 = 4 升汽油开往 0 号加油站，此时油箱有 4 - 3 + 2 = 3 升汽油开往 1 号加油站，此时油箱有 3 - 3 + 3 = 3 升汽油你无法返回 2 号加油站，因为返程需要消耗 4 升汽油，但是你的油箱只有 3 升汽油。因此，无论怎样，你都不可能绕环路行驶一周。 官方题解思路：理解到“gas数组总和与cost数组总和之差小于0，则无法环路一周；否则可以环路一周”是前提。接着，由于环路方向唯一，正确的起点唯一，那么计算到每个加油站的剩余油量，如果小于0，那么自然到不了该加油站。所以，遍历一遍数组，累加下剩余油量，当剩余油量小于0时，重置为0并进入下一循环。如果最后剩余油量不小于0，最后的一次重置点即正确的起点。12345678910111213141516171819class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int n = gas.length; int sum = 0, ans = 0, start = 0; for (int i=0; i&lt;n; i++) &#123; sum += (gas[i] - cost[i]); if (ans &lt; 0) &#123; ans = (gas[i] - cost[i]); start = i; &#125;else &#123; ans += (gas[i] - cost[i]); &#125; &#125; return sum &gt;= 0 ? start : -1; &#125;&#125; 个人解法解题前提想到了，但是找起点的方法效率不高。1234567891011121314151617181920212223242526272829303132333435class Solution &#123; public int canCompleteCircuit(int[] gas, int[] cost) &#123; int len = gas.length; int[] arr = new int[len]; int ans = 0; for (int i=0; i&lt;len; i++) &#123; arr[i] = gas[i] - cost[i]; ans += arr[i]; &#125; if (ans &lt; 0) return -1; for (int i=0; i&lt;len; i++) &#123; if (arr[i] &lt; 0) continue; int sum = arr[i]; for (int j=i+1; ; j++) &#123; if ((j%len) == i &amp;&amp; sum &gt;=0) &#123; return i; &#125; sum += arr[j%len]; if (sum &lt; 0) &#123; break; &#125; &#125; &#125; return -1; &#125;&#125;]]></content>
       <tags>
+        <tag>algorithm</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
-        <tag>algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -145,10 +167,10 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>java</tag>
-        <tag>贪心算法</tag>
         <tag>algorithm</tag>
         <tag>动态规划</tag>
+        <tag>java</tag>
+        <tag>贪心算法</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
@@ -161,8 +183,8 @@
       </categories>
       <tags>
         <tag>String</tag>
-        <tag>java</tag>
         <tag>algorithm</tag>
+        <tag>java</tag>
         <tag>回溯算法</tag>
       </tags>
   </entry>
@@ -174,9 +196,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>algorithm</tag>
         <tag>java</tag>
         <tag>贪心算法</tag>
-        <tag>algorithm</tag>
       </tags>
   </entry>
   <entry>

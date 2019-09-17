@@ -89,7 +89,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/phpLife.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/requestProcess.png">
-<meta property="og:updated_time" content="2019-09-14T11:20:47.244Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/requestDispatch.png">
+<meta property="og:updated_time" content="2019-09-15T08:44:41.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel生命周期">
 <meta name="twitter:description" content="揭秘laravel生命周期与php的生命周期">
@@ -385,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计 ">
-                  629 字
+                  752 字
                 </span>
               
 
@@ -426,7 +427,8 @@
       
 
       
-        <h4 id="php生命周期"><a href="#php生命周期" class="headerlink" title="php生命周期"></a>php生命周期</h4><ul>
+        <h4 id="php生命周期"><a href="#php生命周期" class="headerlink" title="php生命周期"></a>php生命周期</h4><p><img src="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/phpLife.png" alt="php生命周期示意图"></p>
+<ul>
 <li>运行模式<ul>
 <li>CLI模式<br>在终端输入php命令时使用的就是CLI模式</li>
 <li>WEB模式<br>当使用nginx或者其他web服务器作为宿主机处理请求时，使用的就是WEB模式</li>
@@ -440,16 +442,15 @@
 <li>关闭模块：php调用每个模块的module shutdown方法，这是各个模块最后一次释放内存的机会</li>
 </ul>
 </li>
-<li><p>WEB模式和CLI模式的区别</p>
-<ul>
+<li>WEB模式和CLI模式的区别<ul>
 <li>CLI模式会在每次脚本执行经历5个完整的生命周期</li>
-<li>WEB模式为了应对高并发，可能采用多线程，所以，可能1,5只执行一次，而2~4执行多次，以节省系统模块初始化带来的开销<br><img src="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/phpLife.png" alt="php生命周期示意图"></li>
+<li>WEB模式为了应对高并发，可能采用多线程，所以，可能1,5只执行一次，而2~4执行多次，以节省系统模块初始化带来的开销</li>
 </ul>
 </li>
-<li><p>总结<br>理解这些，你就可以优化你的 Laravel 代码，可以更加深入的了解 Laravel 的singleton（单例）。至少你知道了，每一次请求结束，PHP 的变量都会 unset，Laravel 的 singleton 只是在某一次请求过程中的singleton；你在 Laravel 中的静态变量也不能在多个请求之间共享，因为每一次请求结束都会 unset。理解这些概念，是写高质量代码的第一步，也是最关键的一步。因此记住，PHP是一种脚本语言，所有的变量只会在这一次请求中生效，下次请求之时已被重置，而不像Java静态变量拥有全局作用。</p>
-</li>
+<li>总结<br>理解这些，你就可以优化你的 Laravel 代码，可以更加深入的了解 Laravel 的singleton（单例）。至少你知道了，每一次请求结束，PHP 的变量都会 unset，Laravel 的 singleton 只是在某一次请求过程中的singleton；你在 Laravel 中的静态变量也不能在多个请求之间共享，因为每一次请求结束都会 unset。理解这些概念，是写高质量代码的第一步，也是最关键的一步。因此记住，PHP是一种脚本语言，所有的变量只会在这一次请求中生效，下次请求之时已被重置，而不像Java静态变量拥有全局作用。</li>
 </ul>
-<h4 id="laravel生命周期"><a href="#laravel生命周期" class="headerlink" title="laravel生命周期"></a>laravel生命周期</h4><ul>
+<h4 id="laravel生命周期"><a href="#laravel生命周期" class="headerlink" title="laravel生命周期"></a>laravel生命周期</h4><p><img src="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/requestProcess.png" alt="laravel请求步骤"></p>
+<ul>
 <li><p>生命周期</p>
 <ul>
 <li><p>文件载入composer生成的自动加载设置，包括所有你 composer require的依赖。</p>
@@ -458,7 +459,7 @@
 <li><p>注册绑定服务，实例化Application，并绑定HttpKernel，ConsoleKernel ，ExceptionHandler</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$app = <span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">'/../bootstrap/app.php'</span>;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>处理请求，生成并发送响应（毫不夸张的说，你99%的代码都运行在这个小小的handle 方法里面）</p>
+<li><p>将请求分发到路由，处理请求，生成并发送响应（毫不夸张的说，你99%的代码都运行在这个小小的handle 方法里面）<br>但是，请求是如何分发到路由的呢？具体而言就是，请求的分发是通过管道（Pipeline）实现的，而管道中有墙的阻碍。没错，墙就是中间件。<br>请求需要首先经过全局中间件的审核，成功后才会分发到路由；分发到路由后，还要经过路由中间件的审核，然后请求才会被路由引导向控制器或闭包函数。<br><img src="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/requestDispatch.png" alt="请求分发到路由"></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);</span><br><span class="line">$response = $kernel-&gt;handle(</span><br><span class="line">    $request = Illuminate\Http\Request::capture()</span><br><span class="line">);</span><br><span class="line">$response-&gt;send();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>请求结束，进行回调（还记得可终止中间件吗？没错，就是在这里回调的）</p>
@@ -467,7 +468,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Flowers-bloom/Flowers-bloom.github.io/master/2019/09/14/laravel生命周期/requestProcess.png" alt="laravel请求步骤"><br><mark>阅读本文后，建议阅读<a href="https://flowers-bloom.github.io/2019/09/14/laravel框架启动过程/">laravel框架启动过程</a></mark></p>
+<p><mark>阅读本文后，建议阅读<a href="https://flowers-bloom.github.io/2019/09/14/laravel框架启动过程/">laravel框架启动过程</a></mark></p>
 <p>参考：<a href="https://www.cnblogs.com/fubuki/p/9695379.html" target="_blank" rel="noopener">https://www.cnblogs.com/fubuki/p/9695379.html</a></p>
 
       
@@ -538,6 +539,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/16/sql语句执行过程/" rel="prev" title="sql语句执行过程">
+                sql语句执行过程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -618,7 +623,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -640,7 +645,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
