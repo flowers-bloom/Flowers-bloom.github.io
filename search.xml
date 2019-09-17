@@ -71,8 +71,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>回溯算法</tag>
         <tag>树</tag>
+        <tag>回溯算法</tag>
       </tags>
   </entry>
   <entry>
@@ -119,8 +119,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>数据结构</tag>
         <tag>二叉树</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -210,8 +210,8 @@
       </categories>
       <tags>
         <tag>java</tag>
-        <tag>数据结构</tag>
         <tag>树</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -222,9 +222,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>数据结构</tag>
         <tag>php</tag>
         <tag>链表</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -303,8 +303,8 @@
       <tags>
         <tag>C++</tag>
         <tag>String</tag>
-        <tag>algorithm</tag>
         <tag>回文串</tag>
+        <tag>algorithm</tag>
         <tag>动态规划</tag>
       </tags>
   </entry>
